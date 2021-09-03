@@ -15,7 +15,6 @@ use Psr\Http\Message\ResponseInterface;
 use ReflectionClass;
 use ReflectionException;
 use SandwaveIo\Acronis\Exception\AcronisException;
-use SandwaveIo\Acronis\RestClientFactoryInterface;
 
 class RestClient implements RestClientInterface
 {
@@ -31,9 +30,9 @@ class RestClient implements RestClientInterface
      */
     private $serializer;
 
-    public function __construct(RestClientFactoryInterface $restClient, SerializerInterface $serializer)
+    public function __construct(ClientInterface $client, SerializerInterface $serializer)
     {
-        $this->client = $restClient->create();
+        $this->client = $client;
         $this->serializer = $serializer;
     }
 
@@ -116,13 +115,13 @@ class RestClient implements RestClientInterface
      */
     private function getItemsRawData(string $url): string
     {
-        $data = json_decode($this->get($url));
-
-        if ($data === false || ! isset($data->items)) {
-            throw new AcronisException('Items key is missing.');
-        }
-
         try {
+            $data = json_decode($this->get($url), false, 512, JSON_THROW_ON_ERROR);
+
+            if ($data === false || ! isset($data->items)) {
+                throw new AcronisException('Items key is missing.');
+            }
+
             return json_encode($data->items, JSON_THROW_ON_ERROR);
         } catch (JsonException $exception) {
             throw $this->convertException($exception);
