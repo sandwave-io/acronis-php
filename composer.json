@@ -1,0 +1,42 @@
+{
+  "name": "sandwave-io/acronis-php",
+  "description": "A PHP SDK for the Acronis REST API.",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Glenn Blom",
+      "email": "glennblom@gmail.com"
+    },
+    {
+      "name": "Sander van Stokkom",
+      "email": "sander@sanderenjoyce.nl"
+    }
+  ],
+  "require": {
+    "php": "^7.3|^7.4|^8.0",
+    "ext-json": "*",
+    "guzzlehttp/guzzle": "^7.3",
+    "psr/log": "^1.1",
+    "webmozart/assert": "^1.10"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.1",
+    "phpstan/phpstan": "^0.12.98",
+    "phpunit/phpunit": "^9.5",
+    "uptimeproject/php-cs-fixer-config": "^1.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "SandwaveIo\\Acronis\\": "./src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SandwaveIo\\Acronis\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}
