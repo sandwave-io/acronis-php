@@ -28,6 +28,6 @@ class UsageClient
      */
     public function get(string $uuid): array
     {
-        return $this->client->getAsArrayOfData(sprintf(self::TENANT_USAGES, $uuid), Usage::class);
+        return $this->client->getEntityCollection(sprintf(self::TENANT_USAGES, $uuid), Usage::class);
     }
 }
