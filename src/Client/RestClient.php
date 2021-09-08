@@ -47,7 +47,7 @@ class RestClient implements RestClientInterface
      *
      * @return T
      */
-    public function getAsData(string $url, string $class): object
+    public function getEntity(string $url, string $class): object
     {
         $reflectionClass = $this->getDataObject($class);
         $item = $this->get($url);
@@ -66,7 +66,7 @@ class RestClient implements RestClientInterface
      *
      * @return T[]
      */
-    public function getAsArrayOfData(string $url, string $class): array
+    public function getEntityCollection(string $url, string $class): array
     {
         $reflectionClass = $this->getDataObject($class)->getName();
         $items = $this->getItemsRawData($url);
