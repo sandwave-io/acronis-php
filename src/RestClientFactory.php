@@ -13,7 +13,7 @@ class RestClientFactory implements RestClientFactoryInterface
     /**
      * @var string
      */
-    private $uri;
+    private $url;
 
     /**
      * @var string
@@ -25,9 +25,9 @@ class RestClientFactory implements RestClientFactoryInterface
      */
     private $clientIdentifier;
 
-    public function __construct(string $uri, string $clientIdentifier, string $clientSecret)
+    public function __construct(string $url, string $clientIdentifier, string $clientSecret)
     {
-        $this->uri = $uri;
+        $this->url = $url;
         $this->clientSecret = $clientSecret;
         $this->clientIdentifier = $clientIdentifier;
     }
@@ -37,7 +37,7 @@ class RestClientFactory implements RestClientFactoryInterface
         $stack = HandlerStack::create();
         $stack->push(
             new BearerTokenMiddleware(
-                $this->uri,
+                $this->url,
                 $this->clientIdentifier,
                 $this->clientSecret
             )
@@ -47,7 +47,7 @@ class RestClientFactory implements RestClientFactoryInterface
             [
                 'handler' => $stack,
                 'auth' => 'oauth',
-                'base_uri' => $this->uri,
+                'base_uri' => $this->url,
             ]
         );
     }

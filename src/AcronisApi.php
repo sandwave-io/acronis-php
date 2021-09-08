@@ -7,7 +7,7 @@ namespace SandwaveIo\Acronis;
 use SandwaveIo\Acronis\Client\RestClientInterface;
 use SandwaveIo\Acronis\Client\TenantClient;
 
-final class Acronis
+final class AcronisApi
 {
     /**
      * @var TenantClient
@@ -19,13 +19,13 @@ final class Acronis
         $this->setClient($restClient);
     }
 
-    private function setClient(RestClientInterface $client): void
-    {
-        $this->tenantClient = new TenantClient($client);
-    }
-
     public function getTenantClient(): TenantClient
     {
         return $this->tenantClient;
+    }
+
+    private function setClient(RestClientInterface $client): void
+    {
+        $this->tenantClient = new TenantClient($client);
     }
 }
