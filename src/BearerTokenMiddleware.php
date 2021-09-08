@@ -57,8 +57,9 @@ class BearerTokenMiddleware
     /**
      * @throws JsonException
      * @throws GuzzleException
+     * @return Mixed
      */
-    private function getBearerToken(): object
+    private function getBearerToken()
     {
         $client = new Client();
         $response = $client->request(
