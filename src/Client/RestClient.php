@@ -9,6 +9,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\RequestOptions;
 use InvalidArgumentException;
+use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
 use JsonException;
 use Psr\Http\Message\ResponseInterface;
@@ -88,19 +89,59 @@ class RestClient implements RestClientInterface
         return $this->getItemsRawData($url);
     }
 
+    /**
+     * @template T of object
+     * @param string $url
+     * @param object $data
+     * @return T
+     */
     public function post(string $url, object $data): object
     {
-        // TODO: Implement post() method.
+        $json = $this->serializer->serialize($data, 'json', SerializationContext::create()->setGroups(['create_data']));
+
+        $response = $this->request('POST', $url, [
+            'body' => $json,
+            'headers' => [
+                'Content-type' => 'application/json; charset=utf-8'
+            ]
+        ]);
+
+        $class = get_class($data);
+
+        /** @var T $responseData */
+        $responseData = $this->serializer->deserialize($response->getBody()->getContents(), $class, 'json');
+
+        return $responseData;
     }
 
+    /**
+     * @template T of object
+     * @param string $url
+     * @param object $data
+     * @return T
+     */
     public function put(string $url, object $data): object
     {
-        // TODO: Implement put() method.
+        $json = $this->serializer->serialize($data, 'json', SerializationContext::create()->setGroups(['update_data']));
+
+        $response = $this->request('PUT', $url, [
+            'body' => $json,
+            'headers' => [
+                'Content-type' => 'application/json; charset=utf-8'
+            ]
+        ]);
+
+        $class = get_class($data);
+
+        /** @var T $responseData */
+        $responseData = $this->serializer->deserialize($response->getBody()->getContents(), $class, 'json');
+
+        return $responseData;
     }
 
     public function delete(string $url): void
     {
-        // TODO: Implement delete() method.
+        $this->request('delete', $url);
     }
 
     private function get(string $url): string
