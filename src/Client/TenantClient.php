@@ -28,7 +28,7 @@ class TenantClient
     public function get(string $uuid): Tenant
     {
         /** @var Tenant $tenant */
-        $tenant = $this->client->getAsData(sprintf(self::TENANT_DETAILS, $uuid), Tenant::class);
+        $tenant = $this->client->getEntity(sprintf(self::TENANT_DETAILS, $uuid), Tenant::class);
 
         return $tenant;
     }
@@ -40,6 +40,6 @@ class TenantClient
      */
     public function getChildren(string $parentUuid): array
     {
-        return $this->client->getAsArrayOfData(sprintf(self::TENANT_CHILDREN, $parentUuid), Tenant::class);
+        return $this->client->getEntityCollection(sprintf(self::TENANT_CHILDREN, $parentUuid), Tenant::class);
     }
 }
