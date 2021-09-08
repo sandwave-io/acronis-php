@@ -20,7 +20,7 @@ class BearerTokenMiddleware
     /**
      * @var string
      */
-    private $uri;
+    private $url;
 
     /**
      * @var string
@@ -32,9 +32,9 @@ class BearerTokenMiddleware
      */
     private $clientSecret;
 
-    public function __construct(string $uri, string $clientId, string $clientSecret)
+    public function __construct(string $url, string $clientId, string $clientSecret)
     {
-        $this->uri = $uri;
+        $this->url = $url;
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
     }
@@ -65,7 +65,7 @@ class BearerTokenMiddleware
         $client = new Client();
         $response = $client->request(
             'POST',
-            $this->uri . 'idp/token',
+            $this->url . 'idp/token',
             [
                 'auth'        => [$this->clientId, $this->clientSecret],
                 'form_params' => ['grant_type' => 'client_credentials'],
