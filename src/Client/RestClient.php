@@ -159,7 +159,7 @@ class RestClient implements RestClientInterface
         try {
             $data = json_decode($this->get($url), false, 512, JSON_THROW_ON_ERROR);
 
-            if ($data === false || ! isset($data->items)) {
+            if (!isset($data->items)) {
                 throw new AcronisException('Items key is missing.');
             }
 
