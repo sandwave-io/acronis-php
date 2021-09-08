@@ -42,4 +42,12 @@ class TenantClient
     {
         return $this->client->getEntityCollection(sprintf(self::TENANT_CHILDREN, $parentUuid), Tenant::class);
     }
+
+    public function update(Tenant $tenant): Tenant
+    {
+        /** @var Tenant $updatedTenant */
+        $updatedTenant = $this->client->put(sprintf(self::TENANT_DETAILS, $tenant->getId()), $tenant);
+
+        return $updatedTenant;
+    }
 }

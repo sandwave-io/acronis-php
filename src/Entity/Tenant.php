@@ -13,6 +13,7 @@ class Tenant
      * @var string
      * @Serializer\SerializedName("id")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"update_data"})
      */
     private $id;
 
@@ -55,6 +56,7 @@ class Tenant
      * @var int
      * @Serializer\SerializedName("version")
      * @Serializer\Type("integer")
+     * @Serializer\Groups({"update_data"})
      */
     private $version;
 
@@ -111,6 +113,7 @@ class Tenant
      * @var bool
      * @Serializer\SerializedName("enabled")
      * @Serializer\Type("boolean")
+     * @Serializer\Groups({"update_data"})
      */
     private $enabled;
 
@@ -150,6 +153,13 @@ class Tenant
     private $deletedAt;
 
     /**
+     * @var Contact
+     * @Serializer\SerializedName("contact")
+     * @Serializer\Type("SandwaveIo\Acronis\Entity\Contact")
+     */
+    private $contact;
+
+    /**
      * @return string
      */
     public function getId(): string
@@ -159,10 +169,13 @@ class Tenant
 
     /**
      * @param string $id
+     * @return Tenant
      */
-    public function setId(string $id): void
+    public function setId(string $id): Tenant
     {
         $this->id = $id;
+
+        return $this;
     }
 
     /**
@@ -175,10 +188,13 @@ class Tenant
 
     /**
      * @param string $parentId
+     * @return Tenant
      */
-    public function setParentId(string $parentId): void
+    public function setParentId(string $parentId): Tenant
     {
         $this->parentId = $parentId;
+
+        return $this;
     }
 
     /**
@@ -191,10 +207,13 @@ class Tenant
 
     /**
      * @param string|null $ownerId
+     * @return Tenant
      */
-    public function setOwnerId(?string $ownerId): void
+    public function setOwnerId(?string $ownerId): Tenant
     {
         $this->ownerId = $ownerId;
+
+        return $this;
     }
 
     /**
@@ -207,10 +226,13 @@ class Tenant
 
     /**
      * @param string $brandUuid
+     * @return Tenant
      */
-    public function setBrandUuid(string $brandUuid): void
+    public function setBrandUuid(string $brandUuid): Tenant
     {
         $this->brandUuid = $brandUuid;
+
+        return $this;
     }
 
     /**
@@ -223,10 +245,13 @@ class Tenant
 
     /**
      * @param int $brandId
+     * @return Tenant
      */
-    public function setBrandId(int $brandId): void
+    public function setBrandId(int $brandId): Tenant
     {
         $this->brandId = $brandId;
+
+        return $this;
     }
 
     /**
@@ -239,10 +264,13 @@ class Tenant
 
     /**
      * @param string $customerId
+     * @return Tenant
      */
-    public function setCustomerId(string $customerId): void
+    public function setCustomerId(string $customerId): Tenant
     {
         $this->customerId = $customerId;
+
+        return $this;
     }
 
     /**
@@ -255,10 +283,13 @@ class Tenant
 
     /**
      * @param int $version
+     * @return Tenant
      */
-    public function setVersion(int $version): void
+    public function setVersion(int $version): Tenant
     {
         $this->version = $version;
+
+        return $this;
     }
 
     /**
@@ -271,10 +302,13 @@ class Tenant
 
     /**
      * @param string $name
+     * @return Tenant
      */
-    public function setName(string $name): void
+    public function setName(string $name): Tenant
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -287,10 +321,13 @@ class Tenant
 
     /**
      * @param string $internalTag
+     * @return Tenant
      */
-    public function setInternalTag(string $internalTag): void
+    public function setInternalTag(string $internalTag): Tenant
     {
         $this->internalTag = $internalTag;
+
+        return $this;
     }
 
     /**
@@ -303,10 +340,13 @@ class Tenant
 
     /**
      * @param string $customerType
+     * @return Tenant
      */
-    public function setCustomerType(string $customerType): void
+    public function setCustomerType(string $customerType): Tenant
     {
         $this->customerType = $customerType;
+
+        return $this;
     }
 
     /**
@@ -319,10 +359,13 @@ class Tenant
 
     /**
      * @param string $mfaStatus
+     * @return Tenant
      */
-    public function setMfaStatus(string $mfaStatus): void
+    public function setMfaStatus(string $mfaStatus): Tenant
     {
         $this->mfaStatus = $mfaStatus;
+
+        return $this;
     }
 
     /**
@@ -335,10 +378,13 @@ class Tenant
 
     /**
      * @param string $kind
+     * @return Tenant
      */
-    public function setKind(string $kind): void
+    public function setKind(string $kind): Tenant
     {
         $this->kind = $kind;
+
+        return $this;
     }
 
     /**
@@ -351,10 +397,13 @@ class Tenant
 
     /**
      * @param string $pricingMode
+     * @return Tenant
      */
-    public function setPricingMode(string $pricingMode): void
+    public function setPricingMode(string $pricingMode): Tenant
     {
         $this->pricingMode = $pricingMode;
+
+        return $this;
     }
 
     /**
@@ -367,10 +416,13 @@ class Tenant
 
     /**
      * @param string $language
+     * @return Tenant
      */
-    public function setLanguage(string $language): void
+    public function setLanguage(string $language): Tenant
     {
         $this->language = $language;
+
+        return $this;
     }
 
     /**
@@ -383,10 +435,13 @@ class Tenant
 
     /**
      * @param bool $enabled
+     * @return Tenant
      */
-    public function setEnabled(bool $enabled): void
+    public function setEnabled(bool $enabled): Tenant
     {
         $this->enabled = $enabled;
+
+        return $this;
     }
 
     /**
@@ -399,10 +454,13 @@ class Tenant
 
     /**
      * @param bool $hasChildren
+     * @return Tenant
      */
-    public function setHasChildren(bool $hasChildren): void
+    public function setHasChildren(bool $hasChildren): Tenant
     {
         $this->hasChildren = $hasChildren;
+
+        return $this;
     }
 
     /**
@@ -415,10 +473,13 @@ class Tenant
 
     /**
      * @param bool $ancestralAccess
+     * @return Tenant
      */
-    public function setAncestralAccess(bool $ancestralAccess): void
+    public function setAncestralAccess(bool $ancestralAccess): Tenant
     {
         $this->ancestralAccess = $ancestralAccess;
+
+        return $this;
     }
 
     /**
@@ -431,10 +492,13 @@ class Tenant
 
     /**
      * @param DateTimeImmutable $createdAt
+     * @return Tenant
      */
-    public function setCreatedAt(DateTimeImmutable $createdAt): void
+    public function setCreatedAt(DateTimeImmutable $createdAt): Tenant
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
@@ -447,10 +511,13 @@ class Tenant
 
     /**
      * @param DateTimeImmutable $updatedAt
+     * @return Tenant
      */
-    public function setUpdatedAt(DateTimeImmutable $updatedAt): void
+    public function setUpdatedAt(DateTimeImmutable $updatedAt): Tenant
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 
     /**
@@ -463,9 +530,31 @@ class Tenant
 
     /**
      * @param DateTimeImmutable|null $deletedAt
+     * @return Tenant
      */
-    public function setDeletedAt(?DateTimeImmutable $deletedAt): void
+    public function setDeletedAt(?DateTimeImmutable $deletedAt): Tenant
     {
         $this->deletedAt = $deletedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Contact
+     */
+    public function getContact(): Contact
+    {
+        return $this->contact;
+    }
+
+    /**
+     * @param Contact $contact
+     * @return Tenant
+     */
+    public function setContact(Contact $contact): Tenant
+    {
+        $this->contact = $contact;
+
+        return $this;
     }
 }
