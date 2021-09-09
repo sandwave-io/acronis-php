@@ -16,7 +16,7 @@
   "require": {
     "php": "^7.3|^7.4|^8.0",
     "ext-json": "*",
-    "guzzlehttp/guzzle": "^7.3",
+    "guzzlehttp/guzzle": "^6.2.0|^7.0.1",
     "jms/serializer-bundle": "^3.10",
     "psr/log": "^1.1",
     "webmozart/assert": "^1.10"
