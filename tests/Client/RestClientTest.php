@@ -83,6 +83,6 @@ class RestClientTest extends TestCase
 
         $tenant = $this->restClient->getEntity('test', Tenant::class);
         $this->assertInstanceOf(Tenant::class, $tenant, 'Data could not be deserialized to entity.');
-        $this->assertSame($expectedTenant, $tenant);
+        $this->assertEquals($expectedTenant, $tenant);
     }
 }
