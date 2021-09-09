@@ -10,9 +10,9 @@ use JMS\Serializer\Annotation as Serializer;
 class Contact
 {
     /**
-     * @var int
+     * @var string|null
      * @Serializer\SerializedName("id")
-     * @Serializer\Type("int")
+     * @Serializer\Type("string")
      */
     private $id;
 
@@ -41,6 +41,7 @@ class Contact
      * @var string
      * @Serializer\SerializedName("email")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"update_data"})
      */
     private $email;
 
@@ -96,30 +97,30 @@ class Contact
     /**
      * @var DateTimeImmutable
      * @Serializer\SerializedName("created_at")
-     * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', 'Y-m-d\TH:i:sP'>")
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:sP', 'Y-m-d\TH:i:s']>")
      */
     private $createdAt;
 
     /**
      * @var DateTimeImmutable
      * @Serializer\SerializedName("updated_at")
-     * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', 'Y-m-d\TH:i:sP'>")
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:sP', 'Y-m-d\TH:i:s']>")
      */
     private $updatedAt;
 
     /**
-     * @return int
+     * @return string|null
      */
-    public function getId(): int
+    public function getId(): ?string
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * @param string|null $id
      * @return Contact
      */
-    public function setId(int $id): Contact
+    public function setId(?string $id): Contact
     {
         $this->id = $id;
 
