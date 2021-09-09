@@ -10,7 +10,7 @@ use JMS\Serializer\Annotation as Serializer;
 class Tenant
 {
     /**
-     * @var string
+     * @var string|null
      * @Serializer\SerializedName("id")
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
@@ -159,37 +159,69 @@ class Tenant
      */
     private $contact;
 
-    /**
-     * @return string
-     */
-    public function getId(): string
+    public function __construct(
+        int $version,
+        string $parentId,
+        string $brandUuid,
+        int $brandId,
+        string $customerId,
+        string $name,
+        string $internalTag,
+        string $customerType,
+        string $mfaStatus,
+        string $kind,
+        string $pricingMode,
+        string $language,
+        bool $enabled,
+        bool $hasChildren,
+        bool $ancestralAccess,
+        DateTimeImmutable $createdAt,
+        DateTimeImmutable $updatedAt,
+        Contact $contact,
+        string $id = null,
+        ?string $ownerId = null,
+        ?DateTimeImmutable $deletedAt = null
+    ) {
+        $this->id = $id;
+        $this->version = $version;
+        $this->parentId = $parentId;
+        $this->brandUuid = $brandUuid;
+        $this->brandId = $brandId;
+        $this->customerId = $customerId;
+        $this->name = $name;
+        $this->internalTag = $internalTag;
+        $this->customerType = $customerType;
+        $this->mfaStatus = $mfaStatus;
+        $this->kind = $kind;
+        $this->pricingMode = $pricingMode;
+        $this->language = $language;
+        $this->enabled = $enabled;
+        $this->hasChildren = $hasChildren;
+        $this->ancestralAccess = $ancestralAccess;
+        $this->createdAt = $createdAt;
+        $this->updatedAt = $updatedAt;
+        $this->contact = $contact;
+        $this->ownerId = $ownerId;
+        $this->deletedAt = $deletedAt;
+    }
+
+    public function getId(): ?string
     {
         return $this->id;
     }
 
-    /**
-     * @param string $id
-     * @return Tenant
-     */
-    public function setId(string $id): Tenant
+    public function setId(?string $id): Tenant
     {
         $this->id = $id;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getParentId(): string
     {
         return $this->parentId;
     }
 
-    /**
-     * @param string $parentId
-     * @return Tenant
-     */
     public function setParentId(string $parentId): Tenant
     {
         $this->parentId = $parentId;
@@ -197,18 +229,11 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getOwnerId(): ?string
     {
         return $this->ownerId;
     }
 
-    /**
-     * @param string|null $ownerId
-     * @return Tenant
-     */
     public function setOwnerId(?string $ownerId): Tenant
     {
         $this->ownerId = $ownerId;
@@ -216,18 +241,11 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getBrandUuid(): string
     {
         return $this->brandUuid;
     }
 
-    /**
-     * @param string $brandUuid
-     * @return Tenant
-     */
     public function setBrandUuid(string $brandUuid): Tenant
     {
         $this->brandUuid = $brandUuid;
@@ -235,18 +253,11 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getBrandId(): int
     {
         return $this->brandId;
     }
 
-    /**
-     * @param int $brandId
-     * @return Tenant
-     */
     public function setBrandId(int $brandId): Tenant
     {
         $this->brandId = $brandId;
@@ -254,18 +265,11 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerId(): string
     {
         return $this->customerId;
     }
 
-    /**
-     * @param string $customerId
-     * @return Tenant
-     */
     public function setCustomerId(string $customerId): Tenant
     {
         $this->customerId = $customerId;
@@ -273,18 +277,11 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getVersion(): int
     {
         return $this->version;
     }
 
-    /**
-     * @param int $version
-     * @return Tenant
-     */
     public function setVersion(int $version): Tenant
     {
         $this->version = $version;
@@ -292,18 +289,11 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     * @return Tenant
-     */
     public function setName(string $name): Tenant
     {
         $this->name = $name;
@@ -311,18 +301,11 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getInternalTag(): string
     {
         return $this->internalTag;
     }
 
-    /**
-     * @param string $internalTag
-     * @return Tenant
-     */
     public function setInternalTag(string $internalTag): Tenant
     {
         $this->internalTag = $internalTag;
@@ -330,18 +313,11 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getCustomerType(): string
     {
         return $this->customerType;
     }
 
-    /**
-     * @param string $customerType
-     * @return Tenant
-     */
     public function setCustomerType(string $customerType): Tenant
     {
         $this->customerType = $customerType;
@@ -349,18 +325,11 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getMfaStatus(): string
     {
         return $this->mfaStatus;
     }
 
-    /**
-     * @param string $mfaStatus
-     * @return Tenant
-     */
     public function setMfaStatus(string $mfaStatus): Tenant
     {
         $this->mfaStatus = $mfaStatus;
@@ -368,18 +337,11 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getKind(): string
     {
         return $this->kind;
     }
 
-    /**
-     * @param string $kind
-     * @return Tenant
-     */
     public function setKind(string $kind): Tenant
     {
         $this->kind = $kind;
@@ -387,18 +349,11 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getPricingMode(): string
     {
         return $this->pricingMode;
     }
 
-    /**
-     * @param string $pricingMode
-     * @return Tenant
-     */
     public function setPricingMode(string $pricingMode): Tenant
     {
         $this->pricingMode = $pricingMode;
@@ -406,18 +361,11 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getLanguage(): string
     {
         return $this->language;
     }
 
-    /**
-     * @param string $language
-     * @return Tenant
-     */
     public function setLanguage(string $language): Tenant
     {
         $this->language = $language;
@@ -433,10 +381,6 @@ class Tenant
         return $this->enabled;
     }
 
-    /**
-     * @param bool $enabled
-     * @return Tenant
-     */
     public function setEnabled(bool $enabled): Tenant
     {
         $this->enabled = $enabled;
@@ -452,10 +396,6 @@ class Tenant
         return $this->hasChildren;
     }
 
-    /**
-     * @param bool $hasChildren
-     * @return Tenant
-     */
     public function setHasChildren(bool $hasChildren): Tenant
     {
         $this->hasChildren = $hasChildren;
@@ -471,10 +411,6 @@ class Tenant
         return $this->ancestralAccess;
     }
 
-    /**
-     * @param bool $ancestralAccess
-     * @return Tenant
-     */
     public function setAncestralAccess(bool $ancestralAccess): Tenant
     {
         $this->ancestralAccess = $ancestralAccess;
@@ -482,18 +418,11 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return DateTimeImmutable
-     */
     public function getCreatedAt(): DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    /**
-     * @param DateTimeImmutable $createdAt
-     * @return Tenant
-     */
     public function setCreatedAt(DateTimeImmutable $createdAt): Tenant
     {
         $this->createdAt = $createdAt;
@@ -501,18 +430,11 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return DateTimeImmutable
-     */
     public function getUpdatedAt(): DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @param DateTimeImmutable $updatedAt
-     * @return Tenant
-     */
     public function setUpdatedAt(DateTimeImmutable $updatedAt): Tenant
     {
         $this->updatedAt = $updatedAt;
@@ -520,18 +442,11 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return DateTimeImmutable|null
-     */
     public function getDeletedAt(): ?DateTimeImmutable
     {
         return $this->deletedAt;
     }
 
-    /**
-     * @param DateTimeImmutable|null $deletedAt
-     * @return Tenant
-     */
     public function setDeletedAt(?DateTimeImmutable $deletedAt): Tenant
     {
         $this->deletedAt = $deletedAt;
@@ -539,18 +454,11 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return Contact
-     */
     public function getContact(): Contact
     {
         return $this->contact;
     }
 
-    /**
-     * @param Contact $contact
-     * @return Tenant
-     */
     public function setContact(Contact $contact): Tenant
     {
         $this->contact = $contact;

@@ -1,6 +1,6 @@
 [![](https://user-images.githubusercontent.com/60096509/91668964-54ecd500-eb11-11ea-9c35-e8f0b20b277a.png)](https://sandwave.io)
 
-# Acronis Client (PHP)
+# Acronis API - PHP SDK
 
 ## Supported APIs
 
@@ -55,3 +55,5 @@ vendor/bin/phpstan analyze
 
 vendor/bin/phpunit --coverage-text
 ```
+
+These tools will also run in GitHub actions on PR's and pushes on master.

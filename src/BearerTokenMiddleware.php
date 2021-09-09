@@ -57,7 +57,8 @@ class BearerTokenMiddleware
     /**
      * @throws JsonException
      * @throws GuzzleException
-     * @return Mixed
+     *
+     * @return mixed
      */
     private function getBearerToken()
     {

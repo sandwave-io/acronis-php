@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace SandwaveIo\Acronis\Entity;
 
@@ -107,18 +107,11 @@ class Contact
      */
     private $updatedAt;
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     * @return Contact
-     */
     public function setId(int $id): Contact
     {
         $this->id = $id;
@@ -126,18 +119,11 @@ class Contact
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getAcronisAccountNumber(): int
     {
         return $this->acronisAccountNumber;
     }
 
-    /**
-     * @param int $acronisAccountNumber
-     * @return Contact
-     */
     public function setAcronisAccountNumber(int $acronisAccountNumber): Contact
     {
         $this->acronisAccountNumber = $acronisAccountNumber;
@@ -145,18 +131,11 @@ class Contact
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getFirstname(): string
     {
         return $this->firstname;
     }
 
-    /**
-     * @param string $firstname
-     * @return Contact
-     */
     public function setFirstname(string $firstname): Contact
     {
         $this->firstname = $firstname;
@@ -164,18 +143,11 @@ class Contact
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getLastname(): string
     {
         return $this->lastname;
     }
 
-    /**
-     * @param string $lastname
-     * @return Contact
-     */
     public function setLastname(string $lastname): Contact
     {
         $this->lastname = $lastname;
@@ -183,18 +155,11 @@ class Contact
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     * @return Contact
-     */
     public function setEmail(string $email): Contact
     {
         $this->email = $email;
@@ -202,18 +167,11 @@ class Contact
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getAddress1(): string
     {
         return $this->address1;
     }
 
-    /**
-     * @param string $address1
-     * @return Contact
-     */
     public function setAddress1(string $address1): Contact
     {
         $this->address1 = $address1;
@@ -221,18 +179,11 @@ class Contact
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getAddress2(): string
     {
         return $this->address2;
     }
 
-    /**
-     * @param string $address2
-     * @return Contact
-     */
     public function setAddress2(string $address2): Contact
     {
         $this->address2 = $address2;
@@ -240,18 +191,11 @@ class Contact
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getCountry(): string
     {
         return $this->country;
     }
 
-    /**
-     * @param string $country
-     * @return Contact
-     */
     public function setCountry(string $country): Contact
     {
         $this->country = $country;
@@ -259,18 +203,11 @@ class Contact
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getState(): string
     {
         return $this->state;
     }
 
-    /**
-     * @param string $state
-     * @return Contact
-     */
     public function setState(string $state): Contact
     {
         $this->state = $state;
@@ -278,18 +215,11 @@ class Contact
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getZipcode(): string
     {
         return $this->zipcode;
     }
 
-    /**
-     * @param string $zipcode
-     * @return Contact
-     */
     public function setZipcode(string $zipcode): Contact
     {
         $this->zipcode = $zipcode;
@@ -297,18 +227,11 @@ class Contact
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getCity(): string
     {
         return $this->city;
     }
 
-    /**
-     * @param string $city
-     * @return Contact
-     */
     public function setCity(string $city): Contact
     {
         $this->city = $city;
@@ -316,18 +239,11 @@ class Contact
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getPhone(): string
     {
         return $this->phone;
     }
 
-    /**
-     * @param string $phone
-     * @return Contact
-     */
     public function setPhone(string $phone): Contact
     {
         $this->phone = $phone;
@@ -335,18 +251,11 @@ class Contact
         return $this;
     }
 
-    /**
-     * @return DateTimeImmutable
-     */
     public function getCreatedAt(): DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    /**
-     * @param DateTimeImmutable $createdAt
-     * @return Contact
-     */
     public function setCreatedAt(DateTimeImmutable $createdAt): Contact
     {
         $this->createdAt = $createdAt;
@@ -354,24 +263,15 @@ class Contact
         return $this;
     }
 
-    /**
-     * @return DateTimeImmutable
-     */
     public function getUpdatedAt(): DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @param DateTimeImmutable $updatedAt
-     * @return Contact
-     */
     public function setUpdatedAt(DateTimeImmutable $updatedAt): Contact
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
     }
-
-
 }

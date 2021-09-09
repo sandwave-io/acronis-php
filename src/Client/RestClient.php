@@ -17,7 +17,7 @@ use ReflectionClass;
 use ReflectionException;
 use SandwaveIo\Acronis\Exception\AcronisException;
 
-class RestClient implements RestClientInterface
+final class RestClient implements RestClientInterface
 {
     private const REQUEST_TIMEOUT = 5;
 
@@ -91,8 +91,10 @@ class RestClient implements RestClientInterface
 
     /**
      * @template T of object
+     *
      * @param string $url
      * @param object $data
+     *
      * @return T
      */
     public function post(string $url, object $data): object
@@ -102,8 +104,8 @@ class RestClient implements RestClientInterface
         $response = $this->request('POST', $url, [
             'body' => $json,
             'headers' => [
-                'Content-type' => 'application/json; charset=utf-8'
-            ]
+                'Content-type' => 'application/json; charset=utf-8',
+            ],
         ]);
 
         $class = get_class($data);
@@ -116,8 +118,10 @@ class RestClient implements RestClientInterface
 
     /**
      * @template T of object
+     *
      * @param string $url
      * @param object $data
+     *
      * @return T
      */
     public function put(string $url, object $data): object
@@ -127,8 +131,8 @@ class RestClient implements RestClientInterface
         $response = $this->request('PUT', $url, [
             'body' => $json,
             'headers' => [
-                'Content-type' => 'application/json; charset=utf-8'
-            ]
+                'Content-type' => 'application/json; charset=utf-8',
+            ],
         ]);
 
         $class = get_class($data);
@@ -146,9 +150,9 @@ class RestClient implements RestClientInterface
 
     private function get(string $url): string
     {
-        $result = $this->request('GET', $url);
+        $response = $this->request('GET', $url);
 
-        return $result->getBody()->getContents();
+        return $response->getBody()->getContents();
     }
 
     /**
@@ -159,7 +163,7 @@ class RestClient implements RestClientInterface
         try {
             $data = json_decode($this->get($url), false, 512, JSON_THROW_ON_ERROR);
 
-            if (!isset($data->items)) {
+            if (! isset($data->items)) {
                 throw new AcronisException('Items key is missing.');
             }
 
@@ -179,12 +183,12 @@ class RestClient implements RestClientInterface
     private function request(string $method, string $url, array $options = []): ResponseInterface
     {
         try {
-            $result = $this->client->request($method, $url, array_merge($options, $this->getRequestOptions()));
+            $response = $this->client->request($method, $url, array_merge($options, $this->getRequestOptions()));
         } catch (TransferException $exception) {
             throw $this->convertException($exception);
         }
 
-        return $result;
+        return $response;
     }
 
     private function getRequestOptions(): array
