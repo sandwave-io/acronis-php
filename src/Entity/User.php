@@ -97,18 +97,19 @@ class User
 
     /**
      * User constructor.
-     * @param string|null $id
-     * @param string|null $tenantId
-     * @param string|null $personalTenantId
-     * @param int $version
-     * @param string $login
-     * @param bool $enabled
-     * @param bool $activated
-     * @param string $language
-     * @param string $mfaStatus
+     *
+     * @param string|null       $id
+     * @param string|null       $tenantId
+     * @param string|null       $personalTenantId
+     * @param int               $version
+     * @param string            $login
+     * @param bool              $enabled
+     * @param bool              $activated
+     * @param string            $language
+     * @param string            $mfaStatus
      * @param DateTimeImmutable $createdAt
      * @param DateTimeImmutable $updatedAt
-     * @param Contact $contact
+     * @param Contact           $contact
      */
     public function __construct(
         ?string $id,
@@ -148,6 +149,7 @@ class User
 
     /**
      * @param string|null $id
+     *
      * @return User
      */
     public function setId(?string $id): User
@@ -167,6 +169,7 @@ class User
 
     /**
      * @param string|null $tenantId
+     *
      * @return User
      */
     public function setTenantId(?string $tenantId): User
@@ -186,6 +189,7 @@ class User
 
     /**
      * @param string|null $personalTenantId
+     *
      * @return User
      */
     public function setPersonalTenantId(?string $personalTenantId): User
@@ -205,6 +209,7 @@ class User
 
     /**
      * @param int $version
+     *
      * @return User
      */
     public function setVersion(int $version): User
@@ -224,6 +229,7 @@ class User
 
     /**
      * @param string $login
+     *
      * @return User
      */
     public function setLogin(string $login): User
@@ -243,6 +249,7 @@ class User
 
     /**
      * @param bool $enabled
+     *
      * @return User
      */
     public function setEnabled(bool $enabled): User
@@ -262,6 +269,7 @@ class User
 
     /**
      * @param bool $activated
+     *
      * @return User
      */
     public function setActivated(bool $activated): User
@@ -281,6 +289,7 @@ class User
 
     /**
      * @param string $language
+     *
      * @return User
      */
     public function setLanguage(string $language): User
@@ -300,6 +309,7 @@ class User
 
     /**
      * @param string $mfaStatus
+     *
      * @return User
      */
     public function setMfaStatus(string $mfaStatus): User
@@ -319,6 +329,7 @@ class User
 
     /**
      * @param DateTimeImmutable $createdAt
+     *
      * @return User
      */
     public function setCreatedAt(DateTimeImmutable $createdAt): User
@@ -338,6 +349,7 @@ class User
 
     /**
      * @param DateTimeImmutable $updatedAt
+     *
      * @return User
      */
     public function setUpdatedAt(DateTimeImmutable $updatedAt): User
@@ -357,6 +369,7 @@ class User
 
     /**
      * @param Contact $contact
+     *
      * @return User
      */
     public function setContact(Contact $contact): User

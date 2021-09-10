@@ -183,7 +183,6 @@ final class RestClient implements RestClientInterface
     private function request(string $method, string $url, array $options = []): ResponseInterface
     {
         try {
-
             $response = $this->client->request($method, $url, array_merge($options, $this->getRequestOptions()));
         } catch (TransferException $exception) {
             throw $this->convertException($exception);

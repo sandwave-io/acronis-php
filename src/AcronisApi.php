@@ -6,8 +6,8 @@ namespace SandwaveIo\Acronis;
 
 use SandwaveIo\Acronis\Client\RestClientInterface;
 use SandwaveIo\Acronis\Client\TenantClient;
-use SandwaveIo\Acronis\Client\UserClient;
 use SandwaveIo\Acronis\Client\UsageClient;
+use SandwaveIo\Acronis\Client\UserClient;
 
 final class AcronisApi
 {

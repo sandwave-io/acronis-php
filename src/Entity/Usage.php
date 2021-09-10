@@ -79,7 +79,6 @@ class Usage
      */
     private $measurementUnit;
 
-
     public function getTenantUuid(): string
     {
         return $this->tenantUuid;
