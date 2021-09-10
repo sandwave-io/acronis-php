@@ -95,22 +95,6 @@ class User
      */
     private $contact;
 
-    /**
-     * User constructor.
-     *
-     * @param string|null       $id
-     * @param string|null       $tenantId
-     * @param string|null       $personalTenantId
-     * @param int               $version
-     * @param string            $login
-     * @param bool              $enabled
-     * @param bool              $activated
-     * @param string            $language
-     * @param string            $mfaStatus
-     * @param DateTimeImmutable $createdAt
-     * @param DateTimeImmutable $updatedAt
-     * @param Contact           $contact
-     */
     public function __construct(
         ?string $id,
         ?string $tenantId,
@@ -139,19 +123,11 @@ class User
         $this->contact = $contact;
     }
 
-    /**
-     * @return string|null
-     */
     public function getId(): ?string
     {
         return $this->id;
     }
 
-    /**
-     * @param string|null $id
-     *
-     * @return User
-     */
     public function setId(?string $id): User
     {
         $this->id = $id;
@@ -159,19 +135,11 @@ class User
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTenantId(): ?string
     {
         return $this->tenantId;
     }
 
-    /**
-     * @param string|null $tenantId
-     *
-     * @return User
-     */
     public function setTenantId(?string $tenantId): User
     {
         $this->tenantId = $tenantId;
@@ -179,19 +147,11 @@ class User
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPersonalTenantId(): ?string
     {
         return $this->personalTenantId;
     }
 
-    /**
-     * @param string|null $personalTenantId
-     *
-     * @return User
-     */
     public function setPersonalTenantId(?string $personalTenantId): User
     {
         $this->personalTenantId = $personalTenantId;
@@ -199,19 +159,11 @@ class User
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getVersion(): int
     {
         return $this->version;
     }
 
-    /**
-     * @param int $version
-     *
-     * @return User
-     */
     public function setVersion(int $version): User
     {
         $this->version = $version;
@@ -219,19 +171,11 @@ class User
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getLogin(): string
     {
         return $this->login;
     }
 
-    /**
-     * @param string $login
-     *
-     * @return User
-     */
     public function setLogin(string $login): User
     {
         $this->login = $login;
@@ -239,19 +183,11 @@ class User
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isEnabled(): bool
     {
         return $this->enabled;
     }
 
-    /**
-     * @param bool $enabled
-     *
-     * @return User
-     */
     public function setEnabled(bool $enabled): User
     {
         $this->enabled = $enabled;
@@ -259,19 +195,11 @@ class User
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isActivated(): bool
     {
         return $this->activated;
     }
 
-    /**
-     * @param bool $activated
-     *
-     * @return User
-     */
     public function setActivated(bool $activated): User
     {
         $this->activated = $activated;
@@ -279,19 +207,11 @@ class User
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getLanguage(): string
     {
         return $this->language;
     }
 
-    /**
-     * @param string $language
-     *
-     * @return User
-     */
     public function setLanguage(string $language): User
     {
         $this->language = $language;
@@ -299,19 +219,11 @@ class User
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getMfaStatus(): string
     {
         return $this->mfaStatus;
     }
 
-    /**
-     * @param string $mfaStatus
-     *
-     * @return User
-     */
     public function setMfaStatus(string $mfaStatus): User
     {
         $this->mfaStatus = $mfaStatus;
@@ -319,19 +231,11 @@ class User
         return $this;
     }
 
-    /**
-     * @return DateTimeImmutable
-     */
     public function getCreatedAt(): DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    /**
-     * @param DateTimeImmutable $createdAt
-     *
-     * @return User
-     */
     public function setCreatedAt(DateTimeImmutable $createdAt): User
     {
         $this->createdAt = $createdAt;
@@ -339,19 +243,11 @@ class User
         return $this;
     }
 
-    /**
-     * @return DateTimeImmutable
-     */
     public function getUpdatedAt(): DateTimeImmutable
     {
         return $this->updatedAt;
     }
 
-    /**
-     * @param DateTimeImmutable $updatedAt
-     *
-     * @return User
-     */
     public function setUpdatedAt(DateTimeImmutable $updatedAt): User
     {
         $this->updatedAt = $updatedAt;
@@ -359,19 +255,11 @@ class User
         return $this;
     }
 
-    /**
-     * @return Contact
-     */
     public function getContact(): Contact
     {
         return $this->contact;
     }
 
-    /**
-     * @param Contact $contact
-     *
-     * @return User
-     */
     public function setContact(Contact $contact): User
     {
         $this->contact = $contact;
