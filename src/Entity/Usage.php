@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace SandwaveIo\Acronis\Entity;
 
@@ -79,18 +79,12 @@ class Usage
      */
     private $measurementUnit;
 
-    /**
-     * @return string
-     */
+
     public function getTenantUuid(): string
     {
         return $this->tenantUuid;
     }
 
-    /**
-     * @param string $tenantUuid
-     * @return Usage
-     */
     public function setTenantUuid(string $tenantUuid): Usage
     {
         $this->tenantUuid = $tenantUuid;
@@ -98,18 +92,11 @@ class Usage
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getTenantId(): int
     {
         return $this->tenantId;
     }
 
-    /**
-     * @param int $tenantId
-     * @return Usage
-     */
     public function setTenantId(int $tenantId): Usage
     {
         $this->tenantId = $tenantId;
@@ -117,18 +104,11 @@ class Usage
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @param string $type
-     * @return Usage
-     */
     public function setType(string $type): Usage
     {
         $this->type = $type;
@@ -136,18 +116,11 @@ class Usage
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     * @return Usage
-     */
     public function setName(string $name): Usage
     {
         $this->name = $name;
@@ -155,18 +128,11 @@ class Usage
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getEdition(): string
     {
         return $this->edition;
     }
 
-    /**
-     * @param string $edition
-     * @return Usage
-     */
     public function setEdition(string $edition): Usage
     {
         $this->edition = $edition;
@@ -174,18 +140,11 @@ class Usage
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getUsageName(): string
     {
         return $this->usageName;
     }
 
-    /**
-     * @param string $usageName
-     * @return Usage
-     */
     public function setUsageName(string $usageName): Usage
     {
         $this->usageName = $usageName;
@@ -193,18 +152,11 @@ class Usage
         return $this;
     }
 
-    /**
-     * @return DateTimeImmutable
-     */
     public function getRangeStart(): DateTimeImmutable
     {
         return $this->rangeStart;
     }
 
-    /**
-     * @param DateTimeImmutable $rangeStart
-     * @return Usage
-     */
     public function setRangeStart(DateTimeImmutable $rangeStart): Usage
     {
         $this->rangeStart = $rangeStart;
@@ -212,18 +164,11 @@ class Usage
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getAbsoluteValue(): int
     {
         return $this->absoluteValue;
     }
 
-    /**
-     * @param int $absoluteValue
-     * @return Usage
-     */
     public function setAbsoluteValue(int $absoluteValue): Usage
     {
         $this->absoluteValue = $absoluteValue;
@@ -231,18 +176,11 @@ class Usage
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getValue(): int
     {
         return $this->value;
     }
 
-    /**
-     * @param int $value
-     * @return Usage
-     */
     public function setValue(int $value): Usage
     {
         $this->value = $value;
@@ -250,18 +188,11 @@ class Usage
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getMeasurementUnit(): string
     {
         return $this->measurementUnit;
     }
 
-    /**
-     * @param string $measurementUnit
-     * @return Usage
-     */
     public function setMeasurementUnit(string $measurementUnit): Usage
     {
         $this->measurementUnit = $measurementUnit;

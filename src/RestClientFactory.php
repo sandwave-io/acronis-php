@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\HandlerStack;
 
-class RestClientFactory implements RestClientFactoryInterface
+final class RestClientFactory implements RestClientFactoryInterface
 {
     /**
      * @var string

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace SandwaveIo\Acronis\Client;
 
@@ -23,8 +23,10 @@ class UsageClient
 
     /**
      * @param string $uuid
-     * @return Usage[]
+     *
      * @throws AcronisException
+     *
+     * @return Usage[]
      */
     public function get(string $uuid): array
     {
