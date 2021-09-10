@@ -9,8 +9,8 @@ use PHPUnit\Framework\TestCase;
 use SandwaveIo\Acronis\AcronisApi;
 use SandwaveIo\Acronis\Client\RestClient;
 use SandwaveIo\Acronis\Client\TenantClient;
-use SandwaveIo\Acronis\Client\UserClient;
 use SandwaveIo\Acronis\Client\UsageClient;
+use SandwaveIo\Acronis\Client\UserClient;
 use SandwaveIo\Acronis\RestClientFactory;
 
 class AcronisApiTest extends TestCase
