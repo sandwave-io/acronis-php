@@ -373,9 +373,6 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isEnabled(): bool
     {
         return $this->enabled;
@@ -388,9 +385,6 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isHasChildren(): bool
     {
         return $this->hasChildren;
@@ -403,9 +397,6 @@ class Tenant
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isAncestralAccess(): bool
     {
         return $this->ancestralAccess;

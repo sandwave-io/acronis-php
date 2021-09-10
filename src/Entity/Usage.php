@@ -79,6 +79,30 @@ class Usage
      */
     private $measurementUnit;
 
+    public function __construct(
+        string $tenantUuid,
+        int $tenantId,
+        string $type,
+        string $name,
+        string $edition,
+        string $usageName,
+        DateTimeImmutable $rangeStart,
+        int $absoluteValue,
+        int $value,
+        string $measurementUnit
+    ) {
+        $this->tenantUuid = $tenantUuid;
+        $this->tenantId = $tenantId;
+        $this->type = $type;
+        $this->name = $name;
+        $this->edition = $edition;
+        $this->usageName = $usageName;
+        $this->rangeStart = $rangeStart;
+        $this->absoluteValue = $absoluteValue;
+        $this->value = $value;
+        $this->measurementUnit = $measurementUnit;
+    }
+
     public function getTenantUuid(): string
     {
         return $this->tenantUuid;
