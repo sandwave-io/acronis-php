@@ -12,10 +12,10 @@
       "name": "Sander van Stokkom",
       "email": "sander@sanderenjoyce.nl"
     },
-      {
-          "name": "George Boon",
-          "email": "dev@georgeboon.nl"
-      }
+    {
+      "name": "George Boon",
+      "email": "dev@georgeboon.nl"
+    }
   ],
   "require": {
     "php": "^7.3|^7.4|^8.0",
@@ -47,15 +47,15 @@
   "config": {
     "sort-packages": true
   },
-    "scripts": {
-        "phpcs-fix": "vendor/bin/php-cs-fixer fix",
-        "phpcs-fix-dryrun": "vendor/bin/php-cs-fixer fix --dry-run --diff --show-progress=none -vvv",
-        "phpunit": "vendor/bin/phpunit --coverage-text",
-        "phpstan": "vendor/bin/phpstan analyze",
-        "analyze": [
-            "@phpcs-fix-dryrun",
-            "@phpstan",
-            "@phpunit"
-        ]
-    }
+  "scripts": {
+    "phpcs-fix": "vendor/bin/php-cs-fixer fix",
+    "phpcs-fix-dryrun": "vendor/bin/php-cs-fixer fix --dry-run --diff --show-progress=none -vvv",
+    "phpunit": "vendor/bin/phpunit --coverage-text",
+    "phpstan": "vendor/bin/phpstan analyze",
+    "analyze": [
+      "@phpcs-fix-dryrun",
+      "@phpstan",
+      "@phpunit"
+    ]
+  }
 }
