@@ -39,6 +39,7 @@ class OfferingCollection
 
     /**
      * @param Offering[] $offeringItems
+     *
      * @return OfferingCollection
      */
     public function setOfferingItems(array $offeringItems): OfferingCollection
@@ -58,6 +59,7 @@ class OfferingCollection
 
     /**
      * @param Offering[] $updatedOfferingItems
+     *
      * @return OfferingCollection
      */
     public function setUpdatedOfferingItems(array $updatedOfferingItems): OfferingCollection
