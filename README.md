@@ -50,11 +50,9 @@ Feel free to create a PR if you have any ideas for improvements. Or create an is
 * Also make sure PHPStan does not find any bugs.
 
 ```bash
-vendor/bin/php-cs-fixer fix
+composer analyze # this will (dry)run php-cs-fixer, phpstan and phpunit
 
-vendor/bin/phpstan analyze
-
-vendor/bin/phpunit --coverage-text
+composer phpcs-fix # this will actually let php-cs-fixer run to fix
 ```
 
 These tools will also run in GitHub actions on PR's and pushes on master.
