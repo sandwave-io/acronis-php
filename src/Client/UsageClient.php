@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace SandwaveIo\Acronis\Client;
 
+use SandwaveIo\Acronis\Entity\Tenant;
 use SandwaveIo\Acronis\Entity\Usage;
 use SandwaveIo\Acronis\Exception\AcronisException;
 
@@ -22,14 +23,14 @@ class UsageClient
     }
 
     /**
-     * @param string $uuid
+     * @param Tenant $tenant
      *
      * @throws AcronisException
      *
      * @return Usage[]
      */
-    public function get(string $uuid): array
+    public function get(Tenant $tenant): array
     {
-        return $this->client->getEntityCollection(sprintf(self::TENANT_USAGES, $uuid), Usage::class);
+        return $this->client->getEntityCollection(sprintf(self::TENANT_USAGES, $tenant->getId()), Usage::class);
     }
 }

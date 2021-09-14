@@ -7,6 +7,7 @@ namespace SandwaveIo\Acronis\Tests;
 use JMS\Serializer\SerializerInterface;
 use PHPUnit\Framework\TestCase;
 use SandwaveIo\Acronis\AcronisApi;
+use SandwaveIo\Acronis\Client\OfferingClient;
 use SandwaveIo\Acronis\Client\RestClient;
 use SandwaveIo\Acronis\Client\TenantClient;
 use SandwaveIo\Acronis\Client\UsageClient;
@@ -41,6 +42,11 @@ class AcronisApiTest extends TestCase
             UsageClient::class,
             $acronisApi->getUsageClient(),
             'The Usage Client could not be instantiated.'
+        );
+        $this->assertInstanceOf(
+            OfferingClient::class,
+            $acronisApi->getOfferingClient(),
+            'The Offering Client could not be instantiated.'
         );
     }
 }
