@@ -11,6 +11,7 @@ class TenantClient
 {
     private const TENANT_DETAILS = 'tenants/%s';
     private const TENANT_CHILDREN = 'tenants?parent_id=%s';
+    private const TENANT_DELETE = 'tenants/%s?version=%d';
 
     /**
      * @var RestClientInterface
@@ -49,5 +50,15 @@ class TenantClient
         $updatedTenant = $this->client->put(sprintf(self::TENANT_DETAILS, $tenant->getId()), $tenant);
 
         return $updatedTenant;
+    }
+
+    /**
+     * @throws AcronisException
+     */
+    public function delete(Tenant $tenant): void
+    {
+        $this->client->delete(
+            sprintf(self::TENANT_DELETE, $tenant->getId(), $tenant->getVersion())
+        );
     }
 }
