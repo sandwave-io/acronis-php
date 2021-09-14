@@ -32,7 +32,7 @@ class OfferingQuota
      */
     private $value;
 
-    public function __construct(int $version, ?int $overage, ?int $value)
+    public function __construct(int $version, ?int $overage = null, ?int $value = null)
     {
         $this->version = $version;
         $this->overage = $overage;

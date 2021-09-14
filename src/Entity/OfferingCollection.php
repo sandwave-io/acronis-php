@@ -29,11 +29,18 @@ class OfferingCollection
         $this->updatedOfferingItems = [];
     }
 
+    /**
+     * @return array|Offering[]
+     */
     public function getOfferingItems(): array
     {
         return $this->offeringItems;
     }
 
+    /**
+     * @param Offering[] $offeringItems
+     * @return OfferingCollection
+     */
     public function setOfferingItems(array $offeringItems): OfferingCollection
     {
         $this->offeringItems = $offeringItems;
@@ -41,11 +48,18 @@ class OfferingCollection
         return $this;
     }
 
+    /**
+     * @return array|Offering[]
+     */
     public function getUpdatedOfferingItems(): array
     {
         return $this->updatedOfferingItems;
     }
 
+    /**
+     * @param Offering[] $updatedOfferingItems
+     * @return OfferingCollection
+     */
     public function setUpdatedOfferingItems(array $updatedOfferingItems): OfferingCollection
     {
         $this->updatedOfferingItems = $updatedOfferingItems;
