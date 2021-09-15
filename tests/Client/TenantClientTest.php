@@ -152,7 +152,7 @@ class TenantClientTest extends TestCase
     {
         $tenantMock = $this->createMock(Tenant::class);
         $tenantMock->setId('numero-1');
-        $tenantMock->setVersion(2);
+        $tenantMock->setEnabled(true);
 
         $this->restClient
             ->expects(self::once())
@@ -165,7 +165,7 @@ class TenantClientTest extends TestCase
 
         $updatedTenant = $this->tenantClient->update($tenantMock);
 
-        self::assertSame($tenantMock->getVersion(), $updatedTenant->getVersion());
+        self::assertSame($tenantMock->isEnabled(), $updatedTenant->isEnabled());
     }
 
     public function testUpdateFailure(): void
