@@ -116,6 +116,20 @@ final class RestClient implements RestClientInterface
         return $responseData;
     }
 
+    public function postRaw(string $url, array $data): string
+    {
+        $json = json_encode($data);
+
+        $response = $this->request('POST', $url, [
+            'body' => $json,
+            'headers' => [
+                'Content-type' => 'application/json; charset=utf-8',
+            ],
+        ]);
+
+        return $response->getBody()->getContents();
+    }
+
     /**
      * @template T of object
      *
