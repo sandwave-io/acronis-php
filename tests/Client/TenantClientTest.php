@@ -31,7 +31,7 @@ class TenantClientTest extends TestCase
         $this->tenantClient = new TenantClient($this->restClient);
     }
 
-    public function testGetEntity(): void
+    public function testGet(): void
     {
         $tenantUid = 'numero-1';
 
@@ -72,7 +72,7 @@ class TenantClientTest extends TestCase
         self::assertSame($tenantUid, $responeTenant->getId());
     }
 
-    public function testGetEntityFailure(): void
+    public function testGetFailure(): void
     {
         $this->restClient
             ->expects(self::once())
@@ -127,7 +127,6 @@ class TenantClientTest extends TestCase
 
         $response = $this->tenantClient->getChildren($tenantUid);
 
-        $this->assertIsArray($response);
         $this->assertCount(count($tenantList), $response);
         $first = array_shift($response);
         $this->assertInstanceOf(Tenant::class, $first);
