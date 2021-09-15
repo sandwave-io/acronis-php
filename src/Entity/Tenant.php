@@ -21,6 +21,7 @@ class Tenant
      * @var string
      * @Serializer\SerializedName("parent_id")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data"})
      */
     private $parentId;
 
@@ -64,6 +65,7 @@ class Tenant
      * @var string
      * @Serializer\SerializedName("name")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data"})
      */
     private $name;
 
@@ -92,6 +94,7 @@ class Tenant
      * @var string
      * @Serializer\SerializedName("kind")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data"})
      */
     private $kind;
 
@@ -106,6 +109,7 @@ class Tenant
      * @var string
      * @Serializer\SerializedName("language")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data"})
      */
     private $language;
 
@@ -113,7 +117,7 @@ class Tenant
      * @var bool
      * @Serializer\SerializedName("enabled")
      * @Serializer\Type("boolean")
-     * @Serializer\Groups({"update_data"})
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $enabled;
 
@@ -156,53 +160,18 @@ class Tenant
      * @var Contact
      * @Serializer\SerializedName("contact")
      * @Serializer\Type("SandwaveIo\Acronis\Entity\Contact")
+     * @Serializer\Groups({"create_data"})
      */
     private $contact;
 
     public function __construct(
-        int $version,
         string $parentId,
-        string $brandUuid,
-        int $brandId,
-        string $customerId,
         string $name,
-        string $internalTag,
-        string $customerType,
-        string $mfaStatus,
-        string $kind,
-        string $pricingMode,
-        string $language,
-        bool $enabled,
-        bool $hasChildren,
-        bool $ancestralAccess,
-        DateTimeImmutable $createdAt,
-        DateTimeImmutable $updatedAt,
-        Contact $contact,
-        string $id = null,
-        ?string $ownerId = null,
-        ?DateTimeImmutable $deletedAt = null
+        string $kind
     ) {
-        $this->id = $id;
-        $this->version = $version;
         $this->parentId = $parentId;
-        $this->brandUuid = $brandUuid;
-        $this->brandId = $brandId;
-        $this->customerId = $customerId;
         $this->name = $name;
-        $this->internalTag = $internalTag;
-        $this->customerType = $customerType;
-        $this->mfaStatus = $mfaStatus;
         $this->kind = $kind;
-        $this->pricingMode = $pricingMode;
-        $this->language = $language;
-        $this->enabled = $enabled;
-        $this->hasChildren = $hasChildren;
-        $this->ancestralAccess = $ancestralAccess;
-        $this->createdAt = $createdAt;
-        $this->updatedAt = $updatedAt;
-        $this->contact = $contact;
-        $this->ownerId = $ownerId;
-        $this->deletedAt = $deletedAt;
     }
 
     public function getId(): ?string

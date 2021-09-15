@@ -20,6 +20,7 @@ class User
      * @var string|null
      * @Serializer\SerializedName("tenant_id")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data"})
      */
     private $tenantId;
 
@@ -42,6 +43,7 @@ class User
      * @var string
      * @Serializer\SerializedName("login")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data"})
      */
     private $login;
 
@@ -49,6 +51,7 @@ class User
      * @var bool
      * @Serializer\SerializedName("enabled")
      * @Serializer\Type("boolean")
+     * @Serializer\Groups({"create_data"})
      */
     private $enabled;
 
@@ -91,36 +94,14 @@ class User
      * @var Contact
      * @Serializer\SerializedName("contact")
      * @Serializer\Type("SandwaveIo\Acronis\Entity\Contact")
-     * @Serializer\Groups({"update_data"})
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $contact;
 
     public function __construct(
-        ?string $id,
-        ?string $tenantId,
-        ?string $personalTenantId,
-        int $version,
-        string $login,
-        bool $enabled,
-        bool $activated,
-        string $language,
-        string $mfaStatus,
-        DateTimeImmutable $createdAt,
-        DateTimeImmutable $updatedAt,
-        Contact $contact
+        string $tenantId
     ) {
-        $this->id = $id;
         $this->tenantId = $tenantId;
-        $this->personalTenantId = $personalTenantId;
-        $this->version = $version;
-        $this->login = $login;
-        $this->enabled = $enabled;
-        $this->activated = $activated;
-        $this->language = $language;
-        $this->mfaStatus = $mfaStatus;
-        $this->createdAt = $createdAt;
-        $this->updatedAt = $updatedAt;
-        $this->contact = $contact;
     }
 
     public function getId(): ?string

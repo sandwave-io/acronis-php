@@ -9,8 +9,10 @@ use SandwaveIo\Acronis\Exception\AcronisException;
 
 class TenantClient
 {
+    private const TENANT_LIST = 'tenants';
     private const TENANT_DETAILS = 'tenants/%s';
     private const TENANT_CHILDREN = 'tenants?parent_id=%s';
+    private const TENANT_USERS = 'tenants/%s/users';
     private const TENANT_DELETE = 'tenants/%s?version=%d';
 
     /**
@@ -44,12 +46,29 @@ class TenantClient
         return $this->client->getEntityCollection(sprintf(self::TENANT_CHILDREN, $parentUuid), Tenant::class);
     }
 
+    public function create(Tenant $tenant): Tenant
+    {
+        /** @var Tenant $createdTenant */
+        $createdTenant = $this->client->post(self::TENANT_LIST, $tenant);
+
+        return $createdTenant;
+    }
+
     public function update(Tenant $tenant): Tenant
     {
         /** @var Tenant $updatedTenant */
         $updatedTenant = $this->client->put(sprintf(self::TENANT_DETAILS, $tenant->getId()), $tenant);
 
         return $updatedTenant;
+    }
+
+    /**
+     * @param string $tenantUuid
+     * @return string[]
+     */
+    public function getUsersByTenantUuid(string $tenantUuid): array
+    {
+        return json_decode($this->client->getRawData(sprintf(self::TENANT_USERS, $tenantUuid)));
     }
 
     /**

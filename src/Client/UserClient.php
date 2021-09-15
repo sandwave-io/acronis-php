@@ -9,7 +9,9 @@ use SandwaveIo\Acronis\Exception\AcronisException;
 
 class UserClient
 {
+    private const USER_LIST = 'users';
     private const USER_DETAILS = 'users/%s';
+    private const PASSWORD_UPDATE = 'users/%s/password';
 
     /**
      * @var RestClientInterface
@@ -30,6 +32,19 @@ class UserClient
         $user = $this->client->getEntity(sprintf(self::USER_DETAILS, $uuid), User::class);
 
         return $user;
+    }
+
+    public function create(User $user): User
+    {
+        /** @var User $createdUser */
+        $createdUser = $this->client->post(self::USER_LIST, $user);
+
+        return $createdUser;
+    }
+
+    public function updatePassword(User $user, string $password): string
+    {
+        return $this->client->postRaw(sprintf(self::PASSWORD_UPDATE, $user->getId()), ['password' => $password]);
     }
 
     public function update(User $user): User
