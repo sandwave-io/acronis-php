@@ -102,6 +102,7 @@ class Tenant
      * @var string
      * @Serializer\SerializedName("pricing_mode")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data"})
      */
     private $pricingMode;
 
