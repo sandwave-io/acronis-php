@@ -93,8 +93,29 @@ class UsageClientTest extends TestCase
 
     public function testGetFailure(): void
     {
-        $tenantMock = $this->createMock(Tenant::class);
-        $tenantMock->setId('numero-1');
+        $tenantUid = 'numero-1';
+
+        $tenant = new Tenant(
+            1,
+            'parent-uid',
+            'brand-uid',
+            1,
+            'customer-uid',
+            'name',
+            'internal-tag',
+            'customer-type',
+            'mfa-status',
+            'kind',
+            'pricing-mode',
+            'nl',
+            true,
+            false,
+            false,
+            new DateTimeImmutable(),
+            new DateTimeImmutable(),
+            new Contact(),
+            $tenantUid,
+        );
 
         $this->restClient
             ->expects(self::once())
@@ -106,6 +127,6 @@ class UsageClientTest extends TestCase
             );
 
         self::expectException(AcronisException::class);
-        $this->usageClient->get($tenantMock);
+        $this->usageClient->get($tenant);
     }
 }

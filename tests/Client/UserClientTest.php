@@ -84,30 +84,64 @@ class UserClientTest extends TestCase
 
     public function testUpdate(): void
     {
-        $contactMock = $this->createMock(Contact::class);
-        $contactMock->setId('numero-1');
-        $contactMock->setEmail('test@test.com');
+        $contact = new Contact();
+        $contact->setId('numero-1');
+        $contact->setEmail('test@test.com');
 
-        $userMock = $this->createMock(User::class);
-        $userMock->setId('numero-1');
-        $userMock->setContact($contactMock);
+        $userUid = 'numero-10';
+        $tenantUid = 'numero-1';
+        $personalTenantId = 'numero-2';
+
+        $user = new User(
+            $userUid,
+            $tenantUid,
+            $personalTenantId,
+            1,
+            'username',
+            true,
+            true,
+            'en',
+            'disabled',
+            new DateTimeImmutable(),
+            new DateTimeImmutable(),
+            $contact
+        );
 
         $this->restClient
             ->expects(self::once())
             ->method('put')
             ->with(
                 $this->equalTo(
-                    sprintf('users/%s', $userMock->getId())
+                    sprintf('users/%s', $user->getId())
                 )
-            )->willReturn($userMock);
+            )->willReturn($user);
 
-        $updatedUser = $this->userClient->update($userMock);
+        $updatedUser = $this->userClient->update($user);
 
-        self::assertSame($userMock->getContact()->getEmail(), $updatedUser->getContact()->getEmail());
+        self::assertSame($user->getContact()->getEmail(), $updatedUser->getContact()->getEmail());
     }
 
     public function testUpdateFailure(): void
     {
+        $userUid = 'numero-10';
+        $tenantUid = 'numero-1';
+        $personalTenantId = 'numero-2';
+
+        $user = new User(
+            $userUid,
+            $tenantUid,
+            $personalTenantId,
+            1,
+            'username',
+            true,
+            true,
+            'en',
+            'disabled',
+            new DateTimeImmutable(),
+            new DateTimeImmutable(),
+            new Contact()
+        );
+
         $this->restClient
             ->expects(self::once())
             ->method('put')
@@ -118,6 +152,6 @@ class UserClientTest extends TestCase
             );
 
         self::expectException(AcronisException::class);
-        $this->userClient->update($this->createMock(User::class));
+        $this->userClient->update($user);
     }
 }

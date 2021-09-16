@@ -150,26 +150,68 @@ class TenantClientTest extends TestCase
 
     public function testUpdate(): void
     {
-        $tenantMock = $this->createMock(Tenant::class);
-        $tenantMock->setId('numero-1');
-        $tenantMock->setEnabled(true);
+        $tenantUid = 'numero-1';
+        $tenant = new Tenant(
+            1,
+            'parent-uid',
+            'brand-uid',
+            1,
+            'customer-uid',
+            'name',
+            'internal-tag',
+            'customer-type',
+            'mfa-status',
+            'kind',
+            'pricing-mode',
+            'nl',
+            true,
+            false,
+            false,
+            new DateTimeImmutable(),
+            new DateTimeImmutable(),
+            new Contact(),
+            $tenantUid,
+        );
 
         $this->restClient
             ->expects(self::once())
             ->method('put')
             ->with(
                 $this->equalTo(
-                    sprintf('tenants/%s', $tenantMock->getId())
+                    sprintf('tenants/%s', $tenant->getId())
                 )
-            )->willReturn($tenantMock);
+            )->willReturn($tenant);
 
-        $updatedTenant = $this->tenantClient->update($tenantMock);
+        $updatedTenant = $this->tenantClient->update($tenant);
 
-        self::assertSame($tenantMock->isEnabled(), $updatedTenant->isEnabled());
+        self::assertSame($tenant->isEnabled(), $updatedTenant->isEnabled());
     }
 
     public function testUpdateFailure(): void
     {
+        $tenantUid = 'numero-1';
+        $tenant = new Tenant(
+            1,
+            'parent-uid',
+            'brand-uid',
+            1,
+            'customer-uid',
+            'name',
+            'internal-tag',
+            'customer-type',
+            'mfa-status',
+            'kind',
+            'pricing-mode',
+            'nl',
+            true,
+            false,
+            false,
+            new DateTimeImmutable(),
+            new DateTimeImmutable(),
+            new Contact(),
+            $tenantUid,
+        );
+
         $this->restClient
             ->expects(self::once())
             ->method('put')
@@ -180,31 +222,73 @@ class TenantClientTest extends TestCase
             );
 
         self::expectException(AcronisException::class);
-        $this->tenantClient->update($this->createMock(Tenant::class));
+        $this->tenantClient->update($tenant);
     }
 
     public function testDelete(): void
     {
-        $tenantMock = $this->createMock(Tenant::class);
-        $tenantMock->setId('numero-1');
-        $tenantMock->setVersion(2);
+        $tenantUid = 'numero-1';
+        $tenant = new Tenant(
+            1,
+            'parent-uid',
+            'brand-uid',
+            1,
+            'customer-uid',
+            'name',
+            'internal-tag',
+            'customer-type',
+            'mfa-status',
+            'kind',
+            'pricing-mode',
+            'nl',
+            true,
+            false,
+            false,
+            new DateTimeImmutable(),
+            new DateTimeImmutable(),
+            new Contact(),
+            $tenantUid,
+        );
 
         $this->restClient
             ->expects(self::once())
             ->method('delete')
             ->with(
                 $this->equalTo(
-                    sprintf('tenants/%s?version=%d', $tenantMock->getId(), $tenantMock->getVersion())
+                    sprintf('tenants/%s?version=%d', $tenant->getId(), $tenant->getVersion())
                 )
             );
 
         $this->tenantClient->delete(
-            $tenantMock
+            $tenant
         );
     }
 
     public function testDeleteFailure(): void
     {
+        $tenantUid = 'numero-1';
+        $tenant = new Tenant(
+            1,
+            'parent-uid',
+            'brand-uid',
+            1,
+            'customer-uid',
+            'name',
+            'internal-tag',
+            'customer-type',
+            'mfa-status',
+            'kind',
+            'pricing-mode',
+            'nl',
+            true,
+            false,
+            false,
+            new DateTimeImmutable(),
+            new DateTimeImmutable(),
+            new Contact(),
+            $tenantUid,
+        );
+
         $this->restClient
             ->expects(self::once())
             ->method('delete')
@@ -215,6 +299,6 @@ class TenantClientTest extends TestCase
             );
 
         self::expectException(AcronisException::class);
-        $this->tenantClient->delete($this->createMock(Tenant::class));
+        $this->tenantClient->delete($tenant);
     }
 }

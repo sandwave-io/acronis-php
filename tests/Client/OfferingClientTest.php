@@ -100,8 +100,29 @@ class OfferingClientTest extends TestCase
 
     public function testGetFailure(): void
     {
-        $tenantMock = $this->createMock(Tenant::class);
-        $tenantMock->setId('numero-1');
+        $tenantUid = 'numero-1';
+
+        $tenant = new Tenant(
+            1,
+            'parent-uid',
+            'brand-uid',
+            1,
+            'customer-uid',
+            'name',
+            'internal-tag',
+            'customer-type',
+            'mfa-status',
+            'kind',
+            'pricing-mode',
+            'nl',
+            true,
+            false,
+            false,
+            new DateTimeImmutable(),
+            new DateTimeImmutable(),
+            new Contact(),
+            $tenantUid,
+        );
 
         $this->restClient
             ->expects(self::once())
@@ -113,7 +134,7 @@ class OfferingClientTest extends TestCase
             );
 
         self::expectException(AcronisException::class);
-        $this->offeringClient->get($tenantMock);
+        $this->offeringClient->get($tenant);
     }
 
     public function testUpdate(): void
@@ -193,6 +214,48 @@ class OfferingClientTest extends TestCase
 
     public function testUpdateFailure(): void
     {
+        $tenantUid = 'numero-1';
+        $tenant = new Tenant(
+            1,
+            'parent-uid',
+            'brand-uid',
+            1,
+            'customer-uid',
+            'name',
+            'internal-tag',
+            'customer-type',
+            'mfa-status',
+            'kind',
+            'pricing-mode',
+            'nl',
+            true,
+            false,
+            false,
+            new DateTimeImmutable(),
+            new DateTimeImmutable(),
+            new Contact(),
+            $tenantUid,
+        );
+
+        $offeringQuota = new OfferingQuota(1, 0, 268435456000);
+
+        $offering = new Offering(
+            $tenant->getId(),
+            'infra_id',
+            'application_id',
+            'bytes',
+            1,
+            'infra',
+            'standard',
+            'storage',
+            'storage',
+            false,
+            $offeringQuota
+        );
+
+        $offeringCollection = new OfferingCollection();
+        $offeringCollection->setOfferingItems([$offering]);
+
         $this->restClient
             ->expects(self::once())
             ->method('put')
@@ -203,6 +266,6 @@ class OfferingClientTest extends TestCase
             );
 
         self::expectException(AcronisException::class);
-        $this->offeringClient->update($this->createMock(Tenant::class), $this->createMock(OfferingCollection::class));
+        $this->offeringClient->update($tenant, $offeringCollection);
     }
 }
