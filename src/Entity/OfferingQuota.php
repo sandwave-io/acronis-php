@@ -9,7 +9,7 @@ use JMS\Serializer\Annotation as Serializer;
 class OfferingQuota
 {
     /**
-     * @var int
+     * @var int|null
      * @Serializer\SerializedName("version")
      * @Serializer\Type("integer")
      * @Serializer\Groups({"update_data"})
@@ -32,19 +32,19 @@ class OfferingQuota
      */
     private $value;
 
-    public function __construct(int $version, ?int $overage = null, ?int $value = null)
+    public function __construct(?int $value, ?int $overage = null, ?int $version = null)
     {
-        $this->version = $version;
-        $this->overage = $overage;
         $this->value = $value;
+        $this->overage = $overage;
+        $this->version = $version;
     }
 
-    public function getVersion(): int
+    public function getVersion(): ?int
     {
         return $this->version;
     }
 
-    public function setVersion(int $version): OfferingQuota
+    public function setVersion(?int $version): OfferingQuota
     {
         $this->version = $version;
 
