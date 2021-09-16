@@ -86,7 +86,7 @@ final class RestClient implements RestClientInterface
      */
     public function getRawData(string $url): string
     {
-        return $this->getItemsRawData($url);
+        return $this->get($url);
     }
 
     /**

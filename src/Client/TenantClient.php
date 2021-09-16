@@ -12,8 +12,10 @@ class TenantClient
     private const TENANT_LIST = 'tenants';
     private const TENANT_DETAILS = 'tenants/%s';
     private const TENANT_CHILDREN = 'tenants?parent_id=%s';
-    private const TENANT_USERS = 'tenants/%s/users';
     private const TENANT_DELETE = 'tenants/%s?version=%d';
+    private const TENANT_USERS = 'tenants/%s/users';
+    private const TENANT_APPLICATIONS = 'tenants/%s/applications';
+    private const TENANT_INFRA = 'tenants/%s/infra';
 
     /**
      * @var RestClientInterface
@@ -68,7 +70,7 @@ class TenantClient
      */
     public function getUsersByTenantUuid(string $tenantUuid): array
     {
-        return json_decode($this->client->getRawData(sprintf(self::TENANT_USERS, $tenantUuid)));
+        return json_decode($this->client->getRawData(sprintf(self::TENANT_USERS, $tenantUuid)))->items;
     }
 
     /**
@@ -79,5 +81,15 @@ class TenantClient
         $this->client->delete(
             sprintf(self::TENANT_DELETE, $tenant->getId(), $tenant->getVersion())
         );
+    }
+
+    public function getApplications(string $tenantUuid): string
+    {
+        return $this->client->getRawData(sprintf(self::TENANT_APPLICATIONS, $tenantUuid));
+    }
+
+    public function getInfra(string $tenantUuid): string
+    {
+        return $this->client->getRawData(sprintf(self::TENANT_INFRA, $tenantUuid));
     }
 }
