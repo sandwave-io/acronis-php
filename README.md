@@ -55,4 +55,4 @@ composer analyze # this will (dry)run php-cs-fixer, phpstan and phpunit
 composer phpcs-fix # this will actually let php-cs-fixer run to fix
 ```
 
-These tools will also run in GitHub actions on PR's and pushes on master.
+These tools will also run in GitHub actions on PR's and pushes on main.
