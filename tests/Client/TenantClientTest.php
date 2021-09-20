@@ -4,12 +4,10 @@ declare(strict_types = 1);
 
 namespace SandwaveIo\Acronis\Tests\Client;
 
-use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use SandwaveIo\Acronis\Client\RestClientInterface;
 use SandwaveIo\Acronis\Client\TenantClient;
-use SandwaveIo\Acronis\Entity\Contact;
 use SandwaveIo\Acronis\Entity\Tenant;
 use SandwaveIo\Acronis\Exception\AcronisException;
 
@@ -25,37 +23,27 @@ class TenantClientTest extends TestCase
      */
     private $tenantClient;
 
+    /**
+     * @var Tenant
+     */
+    private $tenant;
+
     protected function setUp(): void
     {
         $this->restClient = $this->createMock(RestClientInterface::class);
         $this->tenantClient = new TenantClient($this->restClient);
+        $this->tenant = new Tenant(
+            'parent-uid',
+            'Test tenant',
+            'customer'
+        );
     }
 
     public function testGet(): void
     {
         $tenantUid = 'numero-1';
 
-        $tenant = new Tenant(
-            1,
-            'parent-uid',
-            'brand-uid',
-            1,
-            'customer-uid',
-            'name',
-            'internal-tag',
-            'customer-type',
-            'mfa-status',
-            'kind',
-            'pricing-mode',
-            'nl',
-            true,
-            false,
-            false,
-            new DateTimeImmutable(),
-            new DateTimeImmutable(),
-            new Contact(),
-            $tenantUid,
-        );
+        $this->tenant->setId($tenantUid);
 
         $this->restClient
             ->expects(self::once())
@@ -65,7 +53,7 @@ class TenantClientTest extends TestCase
                     sprintf('tenants/%s', $tenantUid)
                 )
             )
-            ->willReturn($tenant);
+            ->willReturn($this->tenant);
 
         $responeTenant = $this->tenantClient->get($tenantUid);
 
@@ -92,27 +80,7 @@ class TenantClientTest extends TestCase
         $tenantUid = 'numero-1';
 
         $tenantList = [
-            new Tenant(
-                1,
-                'parent-uid',
-                'brand-uid',
-                1,
-                'customer-uid',
-                'name',
-                'internal-tag',
-                'customer-type',
-                'mfa-status',
-                'kind',
-                'pricing-mode',
-                'nl',
-                true,
-                false,
-                false,
-                new DateTimeImmutable(),
-                new DateTimeImmutable(),
-                new Contact(),
-                $tenantUid,
-            ),
+            $this->tenant->setId($tenantUid),
         ];
 
         $this->restClient
@@ -130,7 +98,7 @@ class TenantClientTest extends TestCase
         $this->assertCount(count($tenantList), $response);
         $first = array_shift($response);
         $this->assertInstanceOf(Tenant::class, $first);
-        $this->assertSame('name', $first->getName());
+        $this->assertSame('Test tenant', $first->getName());
     }
 
     public function testGetChildrenFailure(): void
@@ -151,66 +119,25 @@ class TenantClientTest extends TestCase
     public function testUpdate(): void
     {
         $tenantUid = 'numero-1';
-        $tenant = new Tenant(
-            1,
-            'parent-uid',
-            'brand-uid',
-            1,
-            'customer-uid',
-            'name',
-            'internal-tag',
-            'customer-type',
-            'mfa-status',
-            'kind',
-            'pricing-mode',
-            'nl',
-            true,
-            false,
-            false,
-            new DateTimeImmutable(),
-            new DateTimeImmutable(),
-            new Contact(),
-            $tenantUid,
-        );
+        $this->tenant->setId($tenantUid)->setEnabled(true);
 
         $this->restClient
             ->expects(self::once())
             ->method('put')
             ->with(
                 $this->equalTo(
-                    sprintf('tenants/%s', $tenant->getId())
+                    sprintf('tenants/%s', $tenantUid)
                 )
-            )->willReturn($tenant);
+            )->willReturn($this->tenant);
 
-        $updatedTenant = $this->tenantClient->update($tenant);
+        $updatedTenant = $this->tenantClient->update($this->tenant);
 
-        self::assertSame($tenant->isEnabled(), $updatedTenant->isEnabled());
+        self::assertSame($this->tenant->isEnabled(), $updatedTenant->isEnabled());
     }
 
     public function testUpdateFailure(): void
     {
-        $tenantUid = 'numero-1';
-        $tenant = new Tenant(
-            1,
-            'parent-uid',
-            'brand-uid',
-            1,
-            'customer-uid',
-            'name',
-            'internal-tag',
-            'customer-type',
-            'mfa-status',
-            'kind',
-            'pricing-mode',
-            'nl',
-            true,
-            false,
-            false,
-            new DateTimeImmutable(),
-            new DateTimeImmutable(),
-            new Contact(),
-            $tenantUid,
-        );
+        $this->tenant->setId('numero-1');
 
         $this->restClient
             ->expects(self::once())
@@ -222,72 +149,31 @@ class TenantClientTest extends TestCase
             );
 
         self::expectException(AcronisException::class);
-        $this->tenantClient->update($tenant);
+        $this->tenantClient->update($this->tenant);
     }
 
     public function testDelete(): void
     {
         $tenantUid = 'numero-1';
-        $tenant = new Tenant(
-            1,
-            'parent-uid',
-            'brand-uid',
-            1,
-            'customer-uid',
-            'name',
-            'internal-tag',
-            'customer-type',
-            'mfa-status',
-            'kind',
-            'pricing-mode',
-            'nl',
-            true,
-            false,
-            false,
-            new DateTimeImmutable(),
-            new DateTimeImmutable(),
-            new Contact(),
-            $tenantUid,
-        );
+        $this->tenant->setId($tenantUid)->setVersion(1);
 
         $this->restClient
             ->expects(self::once())
             ->method('delete')
             ->with(
                 $this->equalTo(
-                    sprintf('tenants/%s?version=%d', $tenant->getId(), $tenant->getVersion())
+                    sprintf('tenants/%s?version=%d', $tenantUid, $this->tenant->getVersion())
                 )
             );
 
         $this->tenantClient->delete(
-            $tenant
+            $this->tenant
         );
     }
 
     public function testDeleteFailure(): void
     {
-        $tenantUid = 'numero-1';
-        $tenant = new Tenant(
-            1,
-            'parent-uid',
-            'brand-uid',
-            1,
-            'customer-uid',
-            'name',
-            'internal-tag',
-            'customer-type',
-            'mfa-status',
-            'kind',
-            'pricing-mode',
-            'nl',
-            true,
-            false,
-            false,
-            new DateTimeImmutable(),
-            new DateTimeImmutable(),
-            new Contact(),
-            $tenantUid,
-        );
+        $this->tenant->setId('numero-1')->setVersion(1);
 
         $this->restClient
             ->expects(self::once())
@@ -299,6 +185,6 @@ class TenantClientTest extends TestCase
             );
 
         self::expectException(AcronisException::class);
-        $this->tenantClient->delete($tenant);
+        $this->tenantClient->delete($this->tenant);
     }
 }

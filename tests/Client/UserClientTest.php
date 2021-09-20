@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace SandwaveIo\Acronis\Tests\Client;
 
-use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use SandwaveIo\Acronis\Client\RestClientInterface;
@@ -25,32 +24,23 @@ class UserClientTest extends TestCase
      */
     private $userClient;
 
+    /**
+     * @var User
+     */
+    private $user;
+
     protected function setUp(): void
     {
         $this->restClient = $this->createMock(RestClientInterface::class);
         $this->userClient = new UserClient($this->restClient);
+        $this->user = new User('tenant-uid');
     }
 
     public function testGet(): void
     {
         $userUid = 'numero-10';
-        $tenantUid = 'numero-1';
-        $personalTenantId = 'numero-2';
 
-        $user = new User(
-            $userUid,
-            $tenantUid,
-            $personalTenantId,
-            1,
-            'username',
-            true,
-            true,
-            'en',
-            'disabled',
-            new DateTimeImmutable(),
-            new DateTimeImmutable(),
-            new Contact()
-        );
+        $this->user->setId($userUid);
 
         $this->restClient
             ->expects(self::once())
@@ -60,7 +50,7 @@ class UserClientTest extends TestCase
                     sprintf('users/%s', $userUid)
                 )
             )
-            ->willReturn($user);
+            ->willReturn($this->user);
 
         $responeUser = $this->userClient->get($userUid);
 
@@ -84,64 +74,31 @@ class UserClientTest extends TestCase
 
     public function testUpdate(): void
     {
-        $contact = new Contact();
-        $contact->setId('numero-1');
-        $contact->setEmail('test@test.com');
-
-        $userUid = 'numero-10';
-        $tenantUid = 'numero-1';
-        $personalTenantId = 'numero-2';
-
-        $user = new User(
-            $userUid,
-            $tenantUid,
-            $personalTenantId,
-            1,
-            'username',
-            true,
-            true,
-            'en',
-            'disabled',
-            new DateTimeImmutable(),
-            new DateTimeImmutable(),
-            $contact
+        $contact = new Contact(
+            ['primary'],
+            'john.doe@domain.com',
+            'John',
+            'Doe'
         );
+
+        $this->user->setContact($contact);
 
         $this->restClient
             ->expects(self::once())
             ->method('put')
             ->with(
                 $this->equalTo(
-                    sprintf('users/%s', $user->getId())
+                    sprintf('users/%s', $this->user->getId())
                 )
-            )->willReturn($user);
+            )->willReturn($this->user);
 
-        $updatedUser = $this->userClient->update($user);
+        $updatedUser = $this->userClient->update($this->user);
 
-        self::assertSame($user->getContact()->getEmail(), $updatedUser->getContact()->getEmail());
+        self::assertSame($this->user->getContact()->getEmail(), $updatedUser->getContact()->getEmail());
     }
 
     public function testUpdateFailure(): void
     {
-        $userUid = 'numero-10';
-        $tenantUid = 'numero-1';
-        $personalTenantId = 'numero-2';
-
-        $user = new User(
-            $userUid,
-            $tenantUid,
-            $personalTenantId,
-            1,
-            'username',
-            true,
-            true,
-            'en',
-            'disabled',
-            new DateTimeImmutable(),
-            new DateTimeImmutable(),
-            new Contact()
-        );
-
         $this->restClient
             ->expects(self::once())
             ->method('put')
@@ -152,6 +109,6 @@ class UserClientTest extends TestCase
             );
 
         self::expectException(AcronisException::class);
-        $this->userClient->update($user);
+        $this->userClient->update($this->user);
     }
 }

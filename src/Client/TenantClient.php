@@ -66,6 +66,7 @@ class TenantClient
 
     /**
      * @param string $tenantUuid
+     *
      * @return string[]
      */
     public function getUsersByTenantUuid(string $tenantUuid): array

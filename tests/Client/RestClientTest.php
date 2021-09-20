@@ -12,7 +12,6 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 use SandwaveIo\Acronis\Client\RestClient;
-use SandwaveIo\Acronis\Entity\Contact;
 use SandwaveIo\Acronis\Entity\Tenant;
 
 class RestClientTest extends TestCase
@@ -46,26 +45,11 @@ class RestClientTest extends TestCase
         /** @var DateTimeImmutable $updatedAt */
         $updatedAt = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2000-01-01 00:00:01');
         $expectedTenant = new Tenant(
-            1,
-            '2222-1234-4321-1234',
-            '3333-1234-4321-1234',
-            2,
             '4444-1234-4321-1234',
-            'Tenant name',
-            'no-tag',
-            'customerType',
-            'status',
-            'kind',
-            'default',
-            'en',
-            true,
-            true,
-            false,
-            $createdAt,
-            $updatedAt,
-            new Contact(),
-            '1111-1234-4321-1234',
+            'Test tenant',
+            'customer'
         );
+        $expectedTenant->setId('1111-1234-4321-1234');
 
         $stream = $this->createMock(StreamInterface::class);
         $stream->expects($this->once())

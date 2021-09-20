@@ -9,7 +9,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use SandwaveIo\Acronis\Client\RestClientInterface;
 use SandwaveIo\Acronis\Client\UsageClient;
-use SandwaveIo\Acronis\Entity\Contact;
 use SandwaveIo\Acronis\Entity\Tenant;
 use SandwaveIo\Acronis\Entity\Usage;
 use SandwaveIo\Acronis\Exception\AcronisException;
@@ -26,41 +25,31 @@ class UsageClientTest extends TestCase
      */
     private $usageClient;
 
+    /**
+     * @var Tenant
+     */
+    private $tenant;
+
     protected function setUp(): void
     {
         $this->restClient = $this->createMock(RestClientInterface::class);
         $this->usageClient = new UsageClient($this->restClient);
+        $this->tenant = new Tenant(
+            'parent-uid',
+            'Test tenant',
+            'customer'
+        );
     }
 
     public function testGet(): void
     {
         $tenantUid = 'numero-1';
 
-        $tenant = new Tenant(
-            1,
-            'parent-uid',
-            'brand-uid',
-            1,
-            'customer-uid',
-            'name',
-            'internal-tag',
-            'customer-type',
-            'mfa-status',
-            'kind',
-            'pricing-mode',
-            'nl',
-            true,
-            false,
-            false,
-            new DateTimeImmutable(),
-            new DateTimeImmutable(),
-            new Contact(),
-            $tenantUid,
-        );
+        $this->tenant->setId($tenantUid);
 
         $usageList = [
             new Usage(
-                $tenant->getId(),
+                $tenantUid,
                 1,
                 'infra',
                 'storage',
@@ -78,44 +67,22 @@ class UsageClientTest extends TestCase
             ->method('getEntityCollection')
             ->with(
                 $this->equalTo(
-                    sprintf('tenants/%s/usages', $tenant->getId())
+                    sprintf('tenants/%s/usages', $tenantUid)
                 )
             )
             ->willReturn($usageList);
 
-        $response = $this->usageClient->get($tenant);
+        $response = $this->usageClient->get($this->tenant);
 
         $this->assertCount(count($usageList), $response);
         $first = array_shift($response);
         $this->assertInstanceOf(Usage::class, $first);
-        $this->assertSame($tenant->getId(), $first->getTenantUuid());
+        $this->assertSame($this->tenant->getId(), $first->getTenantUuid());
     }
 
     public function testGetFailure(): void
     {
-        $tenantUid = 'numero-1';
-
-        $tenant = new Tenant(
-            1,
-            'parent-uid',
-            'brand-uid',
-            1,
-            'customer-uid',
-            'name',
-            'internal-tag',
-            'customer-type',
-            'mfa-status',
-            'kind',
-            'pricing-mode',
-            'nl',
-            true,
-            false,
-            false,
-            new DateTimeImmutable(),
-            new DateTimeImmutable(),
-            new Contact(),
-            $tenantUid,
-        );
+        $this->tenant->setId('numero-1');
 
         $this->restClient
             ->expects(self::once())
@@ -127,6 +94,6 @@ class UsageClientTest extends TestCase
             );
 
         self::expectException(AcronisException::class);
-        $this->usageClient->get($tenant);
+        $this->usageClient->get($this->tenant);
     }
 }

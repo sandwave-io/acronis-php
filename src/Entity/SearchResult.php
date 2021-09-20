@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace SandwaveIo\Acronis\Entity;
 
-use DateTimeImmutable;
 use JMS\Serializer\Annotation as Serializer;
 
 class SearchResult
@@ -75,9 +74,10 @@ class SearchResult
 
     /**
      * @param string $type
-     * @return Tenant
+     *
+     * @return SearchResult
      */
-    public function setType(string $type): Tenant
+    public function setType(string $type): SearchResult
     {
         $this->type = $type;
         return $this;
@@ -93,9 +93,10 @@ class SearchResult
 
     /**
      * @param string $kind
-     * @return Tenant
+     *
+     * @return SearchResult
      */
-    public function setKind(string $kind): Tenant
+    public function setKind(string $kind): SearchResult
     {
         $this->kind = $kind;
         return $this;
@@ -111,9 +112,10 @@ class SearchResult
 
     /**
      * @param string $id
-     * @return Tenant
+     *
+     * @return SearchResult
      */
-    public function setId(string $id): Tenant
+    public function setId(string $id): SearchResult
     {
         $this->id = $id;
         return $this;
@@ -129,9 +131,10 @@ class SearchResult
 
     /**
      * @param string $parentId
-     * @return Tenant
+     *
+     * @return SearchResult
      */
-    public function setParentId(string $parentId): Tenant
+    public function setParentId(string $parentId): SearchResult
     {
         $this->parentId = $parentId;
         return $this;
@@ -147,9 +150,10 @@ class SearchResult
 
     /**
      * @param string[] $path
-     * @return Tenant
+     *
+     * @return SearchResult
      */
-    public function setPath(array $path): Tenant
+    public function setPath(array $path): SearchResult
     {
         $this->path = $path;
         return $this;
@@ -165,9 +169,10 @@ class SearchResult
 
     /**
      * @param string $name
-     * @return Tenant
+     *
+     * @return SearchResult
      */
-    public function setName(string $name): Tenant
+    public function setName(string $name): SearchResult
     {
         $this->name = $name;
         return $this;
@@ -183,9 +188,10 @@ class SearchResult
 
     /**
      * @param string|null $firstname
-     * @return Tenant
+     *
+     * @return SearchResult
      */
-    public function setFirstname(?string $firstname): Tenant
+    public function setFirstname(?string $firstname): SearchResult
     {
         $this->firstname = $firstname;
         return $this;
@@ -201,9 +207,10 @@ class SearchResult
 
     /**
      * @param string|null $lastname
-     * @return Tenant
+     *
+     * @return SearchResult
      */
-    public function setLastname(?string $lastname): Tenant
+    public function setLastname(?string $lastname): SearchResult
     {
         $this->lastname = $lastname;
         return $this;

@@ -23,7 +23,8 @@ class SearchClient
     /**
      * @param string $tenantId
      * @param string $text
-     * @param int $limit
+     * @param int    $limit
+     *
      * @return SearchResult[]
      */
     public function search(string $tenantId, string $text, int $limit = 10): array
