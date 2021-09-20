@@ -86,7 +86,7 @@ final class RestClient implements RestClientInterface
      */
     public function getRawData(string $url): string
     {
-        return $this->getItemsRawData($url);
+        return $this->get($url);
     }
 
     /**
@@ -114,6 +114,20 @@ final class RestClient implements RestClientInterface
         $responseData = $this->serializer->deserialize($response->getBody()->getContents(), $class, 'json');
 
         return $responseData;
+    }
+
+    public function postRaw(string $url, array $data): string
+    {
+        $json = json_encode($data);
+
+        $response = $this->request('POST', $url, [
+            'body' => $json,
+            'headers' => [
+                'Content-type' => 'application/json; charset=utf-8',
+            ],
+        ]);
+
+        return $response->getBody()->getContents();
     }
 
     /**

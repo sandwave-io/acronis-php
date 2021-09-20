@@ -4,12 +4,10 @@ declare(strict_types = 1);
 
 namespace SandwaveIo\Acronis\Tests\Client;
 
-use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use SandwaveIo\Acronis\Client\OfferingClient;
 use SandwaveIo\Acronis\Client\RestClientInterface;
-use SandwaveIo\Acronis\Entity\Contact;
 use SandwaveIo\Acronis\Entity\Offering;
 use SandwaveIo\Acronis\Entity\OfferingCollection;
 use SandwaveIo\Acronis\Entity\OfferingQuota;
@@ -28,42 +26,32 @@ class OfferingClientTest extends TestCase
      */
     private $offeringClient;
 
+    /**
+     * @var Tenant
+     */
+    private $tenant;
+
     protected function setUp(): void
     {
         $this->restClient = $this->createMock(RestClientInterface::class);
         $this->offeringClient = new OfferingClient($this->restClient);
+        $this->tenant = new Tenant(
+            'parent-uid',
+            'Test tenant',
+            'customer'
+        );
     }
 
     public function testGet(): void
     {
         $tenantUid = 'numero-1';
 
-        $tenant = new Tenant(
-            1,
-            'parent-uid',
-            'brand-uid',
-            1,
-            'customer-uid',
-            'name',
-            'internal-tag',
-            'customer-type',
-            'mfa-status',
-            'kind',
-            'pricing-mode',
-            'nl',
-            true,
-            false,
-            false,
-            new DateTimeImmutable(),
-            new DateTimeImmutable(),
-            new Contact(),
-            $tenantUid,
-        );
+        $this->tenant->setId($tenantUid);
 
-        $offeringQuota = new OfferingQuota(1, 0, 268435456000);
+        $offeringQuota = new OfferingQuota(268435456000, 0, 1);
 
         $offering = new Offering(
-            $tenant->getId(),
+            $tenantUid,
             'infra_id',
             'application_id',
             'bytes',
@@ -84,45 +72,23 @@ class OfferingClientTest extends TestCase
             ->method('getEntity')
             ->with(
                 $this->equalTo(
-                    sprintf('tenants/%s/offering_items', $tenant->getId())
+                    sprintf('tenants/%s/offering_items', $this->tenant->getId())
                 )
             )
             ->willReturn($offeringCollection);
 
-        $responeOfferingCollection = $this->offeringClient->get($tenant);
+        $responeOfferingCollection = $this->offeringClient->get($this->tenant);
 
         $this->assertCount(count($offeringCollection->getOfferingItems()), $responeOfferingCollection->getOfferingItems());
         $offeringItems = $responeOfferingCollection->getOfferingItems();
         $first = array_shift($offeringItems);
         $this->assertInstanceOf(Offering::class, $first);
-        $this->assertSame($tenant->getId(), $first->getTenantId());
+        $this->assertSame($this->tenant->getId(), $first->getTenantId());
     }
 
     public function testGetFailure(): void
     {
-        $tenantUid = 'numero-1';
-
-        $tenant = new Tenant(
-            1,
-            'parent-uid',
-            'brand-uid',
-            1,
-            'customer-uid',
-            'name',
-            'internal-tag',
-            'customer-type',
-            'mfa-status',
-            'kind',
-            'pricing-mode',
-            'nl',
-            true,
-            false,
-            false,
-            new DateTimeImmutable(),
-            new DateTimeImmutable(),
-            new Contact(),
-            $tenantUid,
-        );
+        $this->tenant->setId('numero-1');
 
         $this->restClient
             ->expects(self::once())
@@ -134,39 +100,19 @@ class OfferingClientTest extends TestCase
             );
 
         self::expectException(AcronisException::class);
-        $this->offeringClient->get($tenant);
+        $this->offeringClient->get($this->tenant);
     }
 
     public function testUpdate(): void
     {
         $tenantUid = 'numero-1';
 
-        $tenant = new Tenant(
-            1,
-            'parent-uid',
-            'brand-uid',
-            1,
-            'customer-uid',
-            'name',
-            'internal-tag',
-            'customer-type',
-            'mfa-status',
-            'kind',
-            'pricing-mode',
-            'nl',
-            true,
-            false,
-            false,
-            new DateTimeImmutable(),
-            new DateTimeImmutable(),
-            new Contact(),
-            $tenantUid,
-        );
+        $this->tenant->setId($tenantUid);
 
-        $offeringQuota = new OfferingQuota(1, 0, 268435456000);
+        $offeringQuota = new OfferingQuota(268435456000, 0, 1);
 
         $offering = new Offering(
-            $tenant->getId(),
+            $tenantUid,
             'infra_id',
             'application_id',
             'bytes',
@@ -181,12 +127,14 @@ class OfferingClientTest extends TestCase
 
         $offeringCollection = new OfferingCollection();
         $offeringCollection->setOfferingItems([$offering]);
-        $newQuota = 53687091200;
+        $expectedQuota = 53687091200;
 
         foreach ($offeringCollection->getOfferingItems() as $offering) {
             if ($offering->getStatus() && $offering->getName() === 'storage' && $offering->getMeasurementUnit() === 'bytes') {
-                $offering->getQuota()->setValue($newQuota);
-                $offering->getQuota()->setOverage(0);
+                if ($offering->getQuota() instanceof OfferingQuota) {
+                    $offering->getQuota()->setValue($expectedQuota);
+                    $offering->getQuota()->setOverage(0);
+                }
             }
         }
         $offeringCollection->setUpdatedOfferingItems($offeringCollection->getOfferingItems());
@@ -200,47 +148,32 @@ class OfferingClientTest extends TestCase
             ->method('put')
             ->with(
                 $this->equalTo(
-                    sprintf('tenants/%s/offering_items', $tenant->getId())
+                    sprintf('tenants/%s/offering_items', $this->tenant->getId())
                 )
             )->willReturn($returnCollection);
 
-        $updatedCollection = $this->offeringClient->update($tenant, $offeringCollection);
+        $updatedCollection = $this->offeringClient->update($this->tenant, $offeringCollection);
 
         self::assertCount(count($offeringCollection->getOfferingItems()), $updatedCollection->getOfferingItems());
         $items = $offeringCollection->getOfferingItems();
+
+        /** @var Offering $first */
         $first = array_shift($items);
-        self::assertSame($newQuota, $first->getQuota()->getValue());
+        /** @var OfferingQuota $newOfferingQuota */
+        $newOfferingQuota = $first->getQuota();
+
+        self::assertSame($expectedQuota, $newOfferingQuota->getValue());
     }
 
     public function testUpdateFailure(): void
     {
         $tenantUid = 'numero-1';
-        $tenant = new Tenant(
-            1,
-            'parent-uid',
-            'brand-uid',
-            1,
-            'customer-uid',
-            'name',
-            'internal-tag',
-            'customer-type',
-            'mfa-status',
-            'kind',
-            'pricing-mode',
-            'nl',
-            true,
-            false,
-            false,
-            new DateTimeImmutable(),
-            new DateTimeImmutable(),
-            new Contact(),
-            $tenantUid,
-        );
+        $this->tenant->setId($tenantUid);
 
-        $offeringQuota = new OfferingQuota(1, 0, 268435456000);
+        $offeringQuota = new OfferingQuota(268435456000, 0, 1);
 
         $offering = new Offering(
-            $tenant->getId(),
+            $tenantUid,
             'infra_id',
             'application_id',
             'bytes',
@@ -266,6 +199,6 @@ class OfferingClientTest extends TestCase
             );
 
         self::expectException(AcronisException::class);
-        $this->offeringClient->update($tenant, $offeringCollection);
+        $this->offeringClient->update($this->tenant, $offeringCollection);
     }
 }

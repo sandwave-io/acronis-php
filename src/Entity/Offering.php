@@ -17,7 +17,7 @@ class Offering
     private $tenantId;
 
     /**
-     * @var string
+     * @var string|null
      * @Serializer\SerializedName("infra_id")
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
@@ -57,7 +57,7 @@ class Offering
     private $type;
 
     /**
-     * @var string
+     * @var string|null
      * @Serializer\SerializedName("edition")
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
@@ -89,7 +89,7 @@ class Offering
     private $locked;
 
     /**
-     * @var OfferingQuota
+     * @var OfferingQuota|null
      * @Serializer\SerializedName("quota")
      * @Serializer\Type("SandwaveIo\Acronis\Entity\OfferingQuota")
      * @Serializer\Groups({"update_data"})
@@ -98,16 +98,16 @@ class Offering
 
     public function __construct(
         string $tenantId,
-        string $infraId,
+        ?string $infraId,
         string $applicationId,
         string $measurementUnit,
         int $status,
         string $type,
-        string $edition,
+        ?string $edition,
         string $name,
         string $usageName,
         bool $locked,
-        OfferingQuota $quota
+        ?OfferingQuota $quota
     ) {
         $this->tenantId = $tenantId;
         $this->infraId = $infraId;
@@ -134,12 +134,12 @@ class Offering
         return $this;
     }
 
-    public function getInfraId(): string
+    public function getInfraId(): ?string
     {
         return $this->infraId;
     }
 
-    public function setInfraId(string $infraId): Offering
+    public function setInfraId(?string $infraId): Offering
     {
         $this->infraId = $infraId;
 
@@ -194,12 +194,12 @@ class Offering
         return $this;
     }
 
-    public function getEdition(): string
+    public function getEdition(): ?string
     {
         return $this->edition;
     }
 
-    public function setEdition(string $edition): Offering
+    public function setEdition(?string $edition): Offering
     {
         $this->edition = $edition;
 
@@ -242,12 +242,12 @@ class Offering
         return $this;
     }
 
-    public function getQuota(): OfferingQuota
+    public function getQuota(): ?OfferingQuota
     {
         return $this->quota;
     }
 
-    public function setQuota(OfferingQuota $quota): Offering
+    public function setQuota(?OfferingQuota $quota): Offering
     {
         $this->quota = $quota;
 

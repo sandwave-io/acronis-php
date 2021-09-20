@@ -24,9 +24,18 @@ class Contact
     private $acronisAccountNumber;
 
     /**
+     * @var string[]
+     * @Serializer\SerializedName("types")
+     * @Serializer\Type("array<string>")
+     * @Serializer\Groups({"create_data"})
+     */
+    private $types;
+
+    /**
      * @var string
      * @Serializer\SerializedName("firstname")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data"})
      */
     private $firstname;
 
@@ -34,6 +43,7 @@ class Contact
      * @var string
      * @Serializer\SerializedName("lastname")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data"})
      */
     private $lastname;
 
@@ -41,7 +51,7 @@ class Contact
      * @var string
      * @Serializer\SerializedName("email")
      * @Serializer\Type("string")
-     * @Serializer\Groups({"update_data"})
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $email;
 
@@ -108,6 +118,21 @@ class Contact
      */
     private $updatedAt;
 
+    /**
+     * @param string[] $types
+     */
+    public function __construct(
+        array $types,
+        string $email,
+        string $firstname,
+        string $lastname
+    ) {
+        $this->types = $types;
+        $this->email = $email;
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
+    }
+
     public function getId(): ?string
     {
         return $this->id;
@@ -129,6 +154,23 @@ class Contact
     {
         $this->acronisAccountNumber = $acronisAccountNumber;
 
+        return $this;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getTypes(): array
+    {
+        return $this->types;
+    }
+
+    /**
+     * @param string[] $types
+     */
+    public function setTypes(array $types): Contact
+    {
+        $this->types = $types;
         return $this;
     }
 
