@@ -72,6 +72,39 @@ class UserClientTest extends TestCase
         $this->userClient->get('numero-1');
     }
 
+    public function testCreate(): void
+    {
+        $expectedUser = clone $this->user;
+        $expectedUser->setId('generated-user-id');
+
+        $this->restClient
+            ->expects(self::once())
+            ->method('post')
+            ->with(
+                $this->equalTo('users')
+            )->willReturn($expectedUser);
+
+        $updatedUser = $this->userClient->create($this->user);
+
+        self::assertNull($this->user->getId());
+        self::assertNotNull($expectedUser->getId());
+    }
+
+    public function testCreateFailure(): void
+    {
+        $this->restClient
+            ->expects(self::once())
+            ->method('post')
+            ->will(
+                $this->throwException(
+                    new AcronisException('fake exception')
+                )
+            );
+
+        self::expectException(AcronisException::class);
+        $this->userClient->create($this->user);
+    }
+
     public function testUpdatePassword(): void
     {
         $password = 'password';
@@ -88,6 +121,22 @@ class UserClientTest extends TestCase
         $response = $this->userClient->updatePassword($this->user, $password);
 
         self::assertEmpty($response);
+    }
+
+    public function testUpdatePasswordFailure(): void
+    {
+        $password = 'password';
+        $this->restClient
+            ->expects(self::once())
+            ->method('postRaw')
+            ->will(
+                $this->throwException(
+                    new AcronisException('fake exception')
+                )
+            );
+
+        self::expectException(AcronisException::class);
+        $this->userClient->updatePassword($this->user, $password);
     }
 
     public function testUpdate(): void
