@@ -72,6 +72,24 @@ class UserClientTest extends TestCase
         $this->userClient->get('numero-1');
     }
 
+    public function testUpdatePassword(): void
+    {
+        $password = 'password';
+
+        $this->restClient
+            ->expects(self::once())
+            ->method('postRaw')
+            ->with(
+                $this->equalTo(
+                    sprintf('users/%s/password', $this->user->getId())
+                )
+            )->willReturn('');
+
+        $response = $this->userClient->updatePassword($this->user, $password);
+
+        self::assertEmpty($response);
+    }
+
     public function testUpdate(): void
     {
         $contact = new Contact(

@@ -116,6 +116,39 @@ class TenantClientTest extends TestCase
         $this->tenantClient->getChildren('numero-1');
     }
 
+    public function testCreate(): void
+    {
+        $expectedTenant = clone $this->tenant;
+        $expectedTenant->setId('new-uid');
+
+        $this->restClient
+            ->expects(self::once())
+            ->method('post')
+            ->with(
+                $this->equalTo('tenants')
+            )->willReturn($expectedTenant);
+
+        $createdTenant = $this->tenantClient->create($this->tenant);
+
+        self::assertNull($this->tenant->getId());
+        self::assertNotNull($createdTenant->getId());
+    }
+
+    public function testCreateFailure(): void
+    {
+        $this->restClient
+            ->expects(self::once())
+            ->method('post')
+            ->will(
+                $this->throwException(
+                    new AcronisException('fake exception')
+                )
+            );
+
+        self::expectException(AcronisException::class);
+        $this->tenantClient->create($this->tenant);
+    }
+
     public function testUpdate(): void
     {
         $tenantUid = 'numero-1';
