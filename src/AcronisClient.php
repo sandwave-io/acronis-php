@@ -8,10 +8,9 @@ use SandwaveIo\Acronis\Client\OfferingClient;
 use SandwaveIo\Acronis\Client\RestClientInterface;
 use SandwaveIo\Acronis\Client\SearchClient;
 use SandwaveIo\Acronis\Client\TenantClient;
-use SandwaveIo\Acronis\Client\UsageClient;
 use SandwaveIo\Acronis\Client\UserClient;
 
-final class AcronisApi
+final class AcronisClient
 {
     /**
      * @var TenantClient
@@ -22,11 +21,6 @@ final class AcronisApi
      * @var UserClient
      */
     private $userClient;
-
-    /**
-     * @var UsageClient
-     */
-    private $usageClient;
 
     /**
      * @var OfferingClient
@@ -53,11 +47,6 @@ final class AcronisApi
         return $this->userClient;
     }
 
-    public function getUsageClient(): UsageClient
-    {
-        return $this->usageClient;
-    }
-
     public function getOfferingClient(): OfferingClient
     {
         return $this->offeringClient;
@@ -72,7 +61,6 @@ final class AcronisApi
     {
         $this->tenantClient = new TenantClient($client);
         $this->userClient = new UserClient($client);
-        $this->usageClient = new UsageClient($client);
         $this->offeringClient = new OfferingClient($client);
         $this->searchClient = new SearchClient($client);
     }

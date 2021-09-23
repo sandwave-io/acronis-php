@@ -6,9 +6,10 @@ namespace SandwaveIo\Acronis\Client;
 
 use SandwaveIo\Acronis\Entity\Tenant;
 use SandwaveIo\Acronis\Entity\User;
+use SandwaveIo\Acronis\Entity\UserCollection;
 use SandwaveIo\Acronis\Exception\AcronisException;
 
-class UserClient
+final class UserClient
 {
     private const USER_LIST = 'users';
     private const USER_BY_TENANT = 'users?subtree_root_tenant_id=%s&limit=%d&lod=%s';
@@ -36,23 +37,20 @@ class UserClient
         return $user;
     }
 
-    /**
-     * @return User[]
-     */
-    public function getByTenant(Tenant $tenant, int $limit, string $levelOfDetails = 'full'): array
+    public function getByTenant(string $tenantUuid, int $limit, string $levelOfDetails = 'full'): UserCollection
     {
-        /** @var User[] $users */
-        $users = $this->client->getEntityCollection(
+        /** @var UserCollection $userCollection */
+        $userCollection = $this->client->getEntity(
             sprintf(
                 self::USER_BY_TENANT,
-                $tenant->getId(),
+                $tenantUuid,
                 $limit,
                 $levelOfDetails
             ),
-            User::class
+            UserCollection::class
         );
 
-        return $users;
+        return $userCollection;
     }
 
     public function create(User $user): User
@@ -63,16 +61,16 @@ class UserClient
         return $createdUser;
     }
 
-    public function updatePassword(User $user, string $password): string
-    {
-        return $this->client->postRaw(sprintf(self::PASSWORD_UPDATE, $user->getId()), ['password' => $password]);
-    }
-
     public function update(User $user): User
     {
         /** @var User $updatedUser */
         $updatedUser = $this->client->put(sprintf(self::USER_DETAILS, $user->getId()), $user);
 
         return $updatedUser;
+    }
+
+    public function updatePassword(User $user, string $password): string
+    {
+        return $this->client->postRaw(sprintf(self::PASSWORD_UPDATE, $user->getId()), ['password' => $password]);
     }
 }

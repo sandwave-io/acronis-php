@@ -6,9 +6,13 @@ namespace SandwaveIo\Acronis\Client;
 
 use Exception;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ServerException;
+use GuzzleHttp\Exception\TooManyRedirectsException;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\RequestOptions;
-use InvalidArgumentException;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
 use JsonException;
@@ -16,6 +20,13 @@ use Psr\Http\Message\ResponseInterface;
 use ReflectionClass;
 use ReflectionException;
 use SandwaveIo\Acronis\Exception\AcronisException;
+use SandwaveIo\Acronis\Exception\BadRequestException;
+use SandwaveIo\Acronis\Exception\DeserializationException;
+use SandwaveIo\Acronis\Exception\NetworkException;
+use SandwaveIo\Acronis\Exception\ResourceNotFoundException;
+use SandwaveIo\Acronis\Exception\ServerException as AcronisServerException;
+use SandwaveIo\Acronis\Exception\UnauthorizedException;
+use Symfony\Component\HttpFoundation\Response;
 
 final class RestClient implements RestClientInterface
 {
@@ -50,33 +61,12 @@ final class RestClient implements RestClientInterface
     public function getEntity(string $url, string $class): object
     {
         $reflectionClass = $this->getDataObject($class);
-        $item = $this->get($url);
+        $json = $this->get($url);
 
         /** @var T $data */
-        $data = $this->serializer->deserialize($item, $reflectionClass->getName(), 'json');
+        $data = $this->serializer->deserialize($json, $reflectionClass->getName(), 'json');
 
         return $data;
-    }
-
-    /**
-     * @template T
-     *
-     * @param string          $url
-     * @param class-string<T> $class
-     *
-     * @return T[]
-     */
-    public function getEntityCollection(string $url, string $class): array
-    {
-        $reflectionClass = $this->getDataObject($class)->getName();
-        $items = $this->getItemsRawData($url);
-
-        /**
-         * @var class-string<T>
-         */
-        $class = 'array<' . $reflectionClass . '>';
-
-        return $this->serializer->deserialize($items, $class, 'json');
     }
 
     /**
@@ -159,7 +149,7 @@ final class RestClient implements RestClientInterface
 
     public function delete(string $url): void
     {
-        $this->request('delete', $url);
+        $this->request('DELETE', $url);
     }
 
     private function get(string $url): string
@@ -170,29 +160,12 @@ final class RestClient implements RestClientInterface
     }
 
     /**
-     * @throws AcronisException
-     */
-    private function getItemsRawData(string $url): string
-    {
-        try {
-            $data = json_decode($this->get($url), false, 512, JSON_THROW_ON_ERROR);
-
-            if (! isset($data->items)) {
-                throw new AcronisException('Items key is missing.');
-            }
-
-            return json_encode($data->items, JSON_THROW_ON_ERROR);
-        } catch (JsonException $exception) {
-            throw $this->convertException($exception);
-        }
-    }
-
-    /**
      * @param string $method
      * @param string $url
-     * @param array  $options
+     * @param array $options
      *
      * @return ResponseInterface
+     * @throws AcronisException
      */
     private function request(string $method, string $url, array $options = []): ResponseInterface
     {
@@ -212,11 +185,6 @@ final class RestClient implements RestClientInterface
         ];
     }
 
-    private function convertException(Exception $exception): AcronisException
-    {
-        return new AcronisException($exception->getMessage(), $exception->getCode(), $exception);
-    }
-
     /**
      * @template T
      *
@@ -229,9 +197,75 @@ final class RestClient implements RestClientInterface
         try {
             $reflectionClass = new ReflectionClass($class);
         } catch (ReflectionException $exception) {
-            throw new InvalidArgumentException(sprintf('Supplied classname %s does not exist', $class));
+            throw new DeserializationException(sprintf('Supplied classname %s does not exist', $class));
         }
 
         return $reflectionClass;
+    }
+
+    private function convertException(Exception $exception): AcronisException
+    {
+        $message = $exception instanceof RequestException ? $this->convertMessage($exception) : $exception->getMessage();
+
+        if ($exception instanceof ConnectException || $exception instanceof TooManyRedirectsException) {
+            return new NetworkException($message, 0, $exception);
+        }
+
+        if ($exception instanceof ServerException) {
+            // error 500 range
+            return new AcronisServerException($message, 0, $exception);
+        }
+
+        if ($exception instanceof ClientException) {
+            if ($exception->getCode() === Response::HTTP_NOT_FOUND) {
+                return new ResourceNotFoundException($message, 0, $exception);
+            }
+
+            if ($exception->getCode() === 401) {
+                return new UnauthorizedException($message, 0, $exception);
+            }
+
+            // 400 range
+            return new BadRequestException($message, 0, $exception);
+        }
+
+        return new AcronisException($message, 0, $exception);
+    }
+
+    private function convertMessage(RequestException $exception): string
+    {
+        $response = $exception->getResponse();
+
+        if (null === $response) {
+            return $exception->getMessage();
+        }
+
+        $body = $response->getBody()->getContents();
+        try {
+            $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException $e) {
+            $decoded = null;
+        }
+
+        if (null === $decoded) {
+            return $exception->getMessage();
+        }
+
+        if (isset($decoded['error'])) {
+            if (isset($decoded['error']['details'])) {
+                if (isset($decoded['error']['details']['info']) && is_string($decoded['error']['details']['info'])) {
+                    return $decoded['error']['details']['info'];
+                }
+            }
+            if (isset($decoded['error']['message']) && is_string($decoded['error']['message'])) {
+                return $decoded['error']['message'];
+            }
+        }
+
+        if (isset($decoded['error_description']) && is_string($decoded['error_description'])) {
+            return $decoded['error_description'];
+        }
+
+        return $exception->getMessage();
     }
 }

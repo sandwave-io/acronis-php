@@ -4,10 +4,15 @@ declare(strict_types = 1);
 
 namespace SandwaveIo\Acronis\Client;
 
+use SandwaveIo\Acronis\Entity\ApplicationUuidCollection;
+use SandwaveIo\Acronis\Entity\InfraUuidCollection;
 use SandwaveIo\Acronis\Entity\Tenant;
+use SandwaveIo\Acronis\Entity\TenantCollection;
+use SandwaveIo\Acronis\Entity\UsageCollection;
+use SandwaveIo\Acronis\Entity\UserUuidCollection;
 use SandwaveIo\Acronis\Exception\AcronisException;
 
-class TenantClient
+final class TenantClient
 {
     private const TENANT_LIST = 'tenants';
     private const TENANT_DETAILS = 'tenants/%s';
@@ -16,6 +21,7 @@ class TenantClient
     private const TENANT_USERS = 'tenants/%s/users';
     private const TENANT_APPLICATIONS = 'tenants/%s/applications';
     private const TENANT_INFRA = 'tenants/%s/infra';
+    private const TENANT_USAGES = 'tenants/%s/usages';
 
     /**
      * @var RestClientInterface
@@ -40,12 +46,13 @@ class TenantClient
 
     /**
      * @throws AcronisException
-     *
-     * @return Tenant[]
      */
-    public function getChildren(string $parentUuid): array
+    public function getChildren(string $parentUuid): TenantCollection
     {
-        return $this->client->getEntityCollection(sprintf(self::TENANT_CHILDREN, $parentUuid), Tenant::class);
+        /** @var TenantCollection $tenantCollection */
+        $tenantCollection = $this->client->getEntity(sprintf(self::TENANT_CHILDREN, $parentUuid), TenantCollection::class);
+
+        return $tenantCollection;
     }
 
     public function create(Tenant $tenant): Tenant
@@ -67,11 +74,14 @@ class TenantClient
     /**
      * @param string $tenantUuid
      *
-     * @return string[]
+     * @return UserUuidCollection
      */
-    public function getUsersByTenantUuid(string $tenantUuid): array
+    public function getUsersByTenantUuid(string $tenantUuid): UserUuidCollection
     {
-        return json_decode($this->client->getRawData(sprintf(self::TENANT_USERS, $tenantUuid)))->items;
+        /** @var UserUuidCollection $userUuidCollection */
+        $userUuidCollection = $this->client->getEntity(sprintf(self::TENANT_USERS, $tenantUuid), UserUuidCollection::class);
+
+        return $userUuidCollection;
     }
 
     /**
@@ -84,13 +94,27 @@ class TenantClient
         );
     }
 
-    public function getApplications(string $tenantUuid): string
+    public function getApplications(string $tenantUuid): ApplicationUuidCollection
     {
-        return $this->client->getRawData(sprintf(self::TENANT_APPLICATIONS, $tenantUuid));
+        /** @var ApplicationUuidCollection $applicationUuidCollection */
+        $applicationUuidCollection = $this->client->getEntity(sprintf(self::TENANT_APPLICATIONS, $tenantUuid), ApplicationUuidCollection::class);
+
+        return $applicationUuidCollection;
     }
 
-    public function getInfra(string $tenantUuid): string
+    public function getInfra(string $tenantUuid): InfraUuidCollection
     {
-        return $this->client->getRawData(sprintf(self::TENANT_INFRA, $tenantUuid));
+        /** @var InfraUuidCollection $infraUuidCollection */
+        $infraUuidCollection = $this->client->getEntity(sprintf(self::TENANT_INFRA, $tenantUuid), InfraUuidCollection::class);
+
+        return $infraUuidCollection;
+    }
+
+    public function getUsage(string $tenantUuid): UsageCollection
+    {
+        /** @var UsageCollection $usageCollection */
+        $usageCollection = $this->client->getEntity(sprintf(self::TENANT_USAGES, $tenantUuid), UsageCollection::class);
+
+        return $usageCollection;
     }
 }

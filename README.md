@@ -3,11 +3,20 @@
 
 # Acronis API - PHP SDK
 
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/sandwave-io/acronis-php/CI)](https://packagist.org/packages/sandwave-io/acronis-php)
+[![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/sandwave-io/acronis-php)](https://packagist.org/packages/sandwave-io/acronis-php)
+[![Packagist PHP Version Support](https://img.shields.io/packagist/v/sandwave-io/acronis-php)](https://packagist.org/packages/sandwave-io/acronis-php)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/sandwave-io/acronis-php)](https://packagist.org/packages/sandwave-io/acronis-php)
+
 ## Supported APIs
 
 This SDK currently supports these APIs:
 
+* [Offering API](https://eu5-cloud.acronis.com/mc/api/2/doc#offering_items)
+* [Search API](https://eu5-cloud.acronis.com/mc/api/2/doc#search)
 * [Tenant API](https://eu5-cloud.acronis.com/mc/api/2/doc#tenants)
+* [Usage API](https://eu5-cloud.acronis.com/mc/api/2/doc#tenants)
+* [User API](https://eu5-cloud.acronis.com/mc/api/2/doc#users)
 
 Are you missing functionality? Feel free to create an issue, or hit us up with a pull request.
 
@@ -21,7 +30,7 @@ composer require sandwave-io/acronis-php
 <?php
 
 use JMS\Serializer\SerializerBuilder;
-use SandwaveIo\Acronis\AcronisApi;
+use SandwaveIo\Acronis\AcronisClient;
 use SandwaveIo\Acronis\Client\RestClient;
 use SandwaveIo\Acronis\RestClientFactory;
 
@@ -37,8 +46,8 @@ $restClient = new RestClient(
     $serializerBuilder->build()
 );
 
-$acronisApi = new AcronisApi($restClient);
-$acronisApi->getTenantClient()->get('tenant-guid');
+$acronisClient = new AcronisClient($restClient);
+$acronisClient->getTenantClient()->get('tenant-guid');
 ```
 
 ## How to contribute

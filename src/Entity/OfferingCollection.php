@@ -4,10 +4,18 @@ declare(strict_types = 1);
 
 namespace SandwaveIo\Acronis\Entity;
 
+use DateTimeImmutable;
 use JMS\Serializer\Annotation as Serializer;
 
 class OfferingCollection
 {
+    /**
+     * @var DateTimeImmutable|null
+     * @Serializer\SerializedName("timestamp")
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', 'Y-m-d\TH:i:s'>")
+     */
+    private $timestamp;
+
     /**
      * @var Offering[]
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\Offering>")
@@ -30,6 +38,14 @@ class OfferingCollection
     }
 
     /**
+     * @return DateTimeImmutable|null
+     */
+    public function getTimestamp(): ?DateTimeImmutable
+    {
+        return $this->timestamp;
+    }
+
+    /**
      * @return array|Offering[]
      */
     public function getOfferingItems(): array
@@ -44,27 +60,7 @@ class OfferingCollection
      */
     public function setOfferingItems(array $offeringItems): OfferingCollection
     {
-        $this->offeringItems = $offeringItems;
-
-        return $this;
-    }
-
-    /**
-     * @return array|Offering[]
-     */
-    public function getUpdatedOfferingItems(): array
-    {
-        return $this->updatedOfferingItems;
-    }
-
-    /**
-     * @param Offering[] $updatedOfferingItems
-     *
-     * @return OfferingCollection
-     */
-    public function setUpdatedOfferingItems(array $updatedOfferingItems): OfferingCollection
-    {
-        $this->updatedOfferingItems = $updatedOfferingItems;
+        $this->offeringItems = $this->updatedOfferingItems = $offeringItems;
 
         return $this;
     }

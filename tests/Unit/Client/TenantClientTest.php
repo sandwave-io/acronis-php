@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace SandwaveIo\Acronis\Tests\Client;
+namespace SandwaveIo\Acronis\Tests\Unit\Client;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -39,6 +39,7 @@ class TenantClientTest extends TestCase
         );
     }
 
+    /*
     public function testGet(): void
     {
         $tenantUid = 'numero-1';
@@ -219,5 +220,21 @@ class TenantClientTest extends TestCase
 
         self::expectException(AcronisException::class);
         $this->tenantClient->delete($this->tenant);
+    }
+    */
+
+    public function testDelete(): void
+    {
+        $tenantUid = 'f313ecf6-9256-4afd-9d47-72e032ee81d0';
+        $this->tenant->setId($tenantUid)
+            ->setVersion(2);
+
+        $this->restClient
+            ->expects(self::once())
+            ->method('delete');
+
+        $this->tenantClient->delete(
+            $this->tenant
+        );
     }
 }

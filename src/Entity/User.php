@@ -13,14 +13,15 @@ class User
      * @var string|null
      * @Serializer\SerializedName("id")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"update_data"})
      */
     private $id;
 
     /**
-     * @var string|null
+     * @var string
      * @Serializer\SerializedName("tenant_id")
      * @Serializer\Type("string")
-     * @Serializer\Groups({"create_data"})
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $tenantId;
 
@@ -28,6 +29,7 @@ class User
      * @var string|null
      * @Serializer\SerializedName("personal_tenant_id")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $personalTenantId;
 
@@ -43,7 +45,7 @@ class User
      * @var string
      * @Serializer\SerializedName("login")
      * @Serializer\Type("string")
-     * @Serializer\Groups({"create_data"})
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $login;
 
@@ -51,7 +53,7 @@ class User
      * @var bool
      * @Serializer\SerializedName("enabled")
      * @Serializer\Type("boolean")
-     * @Serializer\Groups({"create_data"})
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $enabled;
 
@@ -59,6 +61,7 @@ class User
      * @var bool
      * @Serializer\SerializedName("activated")
      * @Serializer\Type("boolean")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $activated;
 
@@ -66,6 +69,7 @@ class User
      * @var string
      * @Serializer\SerializedName("language")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $language;
 
@@ -73,6 +77,7 @@ class User
      * @var string
      * @Serializer\SerializedName("mfa_status")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $mfaStatus;
 
@@ -101,7 +106,7 @@ class User
     public function __construct(
         string $tenantId
     ) {
-        $this->tenantId = $tenantId;
+        $this->setTenantId($tenantId);
     }
 
     public function getId(): ?string
@@ -116,12 +121,12 @@ class User
         return $this;
     }
 
-    public function getTenantId(): ?string
+    public function getTenantId(): string
     {
         return $this->tenantId;
     }
 
-    public function setTenantId(?string $tenantId): User
+    public function setTenantId(string $tenantId): User
     {
         $this->tenantId = $tenantId;
 

@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace SandwaveIo\Acronis\Client;
 
-use SandwaveIo\Acronis\Entity\SearchResult;
+use SandwaveIo\Acronis\Entity\SearchResultCollection;
 
-class SearchClient
+final class SearchClient
 {
     private const SEARCH = 'search?tenant=%s&text=%s&limit=%d';
 
@@ -25,21 +25,21 @@ class SearchClient
      * @param string $text
      * @param int    $limit
      *
-     * @return SearchResult[]
+     * @return SearchResultCollection
      */
-    public function search(string $tenantId, string $text, int $limit = 10): array
+    public function search(string $tenantId, string $text, int $limit = 10): SearchResultCollection
     {
-        /** @var SearchResult[] $searchResults */
-        $searchResults = $this->client->getEntityCollection(
+        /** @var SearchResultCollection $searchResultCollection */
+        $searchResultCollection = $this->client->getEntity(
             sprintf(
                 self::SEARCH,
                 $tenantId,
                 $text,
                 $limit
             ),
-            SearchResult::class
+            SearchResultCollection::class
         );
 
-        return $searchResults;
+        return $searchResultCollection;
     }
 }

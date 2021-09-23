@@ -1,0 +1,9 @@
+<?php
+
+declare(strict_types = 1);
+
+namespace SandwaveIo\Acronis\Exception;
+
+class NetworkException extends AcronisException
+{
+}

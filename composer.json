@@ -21,7 +21,7 @@
     "php": "^7.3|^7.4|^8.0",
     "ext-json": "*",
     "guzzlehttp/guzzle": "^6.2.0|^7.0.1",
-    "jms/serializer-bundle": "^3.10",
+    "jms/serializer-bundle": "^3.0.0",
     "psr/log": "^1.1",
     "webmozart/assert": "^1.10"
   },
