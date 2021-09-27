@@ -8,8 +8,6 @@ interface RestClientInterface
 {
     public function getEntity(string $url, string $class): object;
 
-    public function getEntityCollection(string $url, string $class): array;
-
     public function getRawData(string $url): string;
 
     public function post(string $url, object $data): object;

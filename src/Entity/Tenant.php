@@ -21,7 +21,7 @@ class Tenant
      * @var string
      * @Serializer\SerializedName("parent_id")
      * @Serializer\Type("string")
-     * @Serializer\Groups({"create_data"})
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $parentId;
 
@@ -29,35 +29,39 @@ class Tenant
      * @var string|null
      * @Serializer\SerializedName("owner_id")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $ownerId;
 
     /**
-     * @var string
+     * @var string|null
      * @Serializer\SerializedName("brand_uuid")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $brandUuid;
 
     /**
-     * @var int
+     * @var int|null
      * @Serializer\SerializedName("brand_id")
      * @Serializer\Type("integer")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $brandId;
 
     /**
-     * @var string
+     * @var string|null
      * @Serializer\SerializedName("customer_id")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $customerId;
 
     /**
-     * @var int
+     * @var int|null
      * @Serializer\SerializedName("version")
      * @Serializer\Type("integer")
-     * @Serializer\Groups({"update_data"})
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $version;
 
@@ -65,28 +69,31 @@ class Tenant
      * @var string
      * @Serializer\SerializedName("name")
      * @Serializer\Type("string")
-     * @Serializer\Groups({"create_data"})
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $name;
 
     /**
-     * @var string
+     * @var string|null
      * @Serializer\SerializedName("internal_tag")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $internalTag;
 
     /**
-     * @var string
+     * @var string|null
      * @Serializer\SerializedName("customer_type")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $customerType;
 
     /**
-     * @var string
+     * @var string|null
      * @Serializer\SerializedName("mfa_status")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $mfaStatus;
 
@@ -94,23 +101,23 @@ class Tenant
      * @var string
      * @Serializer\SerializedName("kind")
      * @Serializer\Type("string")
-     * @Serializer\Groups({"create_data"})
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $kind;
 
     /**
-     * @var string
+     * @var string|null
      * @Serializer\SerializedName("pricing_mode")
      * @Serializer\Type("string")
-     * @Serializer\Groups({"create_data"})
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $pricingMode;
 
     /**
-     * @var string
+     * @var string|null
      * @Serializer\SerializedName("language")
      * @Serializer\Type("string")
-     * @Serializer\Groups({"create_data"})
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $language;
 
@@ -126,6 +133,7 @@ class Tenant
      * @var bool
      * @Serializer\SerializedName("has_children")
      * @Serializer\Type("boolean")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $hasChildren;
 
@@ -133,6 +141,7 @@ class Tenant
      * @var bool
      * @Serializer\SerializedName("ancestral_access")
      * @Serializer\Type("boolean")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $ancestralAccess;
 
@@ -158,10 +167,10 @@ class Tenant
     private $deletedAt;
 
     /**
-     * @var Contact
+     * @var Contact|null
      * @Serializer\SerializedName("contact")
      * @Serializer\Type("SandwaveIo\Acronis\Entity\Contact")
-     * @Serializer\Groups({"create_data"})
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $contact;
 
@@ -170,9 +179,9 @@ class Tenant
         string $name,
         string $kind
     ) {
-        $this->parentId = $parentId;
-        $this->name = $name;
-        $this->kind = $kind;
+        $this->setParentId($parentId)
+            ->setName($name)
+            ->setKind($kind);
     }
 
     public function getId(): ?string
@@ -211,48 +220,48 @@ class Tenant
         return $this;
     }
 
-    public function getBrandUuid(): string
+    public function getBrandUuid(): ?string
     {
         return $this->brandUuid;
     }
 
-    public function setBrandUuid(string $brandUuid): Tenant
+    public function setBrandUuid(?string $brandUuid): Tenant
     {
         $this->brandUuid = $brandUuid;
 
         return $this;
     }
 
-    public function getBrandId(): int
+    public function getBrandId(): ?int
     {
         return $this->brandId;
     }
 
-    public function setBrandId(int $brandId): Tenant
+    public function setBrandId(?int $brandId): Tenant
     {
         $this->brandId = $brandId;
 
         return $this;
     }
 
-    public function getCustomerId(): string
+    public function getCustomerId(): ?string
     {
         return $this->customerId;
     }
 
-    public function setCustomerId(string $customerId): Tenant
+    public function setCustomerId(?string $customerId): Tenant
     {
         $this->customerId = $customerId;
 
         return $this;
     }
 
-    public function getVersion(): int
+    public function getVersion(): ?int
     {
         return $this->version;
     }
 
-    public function setVersion(int $version): Tenant
+    public function setVersion(?int $version): Tenant
     {
         $this->version = $version;
 
@@ -271,36 +280,36 @@ class Tenant
         return $this;
     }
 
-    public function getInternalTag(): string
+    public function getInternalTag(): ?string
     {
         return $this->internalTag;
     }
 
-    public function setInternalTag(string $internalTag): Tenant
+    public function setInternalTag(?string $internalTag): Tenant
     {
         $this->internalTag = $internalTag;
 
         return $this;
     }
 
-    public function getCustomerType(): string
+    public function getCustomerType(): ?string
     {
         return $this->customerType;
     }
 
-    public function setCustomerType(string $customerType): Tenant
+    public function setCustomerType(?string $customerType): Tenant
     {
         $this->customerType = $customerType;
 
         return $this;
     }
 
-    public function getMfaStatus(): string
+    public function getMfaStatus(): ?string
     {
         return $this->mfaStatus;
     }
 
-    public function setMfaStatus(string $mfaStatus): Tenant
+    public function setMfaStatus(?string $mfaStatus): Tenant
     {
         $this->mfaStatus = $mfaStatus;
 
@@ -319,24 +328,24 @@ class Tenant
         return $this;
     }
 
-    public function getPricingMode(): string
+    public function getPricingMode(): ?string
     {
         return $this->pricingMode;
     }
 
-    public function setPricingMode(string $pricingMode): Tenant
+    public function setPricingMode(?string $pricingMode): Tenant
     {
         $this->pricingMode = $pricingMode;
 
         return $this;
     }
 
-    public function getLanguage(): string
+    public function getLanguage(): ?string
     {
         return $this->language;
     }
 
-    public function setLanguage(string $language): Tenant
+    public function setLanguage(?string $language): Tenant
     {
         $this->language = $language;
 
@@ -355,7 +364,7 @@ class Tenant
         return $this;
     }
 
-    public function isHasChildren(): bool
+    public function hasChildren(): bool
     {
         return $this->hasChildren;
     }
@@ -384,23 +393,9 @@ class Tenant
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTimeImmutable $createdAt): Tenant
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
     public function getUpdatedAt(): DateTimeImmutable
     {
         return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(DateTimeImmutable $updatedAt): Tenant
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     public function getDeletedAt(): ?DateTimeImmutable
@@ -408,19 +403,12 @@ class Tenant
         return $this->deletedAt;
     }
 
-    public function setDeletedAt(?DateTimeImmutable $deletedAt): Tenant
-    {
-        $this->deletedAt = $deletedAt;
-
-        return $this;
-    }
-
-    public function getContact(): Contact
+    public function getContact(): ?Contact
     {
         return $this->contact;
     }
 
-    public function setContact(Contact $contact): Tenant
+    public function setContact(?Contact $contact): Tenant
     {
         $this->contact = $contact;
 

@@ -11,20 +11,6 @@ class Usage
 {
     /**
      * @var string
-     * @Serializer\SerializedName("tenant_uuid")
-     * @Serializer\Type("string")
-     */
-    private $tenantUuid;
-
-    /**
-     * @var int
-     * @Serializer\SerializedName("tenant_id")
-     * @Serializer\Type("integer")
-     */
-    private $tenantId;
-
-    /**
-     * @var string
      * @Serializer\SerializedName("type")
      * @Serializer\Type("string")
      */
@@ -79,64 +65,9 @@ class Usage
      */
     private $measurementUnit;
 
-    public function __construct(
-        string $tenantUuid,
-        int $tenantId,
-        string $type,
-        string $name,
-        string $edition,
-        string $usageName,
-        DateTimeImmutable $rangeStart,
-        int $absoluteValue,
-        int $value,
-        string $measurementUnit
-    ) {
-        $this->tenantUuid = $tenantUuid;
-        $this->tenantId = $tenantId;
-        $this->type = $type;
-        $this->name = $name;
-        $this->edition = $edition;
-        $this->usageName = $usageName;
-        $this->rangeStart = $rangeStart;
-        $this->absoluteValue = $absoluteValue;
-        $this->value = $value;
-        $this->measurementUnit = $measurementUnit;
-    }
-
-    public function getTenantUuid(): string
-    {
-        return $this->tenantUuid;
-    }
-
-    public function setTenantUuid(string $tenantUuid): Usage
-    {
-        $this->tenantUuid = $tenantUuid;
-
-        return $this;
-    }
-
-    public function getTenantId(): int
-    {
-        return $this->tenantId;
-    }
-
-    public function setTenantId(int $tenantId): Usage
-    {
-        $this->tenantId = $tenantId;
-
-        return $this;
-    }
-
     public function getType(): string
     {
         return $this->type;
-    }
-
-    public function setType(string $type): Usage
-    {
-        $this->type = $type;
-
-        return $this;
     }
 
     public function getName(): string
@@ -144,23 +75,9 @@ class Usage
         return $this->name;
     }
 
-    public function setName(string $name): Usage
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
     public function getEdition(): string
     {
         return $this->edition;
-    }
-
-    public function setEdition(string $edition): Usage
-    {
-        $this->edition = $edition;
-
-        return $this;
     }
 
     public function getUsageName(): string
@@ -168,23 +85,9 @@ class Usage
         return $this->usageName;
     }
 
-    public function setUsageName(string $usageName): Usage
-    {
-        $this->usageName = $usageName;
-
-        return $this;
-    }
-
     public function getRangeStart(): DateTimeImmutable
     {
         return $this->rangeStart;
-    }
-
-    public function setRangeStart(DateTimeImmutable $rangeStart): Usage
-    {
-        $this->rangeStart = $rangeStart;
-
-        return $this;
     }
 
     public function getAbsoluteValue(): int
@@ -192,34 +95,13 @@ class Usage
         return $this->absoluteValue;
     }
 
-    public function setAbsoluteValue(int $absoluteValue): Usage
-    {
-        $this->absoluteValue = $absoluteValue;
-
-        return $this;
-    }
-
     public function getValue(): int
     {
         return $this->value;
     }
 
-    public function setValue(int $value): Usage
-    {
-        $this->value = $value;
-
-        return $this;
-    }
-
     public function getMeasurementUnit(): string
     {
         return $this->measurementUnit;
-    }
-
-    public function setMeasurementUnit(string $measurementUnit): Usage
-    {
-        $this->measurementUnit = $measurementUnit;
-
-        return $this;
     }
 }

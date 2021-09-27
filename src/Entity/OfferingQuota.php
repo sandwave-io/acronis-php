@@ -34,9 +34,9 @@ class OfferingQuota
 
     public function __construct(?int $value, ?int $overage = null, ?int $version = null)
     {
-        $this->value = $value;
-        $this->overage = $overage;
-        $this->version = $version;
+        $this->setValue($value)
+            ->setOverage($overage)
+            ->setVersion($version);
     }
 
     public function getVersion(): ?int

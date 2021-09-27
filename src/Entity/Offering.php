@@ -109,17 +109,17 @@ class Offering
         bool $locked,
         ?OfferingQuota $quota
     ) {
-        $this->tenantId = $tenantId;
-        $this->infraId = $infraId;
-        $this->applicationId = $applicationId;
-        $this->measurementUnit = $measurementUnit;
-        $this->status = $status;
-        $this->type = $type;
-        $this->edition = $edition;
-        $this->name = $name;
-        $this->usageName = $usageName;
-        $this->locked = $locked;
-        $this->quota = $quota;
+        $this->setTenantId($tenantId)
+            ->setInfraId($infraId)
+            ->setApplicationId($applicationId)
+            ->setMeasurementUnit($measurementUnit)
+            ->setStatus($status)
+            ->setType($type)
+            ->setEdition($edition)
+            ->setName($name)
+            ->setUsageName($usageName)
+            ->setLocked($locked)
+            ->setQuota($quota);
     }
 
     public function getTenantId(): string

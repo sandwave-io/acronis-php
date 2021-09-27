@@ -13,13 +13,15 @@ class Contact
      * @var string|null
      * @Serializer\SerializedName("id")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"update_data"})
      */
     private $id;
 
     /**
-     * @var int
+     * @var string|null
      * @Serializer\SerializedName("aan")
-     * @Serializer\Type("int")
+     * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $acronisAccountNumber;
 
@@ -27,7 +29,7 @@ class Contact
      * @var string[]
      * @Serializer\SerializedName("types")
      * @Serializer\Type("array<string>")
-     * @Serializer\Groups({"create_data"})
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $types;
 
@@ -35,7 +37,7 @@ class Contact
      * @var string
      * @Serializer\SerializedName("firstname")
      * @Serializer\Type("string")
-     * @Serializer\Groups({"create_data"})
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $firstname;
 
@@ -43,7 +45,7 @@ class Contact
      * @var string
      * @Serializer\SerializedName("lastname")
      * @Serializer\Type("string")
-     * @Serializer\Groups({"create_data"})
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $lastname;
 
@@ -56,51 +58,58 @@ class Contact
     private $email;
 
     /**
-     * @var string
+     * @var string|null
      * @Serializer\SerializedName("address1")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $address1;
 
     /**
-     * @var string
+     * @var string|null
      * @Serializer\SerializedName("address2")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $address2;
 
     /**
-     * @var string
+     * @var string|null
      * @Serializer\SerializedName("country")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $country;
 
     /**
-     * @var string
+     * @var string|null
      * @Serializer\SerializedName("state")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $state;
 
     /**
-     * @var string
+     * @var string|null
      * @Serializer\SerializedName("zipcode")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $zipcode;
 
     /**
-     * @var string
+     * @var string|null
      * @Serializer\SerializedName("city")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $city;
 
     /**
-     * @var string
+     * @var string|null
      * @Serializer\SerializedName("phone")
      * @Serializer\Type("string")
+     * @Serializer\Groups({"create_data","update_data"})
      */
     private $phone;
 
@@ -127,10 +136,10 @@ class Contact
         string $firstname,
         string $lastname
     ) {
-        $this->types = $types;
-        $this->email = $email;
-        $this->firstname = $firstname;
-        $this->lastname = $lastname;
+        $this->setTypes($types)
+            ->setEmail($email)
+            ->setFirstname($firstname)
+            ->setLastname($lastname);
     }
 
     public function getId(): ?string
@@ -145,12 +154,12 @@ class Contact
         return $this;
     }
 
-    public function getAcronisAccountNumber(): int
+    public function getAcronisAccountNumber(): ?string
     {
         return $this->acronisAccountNumber;
     }
 
-    public function setAcronisAccountNumber(int $acronisAccountNumber): Contact
+    public function setAcronisAccountNumber(?string $acronisAccountNumber): Contact
     {
         $this->acronisAccountNumber = $acronisAccountNumber;
 
@@ -210,84 +219,84 @@ class Contact
         return $this;
     }
 
-    public function getAddress1(): string
+    public function getAddress1(): ?string
     {
         return $this->address1;
     }
 
-    public function setAddress1(string $address1): Contact
+    public function setAddress1(?string $address1): Contact
     {
         $this->address1 = $address1;
 
         return $this;
     }
 
-    public function getAddress2(): string
+    public function getAddress2(): ?string
     {
         return $this->address2;
     }
 
-    public function setAddress2(string $address2): Contact
+    public function setAddress2(?string $address2): Contact
     {
         $this->address2 = $address2;
 
         return $this;
     }
 
-    public function getCountry(): string
+    public function getCountry(): ?string
     {
         return $this->country;
     }
 
-    public function setCountry(string $country): Contact
+    public function setCountry(?string $country): Contact
     {
         $this->country = $country;
 
         return $this;
     }
 
-    public function getState(): string
+    public function getState(): ?string
     {
         return $this->state;
     }
 
-    public function setState(string $state): Contact
+    public function setState(?string $state): Contact
     {
         $this->state = $state;
 
         return $this;
     }
 
-    public function getZipcode(): string
+    public function getZipcode(): ?string
     {
         return $this->zipcode;
     }
 
-    public function setZipcode(string $zipcode): Contact
+    public function setZipcode(?string $zipcode): Contact
     {
         $this->zipcode = $zipcode;
 
         return $this;
     }
 
-    public function getCity(): string
+    public function getCity(): ?string
     {
         return $this->city;
     }
 
-    public function setCity(string $city): Contact
+    public function setCity(?string $city): Contact
     {
         $this->city = $city;
 
         return $this;
     }
 
-    public function getPhone(): string
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    public function setPhone(string $phone): Contact
+    public function setPhone(?string $phone): Contact
     {
         $this->phone = $phone;
 
@@ -299,22 +308,8 @@ class Contact
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTimeImmutable $createdAt): Contact
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
     public function getUpdatedAt(): DateTimeImmutable
     {
         return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(DateTimeImmutable $updatedAt): Contact
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 }
