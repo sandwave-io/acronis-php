@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace SandwaveIo\Acronis\Client;
 
 use SandwaveIo\Acronis\Entity\SearchResultCollection;
+use SandwaveIo\Acronis\Exception\AcronisException;
 
 final class SearchClient
 {
@@ -21,11 +22,7 @@ final class SearchClient
     }
 
     /**
-     * @param string $tenantId
-     * @param string $text
-     * @param int    $limit
-     *
-     * @return SearchResultCollection
+     * @throws AcronisException
      */
     public function search(string $tenantId, string $text, int $limit = 10): SearchResultCollection
     {

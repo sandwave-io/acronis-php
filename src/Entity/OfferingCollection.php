@@ -48,7 +48,7 @@ class OfferingCollection
     /**
      * @return array|Offering[]
      */
-    public function getOfferingItems(): array
+    public function getItems(): array
     {
         return $this->offeringItems;
     }
@@ -58,7 +58,7 @@ class OfferingCollection
      *
      * @return OfferingCollection
      */
-    public function setOfferingItems(array $offeringItems): OfferingCollection
+    public function setItems(array $offeringItems): OfferingCollection
     {
         $this->offeringItems = $this->updatedOfferingItems = $offeringItems;
 

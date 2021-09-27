@@ -55,6 +55,9 @@ final class TenantClient
         return $tenantCollection;
     }
 
+    /**
+     * @throws AcronisException
+     */
     public function create(Tenant $tenant): Tenant
     {
         /** @var Tenant $createdTenant */
@@ -63,6 +66,9 @@ final class TenantClient
         return $createdTenant;
     }
 
+    /**
+     * @throws AcronisException
+     */
     public function update(Tenant $tenant): Tenant
     {
         /** @var Tenant $updatedTenant */
@@ -72,9 +78,7 @@ final class TenantClient
     }
 
     /**
-     * @param string $tenantUuid
-     *
-     * @return UserUuidCollection
+     * @throws AcronisException
      */
     public function getUsersByTenantUuid(string $tenantUuid): UserUuidCollection
     {
@@ -94,7 +98,10 @@ final class TenantClient
         );
     }
 
-    public function getApplications(string $tenantUuid): ApplicationUuidCollection
+    /**
+     * @throws AcronisException
+     */
+    public function getAvailableApplications(string $tenantUuid): ApplicationUuidCollection
     {
         /** @var ApplicationUuidCollection $applicationUuidCollection */
         $applicationUuidCollection = $this->client->getEntity(sprintf(self::TENANT_APPLICATIONS, $tenantUuid), ApplicationUuidCollection::class);
@@ -102,6 +109,9 @@ final class TenantClient
         return $applicationUuidCollection;
     }
 
+    /**
+     * @throws AcronisException
+     */
     public function getInfra(string $tenantUuid): InfraUuidCollection
     {
         /** @var InfraUuidCollection $infraUuidCollection */
@@ -110,6 +120,9 @@ final class TenantClient
         return $infraUuidCollection;
     }
 
+    /**
+     * @throws AcronisException
+     */
     public function getUsage(string $tenantUuid): UsageCollection
     {
         /** @var UsageCollection $usageCollection */

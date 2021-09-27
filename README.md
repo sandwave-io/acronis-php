@@ -15,7 +15,6 @@ This SDK currently supports these APIs:
 * [Offering API](https://eu5-cloud.acronis.com/mc/api/2/doc#offering_items)
 * [Search API](https://eu5-cloud.acronis.com/mc/api/2/doc#search)
 * [Tenant API](https://eu5-cloud.acronis.com/mc/api/2/doc#tenants)
-* [Usage API](https://eu5-cloud.acronis.com/mc/api/2/doc#tenants)
 * [User API](https://eu5-cloud.acronis.com/mc/api/2/doc#users)
 
 Are you missing functionality? Feel free to create an issue, or hit us up with a pull request.

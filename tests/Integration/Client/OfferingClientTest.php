@@ -14,11 +14,9 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 use SandwaveIo\Acronis\AcronisClient;
 use SandwaveIo\Acronis\Client\RestClient;
-use SandwaveIo\Acronis\Entity\Contact;
 use SandwaveIo\Acronis\Entity\Offering;
 use SandwaveIo\Acronis\Entity\OfferingCollection;
 use SandwaveIo\Acronis\Entity\OfferingQuota;
-use SandwaveIo\Acronis\Entity\Tenant;
 
 class OfferingClientTest extends TestCase
 {
@@ -38,7 +36,7 @@ class OfferingClientTest extends TestCase
 
         $acronisClient = new AcronisClient($restClient);
         $offeringCollection = $acronisClient->getOfferingClient()->get('fa6859a9-f5e1-4faf-a56c-5a0ae866dc4f');
-        $firstOffering = $offeringCollection->getOfferingItems()[0];
+        $firstOffering = $offeringCollection->getItems()[0];
 
         $this->assertInstanceOf(OfferingCollection::class, $offeringCollection);
         $this->assertInstanceOf(Offering::class, $firstOffering);
@@ -78,7 +76,7 @@ class OfferingClientTest extends TestCase
             $offeringQuota
         );
         $offeringCollection = new OfferingCollection();
-        $offeringCollection->setOfferingItems([$offering]);
+        $offeringCollection->setItems([$offering]);
 
         $jsonResponse = '{"timestamp":"2016-06-22T18:25:16","items":[{"application_id":"a9fd8016-0e00-4ade-949e-6efe8672dac0","name":"vms","edition":"standard","usage_name":"vms","tenant_id":"f313ecf6-9256-4afd-9d47-72e032ee81d0","updated_at":"2016-06-22T18:25:16","deleted_at":null,"status":1,"locked":true,"type":"count","measurement_unit":"quantity","quota":{"value":10,"overage":10,"version":1486479690324}},{"application_id":"a9fd8016-0e00-4ade-949e-6efe8672dac0","name":"dre_mobiles","edition":"disaster_recovery","usage_name":"mobiles","tenant_id":"f313ecf6-9256-4afd-9d47-72e032ee81d0","updated_at":"2016-06-22T18:25:16","deleted_at":null,"status":1,"locked":false,"type":"count","measurement_unit":"quantity","quota":{"value":10,"overage":10,"version":1486479690324}},{"application_id":"a9fd8016-0e00-4ade-949e-6efe8672dac0","name":"local_storage","edition":null,"usage_name":"local_storage","tenant_id":"f313ecf6-9256-4afd-9d47-72e032ee81d0","updated_at":"2016-06-22T18:25:16","deleted_at":null,"status":1,"type":"feature","measurement_unit":"n/a"},{"application_id":"a9fd8016-0e00-4ade-949e-6efe8672dac0","name":"adv_storage","edition":"advanced","usage_name":"storage","tenant_id":"f313ecf6-9256-4afd-9d47-72e032ee81d0","updated_at":"2016-06-22T18:25:16","deleted_at":null,"status":1,"locked":true,"type":"infra","measurement_unit":"bytes","infra_id":"ee978065-8caa-463d-82d7-47006376e7f2","quota":{"value":1000,"overage":null,"version":1486479690324}}]}';
 
@@ -98,7 +96,7 @@ class OfferingClientTest extends TestCase
                 $this->assertArrayHasKey('offering_items', $decoded);
 
                 $firstDecodedOffering = $decoded['offering_items'][0];
-                $firstOffering = $offeringCollection->getOfferingItems()[0];
+                $firstOffering = $offeringCollection->getItems()[0];
                 $this->assertArrayNotHasKey('updated_at', $firstDecodedOffering);
                 $this->assertArrayNotHasKey('deleted_at', $firstDecodedOffering);
                 $this->assertArrayNotHasKey('infra_id', $firstDecodedOffering);

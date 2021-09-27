@@ -36,8 +36,7 @@ class TenantClientTest extends TestCase
         $guzzle = new Client(['handler' => $stack]);
 
         $serializerBuilder = new SerializerBuilder();
-        $serializer = $serializerBuilder->build();
-        $restClient = new RestClient($guzzle, $serializer);
+        $restClient = new RestClient($guzzle, $serializerBuilder->build());
 
         $acronisClient = new AcronisClient($restClient);
         $tenant = $acronisClient->getTenantClient()->get('f313ecf6-9256-4afd-9d47-72e032ee81d0');
@@ -107,11 +106,6 @@ class TenantClientTest extends TestCase
 
     public function testCreate(): void
     {
-        $tenant = new Tenant(
-            'fa6859a9-f5e1-4faf-a56c-5a0ae866dc4f',
-            'The Qwerty Tenant',
-            'partner'
-        );
         $contact = new Contact(
             ['legal'],
             'me@mysite.com',
@@ -126,6 +120,11 @@ class TenantClientTest extends TestCase
             ->setZipcode('12345')
             ->setCity('Rivertown')
             ->setPhone('123456789');
+        $tenant = new Tenant(
+            'fa6859a9-f5e1-4faf-a56c-5a0ae866dc4f',
+            'The Qwerty Tenant',
+            'partner'
+        );
         $tenant->setOwnerId('03fa8bf4-28f2-11e7-ba28-cbe99c3c450a')
             ->setBrandUuid('03fa8bf4-28f2-11e7-ba28-cbe99c3c450a')
             ->setBrandId(1)
@@ -208,11 +207,6 @@ class TenantClientTest extends TestCase
 
     public function testUpdate(): void
     {
-        $tenant = new Tenant(
-            'fa6859a9-f5e1-4faf-a56c-5a0ae866dc4f',
-            'The Qwerty Tenant',
-            'partner'
-        );
         $contact = new Contact(
             ['legal'],
             'me@mysite.com',
@@ -220,6 +214,11 @@ class TenantClientTest extends TestCase
             'Doe'
         );
         $contact->setId('27f6f164-63dd-47df-b5b6-83a0fd117beb');
+        $tenant = new Tenant(
+            'fa6859a9-f5e1-4faf-a56c-5a0ae866dc4f',
+            'The Qwerty Tenant',
+            'partner'
+        );
         $tenant->setId('f313ecf6-9256-4afd-9d47-72e032ee81d0')
             ->setContact($contact);
         $jsonResponse = '{"id":"f313ecf6-9256-4afd-9d47-72e032ee81d0","version":2,"name":"The Qwerty Tenant","customer_type":"enterprise","parent_id":"fa6859a9-f5e1-4faf-a56c-5a0ae866dc4f","kind":"partner","contact":{"id":"27f6f164-63dd-47df-b5b6-83a0fd117beb","created_at":"2020-05-19T11:50:00","updated_at":"2020-05-19T11:50:00","types":["legal"],"email":"me@mysite.com","address1":"1440 River Drive #100","address2":"","country":"USA","state":"CA","zipcode":"12345","city":"Rivertown","phone":"123456789","firstname":"John","lastname":"Doe","title":"","website":"","industry":"","organization_size":"","email_confirmed":false,"aan":"111111"},"contacts":[],"enabled":true,"created_at":"2016-06-22T18:25:16","updated_at":"2016-06-22T18:25:16","deleted_at":null,"customer_id":"123asd","brand_id":1,"brand_uuid":"03fa8bf4-28f2-11e7-ba28-cbe99c3c450a","internal_tag":"internal-tag","language":"en","owner_id":"03fa8bf4-28f2-11e7-ba28-cbe99c3c450a","has_children":true,"ancestral_access":true,"update_lock":{"enabled":true,"owner_id":"7decff12-ee1b-4f8d-b446-59610bfb9203"},"mfa_status":"enabled","pricing_mode":"production"}';
@@ -238,6 +237,7 @@ class TenantClientTest extends TestCase
                 $this->assertArrayHasKey('id', $decoded);
                 $this->assertArrayNotHasKey('created_at', $decoded);
                 $this->assertArrayNotHasKey('updated_at', $decoded);
+                $this->assertArrayNotHasKey('deleted_at', $decoded);
                 $this->assertSame($tenant->getId(), $decoded['id']);
 
                 /** @var Contact $contact */
@@ -298,7 +298,7 @@ class TenantClientTest extends TestCase
         $restClient = new RestClient($guzzle, $serializer);
 
         $acronisClient = new AcronisClient($restClient);
-        $applicationUuidCollection = $acronisClient->getTenantClient()->getApplications('fa6859a9-f5e1-4faf-a56c-5a0ae866dc4f');
+        $applicationUuidCollection = $acronisClient->getTenantClient()->getAvailableApplications('fa6859a9-f5e1-4faf-a56c-5a0ae866dc4f');
         $firstUserUuid = $applicationUuidCollection->getItems()[0];
 
         $this->assertInstanceOf(ApplicationUuidCollection::class, $applicationUuidCollection);

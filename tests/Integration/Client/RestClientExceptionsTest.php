@@ -40,7 +40,7 @@ class RestClientExceptionsTest extends TestCase
                         $uri
                     ),
                     new Response(401, [], $jsonResponse)
-                )
+                ),
             ]
         );
         $stack = HandlerStack::create($mockHandler);
@@ -67,7 +67,7 @@ class RestClientExceptionsTest extends TestCase
                         $uri
                     ),
                     new Response(404, [], $jsonResponse)
-                )
+                ),
             ]
         );
         $stack = HandlerStack::create($mockHandler);
@@ -94,7 +94,7 @@ class RestClientExceptionsTest extends TestCase
                         $uri
                     ),
                     new Response(400, [], $jsonResponse)
-                )
+                ),
             ]
         );
         $stack = HandlerStack::create($mockHandler);
@@ -119,7 +119,7 @@ class RestClientExceptionsTest extends TestCase
                         'GET',
                         $uri
                     )
-                )
+                ),
             ]
         );
         $stack = HandlerStack::create($mockHandler);
@@ -146,7 +146,7 @@ class RestClientExceptionsTest extends TestCase
                         $uri
                     ),
                     new Response(500, [], $response)
-                )
+                ),
             ]
         );
         $stack = HandlerStack::create($mockHandler);
@@ -173,7 +173,7 @@ class RestClientExceptionsTest extends TestCase
                         $uri
                     ),
                     new Response(400, [], $jsonResponse)
-                )
+                ),
             ]
         );
         $stack = HandlerStack::create($mockHandler);
@@ -196,7 +196,7 @@ class RestClientExceptionsTest extends TestCase
         $serializerBuilder = new SerializerBuilder();
         $serializer = $serializerBuilder->build();
 
-        $restClientFactory = new RestClientFactory('','','');
+        $restClientFactory = new RestClientFactory('', '', '');
 
         $restClient = new RestClient($restClientFactory->create(), $serializer);
 

@@ -26,7 +26,6 @@ use SandwaveIo\Acronis\Exception\NetworkException;
 use SandwaveIo\Acronis\Exception\ResourceNotFoundException;
 use SandwaveIo\Acronis\Exception\ServerException as AcronisServerException;
 use SandwaveIo\Acronis\Exception\UnauthorizedException;
-use Symfony\Component\HttpFoundation\Response;
 
 final class RestClient implements RestClientInterface
 {
@@ -162,10 +161,11 @@ final class RestClient implements RestClientInterface
     /**
      * @param string $method
      * @param string $url
-     * @param array $options
+     * @param array  $options
+     *
+     * @throws AcronisException
      *
      * @return ResponseInterface
-     * @throws AcronisException
      */
     private function request(string $method, string $url, array $options = []): ResponseInterface
     {
@@ -217,7 +217,7 @@ final class RestClient implements RestClientInterface
         }
 
         if ($exception instanceof ClientException) {
-            if ($exception->getCode() === Response::HTTP_NOT_FOUND) {
+            if ($exception->getCode() === 404) {
                 return new ResourceNotFoundException($message, 0, $exception);
             }
 

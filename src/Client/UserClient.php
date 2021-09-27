@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace SandwaveIo\Acronis\Client;
 
-use SandwaveIo\Acronis\Entity\Tenant;
 use SandwaveIo\Acronis\Entity\User;
 use SandwaveIo\Acronis\Entity\UserCollection;
 use SandwaveIo\Acronis\Exception\AcronisException;
