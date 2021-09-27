@@ -9,7 +9,6 @@ use PHPUnit\Framework\TestCase;
 use SandwaveIo\Acronis\Client\RestClientInterface;
 use SandwaveIo\Acronis\Client\TenantClient;
 use SandwaveIo\Acronis\Entity\Tenant;
-use SandwaveIo\Acronis\Exception\AcronisException;
 
 class TenantClientTest extends TestCase
 {
