@@ -26,10 +26,7 @@ final class OfferingClient
      */
     public function get(string $tenantUuid): OfferingCollection
     {
-        /** @var OfferingCollection $offeringCollection */
-        $offeringCollection = $this->client->getEntity(sprintf(self::OFFERING_ITEMS, $tenantUuid), OfferingCollection::class);
-
-        return $offeringCollection;
+        return $this->client->getEntity(sprintf(self::OFFERING_ITEMS, $tenantUuid), OfferingCollection::class);
     }
 
     /**
@@ -37,9 +34,6 @@ final class OfferingClient
      */
     public function update(string $tenantUuid, OfferingCollection $offeringItems): OfferingCollection
     {
-        /** @var OfferingCollection $updatedOfferingCollection */
-        $updatedOfferingCollection = $this->client->put(sprintf(self::OFFERING_ITEMS, $tenantUuid), $offeringItems);
-
-        return $updatedOfferingCollection;
+        return $this->client->put(sprintf(self::OFFERING_ITEMS, $tenantUuid), $offeringItems, OfferingCollection::class);
     }
 }

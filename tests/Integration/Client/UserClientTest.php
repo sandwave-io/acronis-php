@@ -101,11 +101,10 @@ class UserClientTest extends TestCase
             [new Response(200, [], $jsonResponse)]
         );
         $stack = HandlerStack::create($mockHandler);
-        $testCase = $this;
-        $stack->push(function (callable $handler) use ($testCase, $user) {
-            return function (RequestInterface $request, $options) use ($handler, $testCase, $user) {
+        $stack->push(function (callable $handler) use ($user) {
+            return function (RequestInterface $request, $options) use ($handler, $user) {
                 $body = $request->getBody()->getContents();
-                $testCase->assertJson($body);
+                $this->assertJson($body);
 
                 $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
                 $this->assertArrayHasKey('contact', $decoded);
@@ -160,11 +159,10 @@ class UserClientTest extends TestCase
             [new Response(200, [], $jsonResponse)]
         );
         $stack = HandlerStack::create($mockHandler);
-        $testCase = $this;
-        $stack->push(function (callable $handler) use ($testCase, $user) {
-            return function (RequestInterface $request, $options) use ($handler, $testCase, $user) {
+        $stack->push(function (callable $handler) use ($user) {
+            return function (RequestInterface $request, $options) use ($handler, $user) {
                 $body = $request->getBody()->getContents();
-                $testCase->assertJson($body);
+                $this->assertJson($body);
 
                 $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
                 $this->assertArrayHasKey('contact', $decoded);
@@ -201,11 +199,10 @@ class UserClientTest extends TestCase
             [new Response(204, [], $response)]
         );
         $stack = HandlerStack::create($mockHandler);
-        $testCase = $this;
-        $stack->push(function (callable $handler) use ($testCase, $password) {
-            return function (RequestInterface $request, $options) use ($handler, $testCase, $password) {
+        $stack->push(function (callable $handler) use ($password) {
+            return function (RequestInterface $request, $options) use ($handler, $password) {
                 $body = $request->getBody()->getContents();
-                $testCase->assertJson($body);
+                $this->assertJson($body);
 
                 $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
                 $this->assertArrayHasKey('password', $decoded);

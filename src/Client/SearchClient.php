@@ -26,8 +26,7 @@ final class SearchClient
      */
     public function search(string $tenantId, string $text, int $limit = 10): SearchResultCollection
     {
-        /** @var SearchResultCollection $searchResultCollection */
-        $searchResultCollection = $this->client->getEntity(
+        return $this->client->getEntity(
             sprintf(
                 self::SEARCH,
                 $tenantId,
@@ -36,7 +35,5 @@ final class SearchClient
             ),
             SearchResultCollection::class
         );
-
-        return $searchResultCollection;
     }
 }

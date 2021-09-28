@@ -51,21 +51,18 @@ final class RestClient implements RestClientInterface
      * @template T of object
      *
      * @param string          $url
-     * @param class-string<T> $class
+     * @param class-string<T> $returnType
      *
      * @throws AcronisException
      *
      * @return T
      */
-    public function getEntity(string $url, string $class): object
+    public function getEntity(string $url, string $returnType): object
     {
-        $reflectionClass = $this->getDataObject($class);
+        $this->assertValidClass($returnType);
         $json = $this->get($url);
 
-        /** @var T $data */
-        $data = $this->serializer->deserialize($json, $reflectionClass->getName(), 'json');
-
-        return $data;
+        return $this->serializer->deserialize($json, $returnType, 'json');
     }
 
     /**
@@ -79,15 +76,17 @@ final class RestClient implements RestClientInterface
     }
 
     /**
-     * @template T of object
+     * @template T
      *
-     * @param string $url
-     * @param object $data
+     * @param string          $url
+     * @param object          $data
+     * @param class-string<T> $returnType
      *
      * @return T
      */
-    public function post(string $url, object $data): object
+    public function post(string $url, object $data, string $returnType)
     {
+        $this->assertValidClass($returnType);
         $json = $this->serializer->serialize($data, 'json', SerializationContext::create()->setGroups(['create_data']));
 
         $response = $this->request('POST', $url, [
@@ -97,12 +96,7 @@ final class RestClient implements RestClientInterface
             ],
         ]);
 
-        $class = get_class($data);
-
-        /** @var T $responseData */
-        $responseData = $this->serializer->deserialize($response->getBody()->getContents(), $class, 'json');
-
-        return $responseData;
+        return $this->serializer->deserialize($response->getBody()->getContents(), $returnType, 'json');
     }
 
     public function postRaw(string $url, array $data): string
@@ -120,15 +114,17 @@ final class RestClient implements RestClientInterface
     }
 
     /**
-     * @template T of object
+     * @template T
      *
-     * @param string $url
-     * @param object $data
+     * @param string          $url
+     * @param object          $data
+     * @param class-string<T> $returnType
      *
      * @return T
      */
-    public function put(string $url, object $data): object
+    public function put(string $url, object $data, string $returnType)
     {
+        $this->assertValidClass($returnType);
         $json = $this->serializer->serialize($data, 'json', SerializationContext::create()->setGroups(['update_data']));
 
         $response = $this->request('PUT', $url, [
@@ -138,12 +134,7 @@ final class RestClient implements RestClientInterface
             ],
         ]);
 
-        $class = get_class($data);
-
-        /** @var T $responseData */
-        $responseData = $this->serializer->deserialize($response->getBody()->getContents(), $class, 'json');
-
-        return $responseData;
+        return $this->serializer->deserialize($response->getBody()->getContents(), $returnType, 'json');
     }
 
     public function delete(string $url): void
@@ -188,19 +179,15 @@ final class RestClient implements RestClientInterface
     /**
      * @template T
      *
-     * @param class-string<T> $class
-     *
-     * @return ReflectionClass
+     * @param class-string<T> $className
      */
-    private function getDataObject(string $class): ReflectionClass
+    private function assertValidClass(string $className): void
     {
         try {
-            $reflectionClass = new ReflectionClass($class);
+            new ReflectionClass($className);
         } catch (ReflectionException $exception) {
-            throw new DeserializationException(sprintf('Supplied classname %s does not exist', $class));
+            throw new DeserializationException(sprintf('Supplied classname %s does not exist', $className));
         }
-
-        return $reflectionClass;
     }
 
     private function convertException(Exception $exception): AcronisException
