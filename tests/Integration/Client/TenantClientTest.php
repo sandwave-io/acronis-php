@@ -17,8 +17,10 @@ use SandwaveIo\Acronis\Client\RestClient;
 use SandwaveIo\Acronis\Entity\ApplicationUuidCollection;
 use SandwaveIo\Acronis\Entity\Contact;
 use SandwaveIo\Acronis\Entity\InfraUuidCollection;
+use SandwaveIo\Acronis\Entity\OfferingCollection;
 use SandwaveIo\Acronis\Entity\Tenant;
 use SandwaveIo\Acronis\Entity\TenantCollection;
+use SandwaveIo\Acronis\Entity\TenantEdition;
 use SandwaveIo\Acronis\Entity\Usage;
 use SandwaveIo\Acronis\Entity\UsageCollection;
 use SandwaveIo\Acronis\Entity\UserUuidCollection;
@@ -145,11 +147,10 @@ class TenantClientTest extends TestCase
             [new Response(200, [], $jsonResponse)]
         );
         $stack = HandlerStack::create($mockHandler);
-        $testCase = $this;
-        $stack->push(function (callable $handler) use ($testCase, $tenant) {
-            return function (RequestInterface $request, $options) use ($handler, $testCase, $tenant) {
+        $stack->push(function (callable $handler) use ($tenant) {
+            return function (RequestInterface $request, $options) use ($handler, $tenant) {
                 $body = $request->getBody()->getContents();
-                $testCase->assertJson($body);
+                $this->assertJson($body);
 
                 $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
                 $this->assertArrayNotHasKey('id', $decoded);
@@ -227,11 +228,10 @@ class TenantClientTest extends TestCase
             [new Response(200, [], $jsonResponse)]
         );
         $stack = HandlerStack::create($mockHandler);
-        $testCase = $this;
-        $stack->push(function (callable $handler) use ($testCase, $tenant) {
-            return function (RequestInterface $request, $options) use ($handler, $testCase, $tenant) {
+        $stack->push(function (callable $handler) use ($tenant) {
+            return function (RequestInterface $request, $options) use ($handler, $tenant) {
                 $body = $request->getBody()->getContents();
-                $testCase->assertJson($body);
+                $this->assertJson($body);
 
                 $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
                 $this->assertArrayHasKey('id', $decoded);
@@ -281,6 +281,38 @@ class TenantClientTest extends TestCase
 
         $this->assertInstanceOf(UserUuidCollection::class, $userUuidCollection);
         $this->assertSame('aa4f8923-8950-4804-8827-c6d78388e5b6', $firstUserUuid);
+    }
+
+    public function testDelete(): void
+    {
+        $response = 'Tenant successfully deleted';
+        $tenant = new Tenant(
+            'fa6859a9-f5e1-4faf-a56c-5a0ae866dc4f',
+            'The Qwerty Tenant',
+            'partner'
+        );
+        $tenant->setId('f313ecf6-9256-4afd-9d47-72e032ee81d0')
+            ->setVersion(2);
+
+        $mockHandler = new MockHandler(
+            [new Response(204, [], $response)]
+        );
+        $stack = HandlerStack::create($mockHandler);
+        $stack->push(function (callable $handler) {
+            return function (RequestInterface $request, $options) use ($handler) {
+                $this->assertSame('DELETE', $request->getMethod());
+
+                return $handler($request, $options);
+            };
+        });
+        $guzzle = new Client(['handler' => $stack]);
+
+        $serializerBuilder = new SerializerBuilder();
+        $serializer = $serializerBuilder->build();
+        $restClient = new RestClient($guzzle, $serializer);
+
+        $acronisClient = new AcronisClient($restClient);
+        $acronisClient->getTenantClient()->delete($tenant);
     }
 
     public function testGetApplications(): void
@@ -356,5 +388,40 @@ class TenantClientTest extends TestCase
         $this->assertSame(800, $firstUsage->getAbsoluteValue());
         $this->assertSame(800, $firstUsage->getValue());
         $this->assertSame('quantity', $firstUsage->getMeasurementUnit());
+    }
+
+    public function testSwitchEdition(): void
+    {
+        $jsonResponse = '{"timestamp":"2016-06-22T18:25:16","items":[{"application_id":"a9fd8016-0e00-4ade-949e-6efe8672dac0","name":"vms","edition":"standard","usage_name":"vms","tenant_id":"f313ecf6-9256-4afd-9d47-72e032ee81d0","updated_at":"2016-06-22T18:25:16","deleted_at":null,"status":1,"locked":true,"type":"count","measurement_unit":"quantity","quota":{"value":10,"overage":10,"version":1486479690324}},{"application_id":"a9fd8016-0e00-4ade-949e-6efe8672dac0","name":"dre_mobiles","edition":"disaster_recovery","usage_name":"mobiles","tenant_id":"f313ecf6-9256-4afd-9d47-72e032ee81d0","updated_at":"2016-06-22T18:25:16","deleted_at":null,"status":1,"locked":false,"type":"count","measurement_unit":"quantity","quota":{"value":10,"overage":10,"version":1486479690324}},{"application_id":"a9fd8016-0e00-4ade-949e-6efe8672dac0","name":"local_storage","edition":null,"usage_name":"local_storage","tenant_id":"f313ecf6-9256-4afd-9d47-72e032ee81d0","updated_at":"2016-06-22T18:25:16","deleted_at":null,"status":1,"type":"feature","measurement_unit":"n/a"},{"application_id":"a9fd8016-0e00-4ade-949e-6efe8672dac0","name":"adv_storage","edition":"advanced","usage_name":"storage","tenant_id":"f313ecf6-9256-4afd-9d47-72e032ee81d0","updated_at":"2016-06-22T18:25:16","deleted_at":null,"status":1,"locked":true,"type":"infra","measurement_unit":"bytes","infra_id":"ee978065-8caa-463d-82d7-47006376e7f2","quota":{"value":1000,"overage":null,"version":1486479690324}}]}';
+        $tenantEdition = new TenantEdition(
+            'disaster_recovery',
+            'c6ab7fb4-b461-4214-9257-86fbad8efb85'
+        );
+
+        $mockHandler = new MockHandler(
+            [new Response(204, [], $jsonResponse)]
+        );
+        $stack = HandlerStack::create($mockHandler);
+        $stack->push(function (callable $handler) use ($tenantEdition) {
+            return function (RequestInterface $request, $options) use ($handler, $tenantEdition) {
+                $body = $request->getBody()->getContents();
+                $this->assertJson($body);
+
+                $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+                $this->assertSame($tenantEdition->getEdition(), $decoded['target_edition']);
+                $this->assertSame($tenantEdition->getApplicationId(), $decoded['application_id']);
+
+                return $handler($request, $options);
+            };
+        });
+        $guzzle = new Client(['handler' => $stack]);
+
+        $serializerBuilder = new SerializerBuilder();
+        $serializer = $serializerBuilder->build();
+        $restClient = new RestClient($guzzle, $serializer);
+
+        $acronisClient = new AcronisClient($restClient);
+        $offeringCollection = $acronisClient->getTenantClient()->switchEdition('f313ecf6-9256-4afd-9d47-72e032ee81d0', $tenantEdition);
+        $this->assertInstanceOf(OfferingCollection::class, $offeringCollection);
     }
 }

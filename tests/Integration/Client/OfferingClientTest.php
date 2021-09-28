@@ -84,11 +84,10 @@ class OfferingClientTest extends TestCase
             [new Response(200, [], $jsonResponse)]
         );
         $stack = HandlerStack::create($mockHandler);
-        $testCase = $this;
-        $stack->push(function (callable $handler) use ($testCase, $offeringCollection) {
-            return function (RequestInterface $request, $options) use ($handler, $testCase, $offeringCollection) {
+        $stack->push(function (callable $handler) use ($offeringCollection) {
+            return function (RequestInterface $request, $options) use ($handler, $offeringCollection) {
                 $body = $request->getBody()->getContents();
-                $testCase->assertJson($body);
+                $this->assertJson($body);
 
                 $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
                 $this->assertArrayNotHasKey('timestamp', $decoded);

@@ -30,16 +30,12 @@ final class UserClient
      */
     public function get(string $uuid): User
     {
-        /** @var User $user */
-        $user = $this->client->getEntity(sprintf(self::USER_DETAILS, $uuid), User::class);
-
-        return $user;
+        return $this->client->getEntity(sprintf(self::USER_DETAILS, $uuid), User::class);
     }
 
     public function getByTenant(string $tenantUuid, int $limit, string $levelOfDetails = 'full'): UserCollection
     {
-        /** @var UserCollection $userCollection */
-        $userCollection = $this->client->getEntity(
+        return $this->client->getEntity(
             sprintf(
                 self::USER_BY_TENANT,
                 $tenantUuid,
@@ -48,24 +44,16 @@ final class UserClient
             ),
             UserCollection::class
         );
-
-        return $userCollection;
     }
 
     public function create(User $user): User
     {
-        /** @var User $createdUser */
-        $createdUser = $this->client->post(self::USER_LIST, $user);
-
-        return $createdUser;
+        return $this->client->post(self::USER_LIST, $user, User::class);
     }
 
     public function update(User $user): User
     {
-        /** @var User $updatedUser */
-        $updatedUser = $this->client->put(sprintf(self::USER_DETAILS, $user->getId()), $user);
-
-        return $updatedUser;
+        return $this->client->put(sprintf(self::USER_DETAILS, $user->getId()), $user, User::class);
     }
 
     public function updatePassword(User $user, string $password): string
