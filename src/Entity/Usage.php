@@ -117,7 +117,7 @@ class Usage
         return $this->offeringItem;
     }
 
-    public function setOfferingItem(OfferingItem $offeringItem): Usage
+    public function setOfferingItem(Offering $offeringItem): Usage
     {
         $this->offeringItem = $offeringItem;
         return $this;
