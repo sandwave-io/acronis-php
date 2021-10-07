@@ -65,6 +65,13 @@ class Usage
      */
     private $measurementUnit;
 
+    /**
+     * @var Offering
+     * @Serializer\SerializedName("offering_item")
+     * @Serializer\Type("SandwaveIo\Acronis\Entity\Offering")
+     */
+    private $offeringItem;
+
     public function getType(): string
     {
         return $this->type;
@@ -103,5 +110,16 @@ class Usage
     public function getMeasurementUnit(): string
     {
         return $this->measurementUnit;
+    }
+
+    public function getOfferingItem(): Offering
+    {
+        return $this->offeringItem;
+    }
+
+    public function setOfferingItem(OfferingItem $offeringItem): Usage
+    {
+        $this->offeringItem = $offeringItem;
+        return $this;
     }
 }
