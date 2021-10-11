@@ -10,6 +10,7 @@ use SandwaveIo\Acronis\Entity\OfferingCollection;
 use SandwaveIo\Acronis\Entity\Tenant;
 use SandwaveIo\Acronis\Entity\TenantCollection;
 use SandwaveIo\Acronis\Entity\TenantEdition;
+use SandwaveIo\Acronis\Entity\TenantPricing;
 use SandwaveIo\Acronis\Entity\UsageCollection;
 use SandwaveIo\Acronis\Entity\UserUuidCollection;
 use SandwaveIo\Acronis\Exception\AcronisException;
@@ -25,6 +26,7 @@ final class TenantClient
     private const TENANT_INFRA = 'tenants/%s/infra';
     private const TENANT_USAGES = 'tenants/%s/usages';
     private const TENANT_EDITION = 'tenants/%s/edition';
+    private const TENANT_PRICING = 'tenants/%s/pricing';
 
     /**
      * @var RestClientInterface
@@ -84,6 +86,22 @@ final class TenantClient
         $this->client->delete(
             sprintf(self::TENANT_DELETE, $tenant->getId(), $tenant->getVersion())
         );
+    }
+
+    /**
+     * @throws AcronisException
+     */
+    public function getPricing(string $tenantUuid): TenantPricing
+    {
+        return $this->client->getEntity(sprintf(self::TENANT_PRICING, $tenantUuid), TenantPricing::class);
+    }
+
+    /**
+     * @throws AcronisException
+     */
+    public function updatePricing(string $tenantUuid, TenantPricing $tenantPricing): TenantPricing
+    {
+        return $this->client->put(sprintf(self::TENANT_PRICING, $tenantUuid), $tenantPricing, TenantPricing::class);
     }
 
     /**
