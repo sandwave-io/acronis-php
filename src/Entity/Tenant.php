@@ -85,7 +85,7 @@ class Tenant
      * @var string|null
      * @Serializer\SerializedName("customer_type")
      * @Serializer\Type("string")
-     * @Serializer\Groups({"create_data","update_data"})
+     * @Serializer\Groups({"create_data"})
      */
     private $customerType;
 
