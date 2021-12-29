@@ -85,7 +85,6 @@ class Tenant
      * @var string|null
      * @Serializer\SerializedName("customer_type")
      * @Serializer\Type("string")
-     * @Serializer\Groups({"create_data","update_data"})
      */
     private $customerType;
 
@@ -141,7 +140,6 @@ class Tenant
      * @var bool
      * @Serializer\SerializedName("ancestral_access")
      * @Serializer\Type("boolean")
-     * @Serializer\Groups({"create_data","update_data"})
      */
     private $ancestralAccess;
 

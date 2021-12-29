@@ -154,6 +154,8 @@ class TenantClientTest extends TestCase
 
                 $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
                 $this->assertArrayNotHasKey('id', $decoded);
+                $this->assertArrayNotHasKey('customer_type', $decoded);
+                $this->assertArrayNotHasKey('ancestral_access', $decoded);
                 $this->assertArrayNotHasKey('created_at', $decoded);
                 $this->assertArrayNotHasKey('updated_at', $decoded);
                 $this->assertArrayNotHasKey('deleted_at', $decoded);
@@ -165,14 +167,12 @@ class TenantClientTest extends TestCase
                 $this->assertSame($tenant->getVersion(), $decoded['version']);
                 $this->assertSame($tenant->getName(), $decoded['name']);
                 $this->assertSame($tenant->getInternalTag(), $decoded['internal_tag']);
-                $this->assertSame($tenant->getCustomerType(), $decoded['customer_type']);
                 $this->assertSame($tenant->getMfaStatus(), $decoded['mfa_status']);
                 $this->assertSame($tenant->getKind(), $decoded['kind']);
                 $this->assertSame($tenant->getPricingMode(), $decoded['pricing_mode']);
                 $this->assertSame($tenant->getLanguage(), $decoded['language']);
                 $this->assertTrue($decoded['enabled']);
                 $this->assertTrue($decoded['has_children']);
-                $this->assertTrue($decoded['ancestral_access']);
 
                 /** @var Contact $contact */
                 $contact = $tenant->getContact();
@@ -235,6 +235,8 @@ class TenantClientTest extends TestCase
 
                 $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
                 $this->assertArrayHasKey('id', $decoded);
+                $this->assertArrayNotHasKey('customer_type', $decoded);
+                $this->assertArrayNotHasKey('ancestral_access', $decoded);
                 $this->assertArrayNotHasKey('created_at', $decoded);
                 $this->assertArrayNotHasKey('updated_at', $decoded);
                 $this->assertArrayNotHasKey('deleted_at', $decoded);
