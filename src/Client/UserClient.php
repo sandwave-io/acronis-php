@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace SandwaveIo\Acronis\Client;
 
+use SandwaveIo\Acronis\Entity\AccessPolicyCollection;
 use SandwaveIo\Acronis\Entity\User;
 use SandwaveIo\Acronis\Entity\UserCollection;
 use SandwaveIo\Acronis\Exception\AcronisException;
@@ -14,6 +15,7 @@ final class UserClient
     private const USER_BY_TENANT = 'users?subtree_root_tenant_id=%s&limit=%d&lod=%s';
     private const USER_DETAILS = 'users/%s';
     private const PASSWORD_UPDATE = 'users/%s/password';
+    private const ACCESS_POLICIES = 'users/%s/access_policies';
 
     /**
      * @var RestClientInterface
@@ -59,5 +61,10 @@ final class UserClient
     public function updatePassword(User $user, string $password): string
     {
         return $this->client->postRaw(sprintf(self::PASSWORD_UPDATE, $user->getId()), ['password' => $password]);
+    }
+
+    public function updateAccessPolicies(string $userUuid, AccessPolicyCollection $accessPolicyCollection): AccessPolicyCollection
+    {
+        return $this->client->put(sprintf(self::ACCESS_POLICIES, $userUuid), $accessPolicyCollection, AccessPolicyCollection::class);
     }
 }
