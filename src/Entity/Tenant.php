@@ -146,21 +146,21 @@ class Tenant
     /**
      * @var DateTimeImmutable
      * @Serializer\SerializedName("created_at")
-     * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', 'Y-m-d\TH:i:s'>")
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:s\Z', 'Y-m-d\TH:i:s']>")
      */
     private $createdAt;
 
     /**
      * @var DateTimeImmutable
      * @Serializer\SerializedName("updated_at")
-     * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', 'Y-m-d\TH:i:s'>")
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:s\Z', 'Y-m-d\TH:i:s']>")
      */
     private $updatedAt;
 
     /**
      * @var DateTimeImmutable|null
      * @Serializer\SerializedName("deleted_at")
-     * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', 'Y-m-d\TH:i:s'>")
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:s\Z', 'Y-m-d\TH:i:s']>")
      */
     private $deletedAt;
 
