@@ -14,14 +14,14 @@ class Contact
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
      */
-    private ?string $id;
+    private ?string $id = null;
 
     /**
      * @Serializer\SerializedName("aan")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?string $acronisAccountNumber;
+    private ?string $acronisAccountNumber = null;
 
     /**
      * @var string[]
@@ -57,49 +57,49 @@ class Contact
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?string $address1;
+    private ?string $address1 = null;
 
     /**
      * @Serializer\SerializedName("address2")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?string $address2;
+    private ?string $address2 = null;
 
     /**
      * @Serializer\SerializedName("country")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?string $country;
+    private ?string $country = null;
 
     /**
      * @Serializer\SerializedName("state")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?string $state;
+    private ?string $state = null;
 
     /**
      * @Serializer\SerializedName("zipcode")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?string $zipcode;
+    private ?string $zipcode = null;
 
     /**
      * @Serializer\SerializedName("city")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?string $city;
+    private ?string $city = null;
 
     /**
      * @Serializer\SerializedName("phone")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?string $phone;
+    private ?string $phone = null;
 
     /**
      * @Serializer\SerializedName("created_at")

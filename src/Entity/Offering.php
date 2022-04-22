@@ -20,7 +20,7 @@ class Offering
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
      */
-    private ?string $infraId;
+    private ?string $infraId = null;
 
     /**
      * @Serializer\SerializedName("application_id")
@@ -55,7 +55,7 @@ class Offering
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
      */
-    private ?string $edition;
+    private ?string $edition = null;
 
     /**
      * @Serializer\SerializedName("name")
@@ -83,7 +83,7 @@ class Offering
      * @Serializer\Type("SandwaveIo\Acronis\Entity\OfferingQuota")
      * @Serializer\Groups({"update_data"})
      */
-    private ?OfferingQuota $quota;
+    private ?OfferingQuota $quota = null;
 
     public function __construct(
         string $tenantId,

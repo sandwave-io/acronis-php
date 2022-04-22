@@ -14,7 +14,7 @@ class Tenant
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
      */
-    private ?string $id;
+    private ?string $id = null;
 
     /**
      * @Serializer\SerializedName("parent_id")
@@ -28,35 +28,35 @@ class Tenant
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?string $ownerId;
+    private ?string $ownerId = null;
 
     /**
      * @Serializer\SerializedName("brand_uuid")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?string $brandUuid;
+    private ?string $brandUuid = null;
 
     /**
      * @Serializer\SerializedName("brand_id")
      * @Serializer\Type("integer")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?int $brandId;
+    private ?int $brandId = null;
 
     /**
      * @Serializer\SerializedName("customer_id")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?string $customerId;
+    private ?string $customerId = null;
 
     /**
      * @Serializer\SerializedName("version")
      * @Serializer\Type("integer")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?int $version;
+    private ?int $version = null;
 
     /**
      * @Serializer\SerializedName("name")
@@ -70,21 +70,21 @@ class Tenant
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?string $internalTag;
+    private ?string $internalTag = null;
 
     /**
      * @Serializer\SerializedName("customer_type")
      * @Serializer\Type("string")
      * @Serializer\Groups()
      */
-    private ?string $customerType;
+    private ?string $customerType = null;
 
     /**
      * @Serializer\SerializedName("mfa_status")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?string $mfaStatus;
+    private ?string $mfaStatus = null;
 
     /**
      * @Serializer\SerializedName("kind")
@@ -98,28 +98,28 @@ class Tenant
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?string $pricingMode;
+    private ?string $pricingMode = null;
 
     /**
      * @Serializer\SerializedName("language")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?string $language;
+    private ?string $language = null;
 
     /**
      * @Serializer\SerializedName("enabled")
      * @Serializer\Type("boolean")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private bool $enabled;
+    private bool $enabled = false;
 
     /**
      * @Serializer\SerializedName("has_children")
      * @Serializer\Type("boolean")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private bool $hasChildren;
+    private bool $hasChildren = false;
 
     /**
      * @Serializer\SerializedName("ancestral_access")
@@ -144,14 +144,14 @@ class Tenant
      * @Serializer\SerializedName("deleted_at")
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:s\Z', 'Y-m-d\TH:i:s']>")
      */
-    private ?DateTimeImmutable $deletedAt;
+    private ?DateTimeImmutable $deletedAt = null;
 
     /**
      * @Serializer\SerializedName("contact")
      * @Serializer\Type("SandwaveIo\Acronis\Entity\Contact")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?Contact $contact;
+    private ?Contact $contact = null;
 
     public function __construct(
         string $parentId,
