@@ -13,8 +13,11 @@ use SandwaveIo\Acronis\Client\UserClient;
 final class AcronisClient
 {
     private TenantClient $tenantClient;
+
     private UserClient $userClient;
+
     private OfferingClient $offeringClient;
+
     private SearchClient $searchClient;
 
     public function __construct(RestClientInterface $restClient)

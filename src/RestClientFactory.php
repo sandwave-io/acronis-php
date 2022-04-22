@@ -11,7 +11,9 @@ use GuzzleHttp\HandlerStack;
 final class RestClientFactory implements RestClientFactoryInterface
 {
     private string $url;
+
     private string $clientSecret;
+
     private string $clientIdentifier;
 
     public function __construct(string $url, string $clientIdentifier, string $clientSecret)

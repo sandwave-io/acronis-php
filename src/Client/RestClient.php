@@ -32,6 +32,7 @@ final class RestClient implements RestClientInterface
     private const REQUEST_TIMEOUT = 5;
 
     private ClientInterface $client;
+
     private SerializerInterface $serializer;
 
     public function __construct(ClientInterface $client, SerializerInterface $serializer)
