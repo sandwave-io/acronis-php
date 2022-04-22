@@ -13,7 +13,7 @@ class SearchResultCollection
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\SearchResult>")
      * @Serializer\SerializedName("items")
      */
-    private $items;
+    private array $items;
 
     /**
      * @return SearchResult[]

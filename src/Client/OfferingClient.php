@@ -11,10 +11,7 @@ final class OfferingClient
 {
     private const OFFERING_ITEMS = 'tenants/%s/offering_items';
 
-    /**
-     * @var RestClientInterface
-     */
-    private $client;
+    private RestClientInterface $client;
 
     public function __construct(RestClientInterface $client)
     {

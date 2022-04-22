@@ -10,18 +10,17 @@ use JMS\Serializer\Annotation as Serializer;
 class OfferingCollection
 {
     /**
-     * @var DateTimeImmutable|null
      * @Serializer\SerializedName("timestamp")
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', 'Y-m-d\TH:i:s'>")
      */
-    private $timestamp;
+    private ?DateTimeImmutable $timestamp;
 
     /**
      * @var Offering[]
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\Offering>")
      * @Serializer\SerializedName("items")
      */
-    private $offeringItems;
+    private array $offeringItems;
 
     /**
      * @var Offering[]
@@ -29,7 +28,7 @@ class OfferingCollection
      * @Serializer\SerializedName("offering_items")
      * @Serializer\Groups({"update_data"})
      */
-    private $updatedOfferingItems;
+    private array $updatedOfferingItems;
 
     public function __construct()
     {

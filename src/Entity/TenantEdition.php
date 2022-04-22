@@ -9,20 +9,18 @@ use JMS\Serializer\Annotation as Serializer;
 class TenantEdition
 {
     /**
-     * @var string
      * @Serializer\SerializedName("target_edition")
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
      */
-    private $edition;
+    private string $edition;
 
     /**
-     * @var string
      * @Serializer\SerializedName("application_id")
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
      */
-    private $applicationId;
+    private string $applicationId;
 
     public function __construct(string $edition, string $applicationId)
     {

@@ -10,167 +10,148 @@ use JMS\Serializer\Annotation as Serializer;
 class Tenant
 {
     /**
-     * @var string|null
      * @Serializer\SerializedName("id")
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
      */
-    private $id;
+    private ?string $id;
 
     /**
-     * @var string
      * @Serializer\SerializedName("parent_id")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private $parentId;
+    private string $parentId;
 
     /**
-     * @var string|null
      * @Serializer\SerializedName("owner_id")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private $ownerId;
+    private ?string $ownerId;
 
     /**
-     * @var string|null
      * @Serializer\SerializedName("brand_uuid")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private $brandUuid;
+    private ?string $brandUuid;
 
     /**
-     * @var int|null
      * @Serializer\SerializedName("brand_id")
      * @Serializer\Type("integer")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private $brandId;
+    private ?int $brandId;
 
     /**
-     * @var string|null
      * @Serializer\SerializedName("customer_id")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private $customerId;
+    private ?string $customerId;
 
     /**
-     * @var int|null
      * @Serializer\SerializedName("version")
      * @Serializer\Type("integer")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private $version;
+    private ?int $version;
 
     /**
-     * @var string
      * @Serializer\SerializedName("name")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private $name;
+    private string $name;
 
     /**
-     * @var string|null
      * @Serializer\SerializedName("internal_tag")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private $internalTag;
+    private ?string $internalTag;
 
     /**
-     * @var string|null
      * @Serializer\SerializedName("customer_type")
      * @Serializer\Type("string")
+     * @Serializer\Groups()
      */
-    private $customerType;
+    private ?string $customerType;
 
     /**
-     * @var string|null
      * @Serializer\SerializedName("mfa_status")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private $mfaStatus;
+    private ?string $mfaStatus;
 
     /**
-     * @var string
      * @Serializer\SerializedName("kind")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private $kind;
+    private string $kind;
 
     /**
-     * @var string|null
      * @Serializer\SerializedName("pricing_mode")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private $pricingMode;
+    private ?string $pricingMode;
 
     /**
-     * @var string|null
      * @Serializer\SerializedName("language")
      * @Serializer\Type("string")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private $language;
+    private ?string $language;
 
     /**
-     * @var bool
      * @Serializer\SerializedName("enabled")
      * @Serializer\Type("boolean")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private $enabled;
+    private bool $enabled;
 
     /**
-     * @var bool
      * @Serializer\SerializedName("has_children")
      * @Serializer\Type("boolean")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private $hasChildren;
+    private bool $hasChildren;
 
     /**
-     * @var bool
      * @Serializer\SerializedName("ancestral_access")
      * @Serializer\Type("boolean")
+     * @Serializer\Groups()
      */
-    private $ancestralAccess;
+    private bool $ancestralAccess;
 
     /**
-     * @var DateTimeImmutable
      * @Serializer\SerializedName("created_at")
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:s\Z', 'Y-m-d\TH:i:s']>")
      */
-    private $createdAt;
+    private DateTimeImmutable $createdAt;
 
     /**
-     * @var DateTimeImmutable
      * @Serializer\SerializedName("updated_at")
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:s\Z', 'Y-m-d\TH:i:s']>")
      */
-    private $updatedAt;
+    private DateTimeImmutable $updatedAt;
 
     /**
-     * @var DateTimeImmutable|null
      * @Serializer\SerializedName("deleted_at")
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:s\Z', 'Y-m-d\TH:i:s']>")
      */
-    private $deletedAt;
+    private ?DateTimeImmutable $deletedAt;
 
     /**
-     * @var Contact|null
      * @Serializer\SerializedName("contact")
      * @Serializer\Type("SandwaveIo\Acronis\Entity\Contact")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private $contact;
+    private ?Contact $contact;
 
     public function __construct(
         string $parentId,

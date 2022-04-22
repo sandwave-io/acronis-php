@@ -9,28 +9,25 @@ use JMS\Serializer\Annotation as Serializer;
 class OfferingQuota
 {
     /**
-     * @var int|null
      * @Serializer\SerializedName("version")
      * @Serializer\Type("integer")
      * @Serializer\Groups({"update_data"})
      */
-    private $version;
+    private ?int $version;
 
     /**
-     * @var int|null
      * @Serializer\SerializedName("overage")
      * @Serializer\Type("integer")
      * @Serializer\Groups({"update_data"})
      */
-    private $overage;
+    private ?int $overage;
 
     /**
-     * @var int|null
      * @Serializer\SerializedName("value")
      * @Serializer\Type("integer")
      * @Serializer\Groups({"update_data"})
      */
-    private $value;
+    private ?int $value;
 
     public function __construct(?int $value, ?int $overage = null, ?int $version = null)
     {

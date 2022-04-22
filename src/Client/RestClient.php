@@ -31,15 +31,8 @@ final class RestClient implements RestClientInterface
 {
     private const REQUEST_TIMEOUT = 5;
 
-    /**
-     * @var ClientInterface
-     */
-    private $client;
-
-    /**
-     * @var SerializerInterface
-     */
-    private $serializer;
+    private ClientInterface $client;
+    private SerializerInterface $serializer;
 
     public function __construct(ClientInterface $client, SerializerInterface $serializer)
     {
@@ -65,11 +58,6 @@ final class RestClient implements RestClientInterface
         return $this->serializer->deserialize($json, $returnType, 'json');
     }
 
-    /**
-     * @param string $url
-     *
-     * @return string
-     */
     public function getRawData(string $url): string
     {
         return $this->get($url);

@@ -12,25 +12,10 @@ use Psr\Http\Message\RequestInterface;
 
 class BearerTokenMiddleware
 {
-    /**
-     * @var string|null
-     */
-    private $bearerToken;
-
-    /**
-     * @var string
-     */
-    private $url;
-
-    /**
-     * @var string
-     */
-    private $clientId;
-
-    /**
-     * @var string
-     */
-    private $clientSecret;
+    private ?string $bearerToken;
+    private string $url;
+    private string $clientId;
+    private string $clientSecret;
 
     public function __construct(string $url, string $clientId, string $clientSecret)
     {
