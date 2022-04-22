@@ -17,10 +17,7 @@ final class UserClient
     private const PASSWORD_UPDATE = 'users/%s/password';
     private const ACCESS_POLICIES = 'users/%s/access_policies';
 
-    /**
-     * @var RestClientInterface
-     */
-    private $client;
+    private RestClientInterface $client;
 
     public function __construct(RestClientInterface $client)
     {

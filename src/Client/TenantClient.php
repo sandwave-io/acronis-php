@@ -28,10 +28,7 @@ final class TenantClient
     private const TENANT_EDITION = 'tenants/%s/edition';
     private const TENANT_PRICING = 'tenants/%s/pricing';
 
-    /**
-     * @var RestClientInterface
-     */
-    private $client;
+    private RestClientInterface $client;
 
     public function __construct(RestClientInterface $client)
     {

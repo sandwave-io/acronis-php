@@ -11,10 +11,7 @@ final class SearchClient
 {
     private const SEARCH = 'search?tenant=%s&text=%s&limit=%d';
 
-    /**
-     * @var RestClientInterface
-     */
-    private $client;
+    private RestClientInterface $client;
 
     public function __construct(RestClientInterface $client)
     {

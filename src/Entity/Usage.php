@@ -10,67 +10,58 @@ use JMS\Serializer\Annotation as Serializer;
 class Usage
 {
     /**
-     * @var string
      * @Serializer\SerializedName("type")
      * @Serializer\Type("string")
      */
-    private $type;
+    private string $type;
 
     /**
-     * @var string
      * @Serializer\SerializedName("name")
      * @Serializer\Type("string")
      */
-    private $name;
+    private string $name;
 
     /**
-     * @var string
      * @Serializer\SerializedName("edition")
      * @Serializer\Type("string")
      */
-    private $edition;
+    private string $edition;
 
     /**
-     * @var string
      * @Serializer\SerializedName("usage_name")
      * @Serializer\Type("string")
      */
-    private $usageName;
+    private string $usageName;
 
     /**
-     * @var DateTimeImmutable
      * @Serializer\SerializedName("range_start")
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', 'Y-m-d\TH:i:s'>")
      */
-    private $rangeStart;
+    private DateTimeImmutable $rangeStart;
 
     /**
-     * @var int
      * @Serializer\SerializedName("absolute_value")
      * @Serializer\Type("integer")
      */
-    private $absoluteValue;
+    private int $absoluteValue;
 
     /**
-     * @var int
      * @Serializer\SerializedName("value")
      * @Serializer\Type("integer")
      */
-    private $value;
+    private int $value;
 
     /**
-     * @var string
      * @Serializer\SerializedName("measurement_unit")
      * @Serializer\Type("string")
      */
-    private $measurementUnit;
+    private string $measurementUnit;
 
     /**
-     * @var Offering
      * @Serializer\SerializedName("offering_item")
      * @Serializer\Type("SandwaveIo\Acronis\Entity\Offering")
      */
-    private $offeringItem;
+    private Offering $offeringItem;
 
     public function getType(): string
     {

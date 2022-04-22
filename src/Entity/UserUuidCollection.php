@@ -13,7 +13,7 @@ class UserUuidCollection
      * @Serializer\Type("array<string>")
      * @Serializer\SerializedName("items")
      */
-    private $items;
+    private array $items;
 
     /**
      * @return string[]

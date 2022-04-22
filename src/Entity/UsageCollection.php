@@ -13,7 +13,7 @@ class UsageCollection
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\Usage>")
      * @Serializer\SerializedName("items")
      */
-    private $items;
+    private array $items;
 
     /**
      * @return Usage[]

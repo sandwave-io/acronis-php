@@ -9,60 +9,53 @@ use JMS\Serializer\Annotation as Serializer;
 class SearchResult
 {
     /**
-     * @var string
      * @Serializer\SerializedName("id")
      * @Serializer\Type("string")
      */
-    private $id;
+    private string $id;
 
     /**
-     * @var string
      * @Serializer\SerializedName("obj_type")
      * @Serializer\Type("string")
      */
-    private $type;
+    private string $type;
 
     /**
-     * @var string
      * @Serializer\SerializedName("kind")
      * @Serializer\Type("string")
      */
-    private $kind;
+    private string $kind;
 
     /**
-     * @var string
      * @Serializer\SerializedName("parent_id")
      * @Serializer\Type("string")
      */
-    private $parentId;
+    private string $parentId;
 
     /**
      * @var string[]
      * @Serializer\SerializedName("path")
      * @Serializer\Type("array<string>")
      */
-    private $path;
+    private array $path;
 
     /**
-     * @var string
      * @Serializer\SerializedName("name")
      * @Serializer\Type("string")
      */
-    private $name;
+    private string $name;
 
     /**
-     * @var string|null
      * @Serializer\SerializedName("first_name")
      * @Serializer\Type("string")
      */
-    private $firstname;
+    private ?string $firstname;
 
     /**
-     * @var string|null
      * @Serializer\SerializedName("last_name")
      * @Serializer\Type("string")
      */
-    private $lastname;
+    private ?string $lastname;
 
     public function getId(): string
     {

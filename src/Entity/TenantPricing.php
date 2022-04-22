@@ -10,35 +10,31 @@ use JMS\Serializer\Annotation as Serializer;
 class TenantPricing
 {
     /**
-     * @var string|null
      * @Serializer\SerializedName("mode")
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
      */
-    private $mode;
+    private ?string $mode;
 
     /**
-     * @var int|null
      * @Serializer\SerializedName("version")
      * @Serializer\Type("integer")
      * @Serializer\Groups({"update_data"})
      */
-    private $version;
+    private ?int $version;
 
     /**
-     * @var string|null
      * @Serializer\SerializedName("mode")
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
      */
-    private $currency;
+    private ?string $currency;
 
     /**
-     * @var DateTimeImmutable|null
      * @Serializer\SerializedName("production_start_date")
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:s']>")
      */
-    private $productionStartDate;
+    private ?DateTimeImmutable $productionStartDate;
 
     public function getMode(): ?string
     {

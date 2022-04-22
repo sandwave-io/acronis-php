@@ -9,60 +9,53 @@ use JMS\Serializer\Annotation as Serializer;
 class AccessPolicy
 {
     /**
-     * @var string|null
      * @Serializer\SerializedName("id")
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
      */
-    private $id;
+    private ?string $id;
 
     /**
-     * @var string
      * @Serializer\SerializedName("issuer_id")
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
      */
-    private $issuerId;
+    private string $issuerId;
 
     /**
-     * @var string
      * @Serializer\SerializedName("role_id")
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
      */
-    private $roleId;
+    private string $roleId;
 
     /**
-     * @var string
      * @Serializer\SerializedName("tenant_id")
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
      */
-    private $tenantId;
+    private string $tenantId;
 
     /**
-     * @var string
      * @Serializer\SerializedName("trustee_id")
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
      */
-    private $trusteeId;
+    private string $trusteeId;
 
     /**
-     * @var string
      * @Serializer\SerializedName("trustee_type")
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
      */
-    private $trusteeType;
+    private string $trusteeType;
 
     /**
-     * @var int
      * @Serializer\SerializedName("version")
      * @Serializer\Type("integer")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private $version;
+    private int $version;
 
     public function __construct(
         ?string $id,
