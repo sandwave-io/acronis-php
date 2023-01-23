@@ -10,6 +10,7 @@ class SearchResultCollection
 {
     /**
      * @var SearchResult[]
+     *
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\SearchResult>")
      * @Serializer\SerializedName("items")
      */

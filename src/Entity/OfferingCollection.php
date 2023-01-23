@@ -17,6 +17,7 @@ class OfferingCollection
 
     /**
      * @var Offering[]
+     *
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\Offering>")
      * @Serializer\SerializedName("items")
      */
@@ -24,6 +25,7 @@ class OfferingCollection
 
     /**
      * @var Offering[]
+     *
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\Offering>")
      * @Serializer\SerializedName("offering_items")
      * @Serializer\Groups({"update_data"})

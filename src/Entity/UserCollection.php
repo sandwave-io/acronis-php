@@ -17,6 +17,7 @@ class UserCollection
 
     /**
      * @var User[]
+     *
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\User>")
      * @Serializer\SerializedName("items")
      */

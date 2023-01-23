@@ -34,6 +34,7 @@ class SearchResult
 
     /**
      * @var string[]
+     *
      * @Serializer\SerializedName("path")
      * @Serializer\Type("array<string>")
      */

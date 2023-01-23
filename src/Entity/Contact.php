@@ -25,6 +25,7 @@ class Contact
 
     /**
      * @var string[]
+     *
      * @Serializer\SerializedName("types")
      * @Serializer\Type("array<string>")
      * @Serializer\Groups({"create_data","update_data"})

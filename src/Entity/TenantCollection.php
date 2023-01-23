@@ -17,6 +17,7 @@ class TenantCollection
 
     /**
      * @var Tenant[]
+     *
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\Tenant>")
      * @Serializer\SerializedName("items")
      */
