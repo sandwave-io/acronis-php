@@ -32,7 +32,7 @@ class TenantPricing
 
     /**
      * @Serializer\SerializedName("production_start_date")
-     * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:s']>")
+     * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:s\Z', 'Y-m-d\TH:i:s']>")
      */
     private ?DateTimeImmutable $productionStartDate;
 

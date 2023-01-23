@@ -10,6 +10,7 @@ class ApplicationUuidCollection
 {
     /**
      * @var string[]
+     *
      * @Serializer\Type("array<string>")
      * @Serializer\SerializedName("items")
      */
