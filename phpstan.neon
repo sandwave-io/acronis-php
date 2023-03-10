@@ -14,3 +14,13 @@ parameters:
         -
             function: 'print_r()'
             message: 'use logger instead'
+    ignoreErrors:
+        -
+            message: '#Property [a-zA-Z0-9\\_]+::\$[a-zA-Z]+ is never written, only read.#'
+            path: src/Entity/*
+        -
+            message: '#Property [a-zA-Z0-9\\_]+::\$[a-zA-Z]+ is never read, only written.#'
+            path: src/Entity/*
+        -
+            message: '#Dead catch \- ReflectionException is never thrown in the try block.#'
+            path: src/Client/RestClient.php
