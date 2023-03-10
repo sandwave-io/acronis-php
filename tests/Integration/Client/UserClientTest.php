@@ -37,21 +37,21 @@ class UserClientTest extends TestCase
         $acronisClient = new AcronisClient($restClient);
         $user = $acronisClient->getUserClient()->get('948efcf2-b740-4c40-bb2d-4e4a46adfd87');
 
-        $this->assertInstanceOf(User::class, $user);
-        $this->assertInstanceOf(Contact::class, $user->getContact());
-        $this->assertInstanceOf(DateTimeImmutable::class, $user->getCreatedAt());
-        $this->assertInstanceOf(DateTimeImmutable::class, $user->getUpdatedAt());
-        $this->assertSame('948efcf2-b740-4c40-bb2d-4e4a46adfd87', $user->getId());
-        $this->assertSame('0ef03214-6e47-4e50-87f2-a5955ba6095c', $user->getTenantId());
-        $this->assertSame('2f8ad2e2-28f2-11e7-aad1-5ffe2ad47151', $user->getPersonalTenantId());
-        $this->assertSame(2, $user->getVersion());
-        $this->assertSame('mylogin', $user->getLogin());
-        $this->assertTrue($user->isEnabled());
-        $this->assertTrue($user->isActivated());
-        $this->assertSame('ru', $user->getLanguage());
-        $this->assertSame('setup_required', $user->getMfaStatus());
-        $this->assertSame('2016-06-22 18:25:16', $user->getCreatedAt()->format('Y-m-d H:i:s'));
-        $this->assertSame('2016-06-22 18:25:16', $user->getUpdatedAt()->format('Y-m-d H:i:s'));
+        self::assertInstanceOf(User::class, $user);
+        self::assertInstanceOf(Contact::class, $user->getContact());
+        self::assertInstanceOf(DateTimeImmutable::class, $user->getCreatedAt());
+        self::assertInstanceOf(DateTimeImmutable::class, $user->getUpdatedAt());
+        self::assertSame('948efcf2-b740-4c40-bb2d-4e4a46adfd87', $user->getId());
+        self::assertSame('0ef03214-6e47-4e50-87f2-a5955ba6095c', $user->getTenantId());
+        self::assertSame('2f8ad2e2-28f2-11e7-aad1-5ffe2ad47151', $user->getPersonalTenantId());
+        self::assertSame(2, $user->getVersion());
+        self::assertSame('mylogin', $user->getLogin());
+        self::assertTrue($user->isEnabled());
+        self::assertTrue($user->isActivated());
+        self::assertSame('ru', $user->getLanguage());
+        self::assertSame('setup_required', $user->getMfaStatus());
+        self::assertSame('2016-06-22 18:25:16', $user->getCreatedAt()->format('Y-m-d H:i:s'));
+        self::assertSame('2016-06-22 18:25:16', $user->getUpdatedAt()->format('Y-m-d H:i:s'));
     }
 
     public function testGetByTenant(): void
@@ -72,9 +72,9 @@ class UserClientTest extends TestCase
         $userCollection = $acronisClient->getUserClient()->getByTenant('7ea1cf00-0ef0-11e7-8741-bb83f58f591f', 10);
         $firstUser = $userCollection->getItems()[0];
 
-        $this->assertInstanceOf(UserCollection::class, $userCollection);
-        $this->assertInstanceOf(User::class, $firstUser);
-        $this->assertSame('2016-06-22 18:25:16', $userCollection->getTimestamp()->format('Y-m-d H:i:s'));
+        self::assertInstanceOf(UserCollection::class, $userCollection);
+        self::assertInstanceOf(User::class, $firstUser);
+        self::assertSame('2016-06-22 18:25:16', $userCollection->getTimestamp()->format('Y-m-d H:i:s'));
     }
 
     public function testCreate(): void
@@ -104,22 +104,22 @@ class UserClientTest extends TestCase
         $stack->push(function (callable $handler) use ($user) {
             return function (RequestInterface $request, $options) use ($handler, $user) {
                 $body = $request->getBody()->getContents();
-                $this->assertJson($body);
+                self::assertJson($body);
 
                 $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
-                $this->assertArrayHasKey('contact', $decoded);
-                $this->assertArrayNotHasKey('id', $decoded);
-                $this->assertArrayNotHasKey('personal_tenant_id', $decoded);
-                $this->assertArrayNotHasKey('version', $decoded);
-                $this->assertArrayNotHasKey('created_at', $decoded);
-                $this->assertArrayNotHasKey('updated_at', $decoded);
-                $this->assertArrayNotHasKey('deleted_at', $decoded);
-                $this->assertSame($user->getTenantId(), $decoded['tenant_id']);
-                $this->assertSame($user->getLogin(), $decoded['login']);
-                $this->assertSame($user->isEnabled(), $decoded['enabled']);
-                $this->assertSame($user->isActivated(), $decoded['activated']);
-                $this->assertSame($user->getLanguage(), $decoded['language']);
-                $this->assertSame($user->getMfaStatus(), $decoded['mfa_status']);
+                self::assertArrayHasKey('contact', $decoded);
+                self::assertArrayNotHasKey('id', $decoded);
+                self::assertArrayNotHasKey('personal_tenant_id', $decoded);
+                self::assertArrayNotHasKey('version', $decoded);
+                self::assertArrayNotHasKey('created_at', $decoded);
+                self::assertArrayNotHasKey('updated_at', $decoded);
+                self::assertArrayNotHasKey('deleted_at', $decoded);
+                self::assertSame($user->getTenantId(), $decoded['tenant_id']);
+                self::assertSame($user->getLogin(), $decoded['login']);
+                self::assertSame($user->isEnabled(), $decoded['enabled']);
+                self::assertSame($user->isActivated(), $decoded['activated']);
+                self::assertSame($user->getLanguage(), $decoded['language']);
+                self::assertSame($user->getMfaStatus(), $decoded['mfa_status']);
 
                 return $handler($request, $options);
             };
@@ -162,16 +162,16 @@ class UserClientTest extends TestCase
         $stack->push(function (callable $handler) use ($user) {
             return function (RequestInterface $request, $options) use ($handler, $user) {
                 $body = $request->getBody()->getContents();
-                $this->assertJson($body);
+                self::assertJson($body);
 
                 $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
-                $this->assertArrayHasKey('contact', $decoded);
-                $this->assertArrayNotHasKey('created_at', $decoded);
-                $this->assertArrayNotHasKey('updated_at', $decoded);
-                $this->assertArrayNotHasKey('deleted_at', $decoded);
-                $this->assertSame($user->getId(), $decoded['id']);
-                $this->assertSame($user->getPersonalTenantId(), $decoded['personal_tenant_id']);
-                $this->assertSame($user->getVersion(), $decoded['version']);
+                self::assertArrayHasKey('contact', $decoded);
+                self::assertArrayNotHasKey('created_at', $decoded);
+                self::assertArrayNotHasKey('updated_at', $decoded);
+                self::assertArrayNotHasKey('deleted_at', $decoded);
+                self::assertSame($user->getId(), $decoded['id']);
+                self::assertSame($user->getPersonalTenantId(), $decoded['personal_tenant_id']);
+                self::assertSame($user->getVersion(), $decoded['version']);
 
                 return $handler($request, $options);
             };
@@ -202,11 +202,11 @@ class UserClientTest extends TestCase
         $stack->push(function (callable $handler) use ($password) {
             return function (RequestInterface $request, $options) use ($handler, $password) {
                 $body = $request->getBody()->getContents();
-                $this->assertJson($body);
+                self::assertJson($body);
 
                 $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
-                $this->assertArrayHasKey('password', $decoded);
-                $this->assertSame($password, $decoded['password']);
+                self::assertArrayHasKey('password', $decoded);
+                self::assertSame($password, $decoded['password']);
 
                 return $handler($request, $options);
             };
