@@ -10,24 +10,28 @@ class SearchResult
 {
     /**
      * @Serializer\SerializedName("id")
+     *
      * @Serializer\Type("string")
      */
     private string $id;
 
     /**
      * @Serializer\SerializedName("obj_type")
+     *
      * @Serializer\Type("string")
      */
     private string $type;
 
     /**
      * @Serializer\SerializedName("kind")
+     *
      * @Serializer\Type("string")
      */
     private string $kind;
 
     /**
      * @Serializer\SerializedName("parent_id")
+     *
      * @Serializer\Type("string")
      */
     private string $parentId;
@@ -36,24 +40,28 @@ class SearchResult
      * @var string[]
      *
      * @Serializer\SerializedName("path")
+     *
      * @Serializer\Type("array<string>")
      */
     private array $path;
 
     /**
      * @Serializer\SerializedName("name")
+     *
      * @Serializer\Type("string")
      */
     private string $name;
 
     /**
      * @Serializer\SerializedName("first_name")
+     *
      * @Serializer\Type("string")
      */
     private ?string $firstname;
 
     /**
      * @Serializer\SerializedName("last_name")
+     *
      * @Serializer\Type("string")
      */
     private ?string $lastname;

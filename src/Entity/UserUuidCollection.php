@@ -12,6 +12,7 @@ class UserUuidCollection
      * @var string[]
      *
      * @Serializer\Type("array<string>")
+     *
      * @Serializer\SerializedName("items")
      */
     private array $items;

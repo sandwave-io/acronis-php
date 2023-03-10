@@ -11,14 +11,18 @@ class Contact
 {
     /**
      * @Serializer\SerializedName("id")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private ?string $id = null;
 
     /**
      * @Serializer\SerializedName("aan")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private ?string $acronisAccountNumber = null;
@@ -27,89 +31,113 @@ class Contact
      * @var string[]
      *
      * @Serializer\SerializedName("types")
+     *
      * @Serializer\Type("array<string>")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private array $types;
 
     /**
      * @Serializer\SerializedName("firstname")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private string $firstname;
 
     /**
      * @Serializer\SerializedName("lastname")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private string $lastname;
 
     /**
      * @Serializer\SerializedName("email")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private string $email;
 
     /**
      * @Serializer\SerializedName("address1")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private ?string $address1 = null;
 
     /**
      * @Serializer\SerializedName("address2")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private ?string $address2 = null;
 
     /**
      * @Serializer\SerializedName("country")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private ?string $country = null;
 
     /**
      * @Serializer\SerializedName("state")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private ?string $state = null;
 
     /**
      * @Serializer\SerializedName("zipcode")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private ?string $zipcode = null;
 
     /**
      * @Serializer\SerializedName("city")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private ?string $city = null;
 
     /**
      * @Serializer\SerializedName("phone")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private ?string $phone = null;
 
     /**
      * @Serializer\SerializedName("created_at")
+     *
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:sP', 'Y-m-d\TH:i:s']>")
      */
     private DateTimeImmutable $createdAt;
 
     /**
      * @Serializer\SerializedName("updated_at")
+     *
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:sP', 'Y-m-d\TH:i:s']>")
      */
     private DateTimeImmutable $updatedAt;

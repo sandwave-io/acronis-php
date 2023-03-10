@@ -11,6 +11,7 @@ class OfferingCollection
 {
     /**
      * @Serializer\SerializedName("timestamp")
+     *
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', 'Y-m-d\TH:i:s'>")
      */
     private ?DateTimeImmutable $timestamp;
@@ -19,6 +20,7 @@ class OfferingCollection
      * @var Offering[]
      *
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\Offering>")
+     *
      * @Serializer\SerializedName("items")
      */
     private array $offeringItems;
@@ -27,7 +29,9 @@ class OfferingCollection
      * @var Offering[]
      *
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\Offering>")
+     *
      * @Serializer\SerializedName("offering_items")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private array $updatedOfferingItems;
