@@ -3,7 +3,7 @@
 
 # Acronis API - PHP SDK
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/sandwave-io/acronis-php/CI)](https://packagist.org/packages/sandwave-io/acronis-php)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/sandwave-io/acronis-php/ci.yml?branch=main)](https://packagist.org/packages/sandwave-io/acronis-php)
 [![Packagist PHP Version Support](https://img.shields.io/packagist/php-v/sandwave-io/acronis-php)](https://packagist.org/packages/sandwave-io/acronis-php)
 [![Packagist PHP Version Support](https://img.shields.io/packagist/v/sandwave-io/acronis-php)](https://packagist.org/packages/sandwave-io/acronis-php)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/sandwave-io/acronis-php)](https://packagist.org/packages/sandwave-io/acronis-php)
