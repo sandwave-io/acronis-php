@@ -12,7 +12,7 @@ use Psr\Http\Message\RequestInterface;
 
 class BearerTokenMiddleware
 {
-    private ?string $bearerToken;
+    private ?string $bearerToken = null;
 
     private string $url;
 
