@@ -13,7 +13,7 @@ class OfferingCollection
      * @Serializer\SerializedName("timestamp")
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', 'Y-m-d\TH:i:s'>")
      */
-    private ?DateTimeImmutable $timestamp;
+    private ?DateTimeImmutable $timestamp = null;
 
     /**
      * @var Offering[]

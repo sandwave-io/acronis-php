@@ -50,13 +50,13 @@ class SearchResult
      * @Serializer\SerializedName("first_name")
      * @Serializer\Type("string")
      */
-    private ?string $firstname;
+    private ?string $firstname = null;
 
     /**
      * @Serializer\SerializedName("last_name")
      * @Serializer\Type("string")
      */
-    private ?string $lastname;
+    private ?string $lastname = null;
 
     public function getId(): string
     {

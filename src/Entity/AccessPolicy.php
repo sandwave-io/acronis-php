@@ -13,7 +13,7 @@ class AccessPolicy
      * @Serializer\Type("string")
      * @Serializer\Groups({"update_data"})
      */
-    private ?string $id;
+    private ?string $id = null;
 
     /**
      * @Serializer\SerializedName("issuer_id")
