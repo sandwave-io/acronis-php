@@ -21,7 +21,7 @@ class OfferingCollection
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\Offering>")
      * @Serializer\SerializedName("items")
      */
-    private array $offeringItems;
+    private array $offeringItems = [];
 
     /**
      * @var Offering[]
@@ -30,7 +30,7 @@ class OfferingCollection
      * @Serializer\SerializedName("offering_items")
      * @Serializer\Groups({"update_data"})
      */
-    private array $updatedOfferingItems;
+    private array $updatedOfferingItems = [];
 
     public function __construct()
     {

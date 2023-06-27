@@ -21,7 +21,7 @@ class TenantCollection
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\Tenant>")
      * @Serializer\SerializedName("items")
      */
-    private array $items;
+    private array $items = [];
 
     public function getTimestamp(): DateTimeImmutable
     {

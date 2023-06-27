@@ -38,7 +38,7 @@ class SearchResult
      * @Serializer\SerializedName("path")
      * @Serializer\Type("array<string>")
      */
-    private array $path;
+    private array $path = [];
 
     /**
      * @Serializer\SerializedName("name")

@@ -14,7 +14,7 @@ class InfraUuidCollection
      * @Serializer\Type("array<string>")
      * @Serializer\SerializedName("infras")
      */
-    private array $items;
+    private array $items = [];
 
     /**
      * @return string[]

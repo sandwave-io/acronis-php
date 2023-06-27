@@ -14,7 +14,7 @@ class ApplicationUuidCollection
      * @Serializer\Type("array<string>")
      * @Serializer\SerializedName("items")
      */
-    private array $items;
+    private array $items = [];
 
     /**
      * @return string[]

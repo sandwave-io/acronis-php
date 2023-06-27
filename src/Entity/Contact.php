@@ -30,7 +30,7 @@ class Contact
      * @Serializer\Type("array<string>")
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private array $types;
+    private array $types = [];
 
     /**
      * @Serializer\SerializedName("firstname")
