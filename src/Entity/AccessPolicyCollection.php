@@ -17,7 +17,7 @@ class AccessPolicyCollection
      *
      * @Serializer\Groups({"update_data"})
      */
-    private array $items;
+    private array $items = [];
 
     /**
      * @param AccessPolicy[] $items

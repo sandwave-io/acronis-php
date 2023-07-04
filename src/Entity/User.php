@@ -16,7 +16,7 @@ class User
      *
      * @Serializer\Groups({"update_data"})
      */
-    private ?string $id;
+    private ?string $id = null;
 
     /**
      * @Serializer\SerializedName("tenant_id")
@@ -34,7 +34,7 @@ class User
      *
      * @Serializer\Groups({"update_data"})
      */
-    private ?string $personalTenantId;
+    private ?string $personalTenantId = null;
 
     /**
      * @Serializer\SerializedName("version")
@@ -43,7 +43,7 @@ class User
      *
      * @Serializer\Groups({"update_data"})
      */
-    private ?int $version;
+    private ?int $version = null;
 
     /**
      * @Serializer\SerializedName("login")
@@ -52,7 +52,7 @@ class User
      *
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?string $login;
+    private ?string $login = null;
 
     /**
      * @Serializer\SerializedName("enabled")
@@ -61,7 +61,7 @@ class User
      *
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?bool $enabled;
+    private ?bool $enabled = null;
 
     /**
      * @Serializer\SerializedName("activated")
@@ -70,7 +70,7 @@ class User
      *
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?bool $activated;
+    private ?bool $activated = null;
 
     /**
      * @Serializer\SerializedName("language")
@@ -79,7 +79,7 @@ class User
      *
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?string $language;
+    private ?string $language = null;
 
     /**
      * @Serializer\SerializedName("mfa_status")
@@ -88,21 +88,21 @@ class User
      *
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?string $mfaStatus;
+    private ?string $mfaStatus = null;
 
     /**
      * @Serializer\SerializedName("created_at")
      *
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:s\Z', 'Y-m-d\TH:i:s']>")
      */
-    private ?DateTimeImmutable $createdAt;
+    private ?DateTimeImmutable $createdAt = null;
 
     /**
      * @Serializer\SerializedName("updated_at")
      *
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:s\Z', 'Y-m-d\TH:i:s']>")
      */
-    private ?DateTimeImmutable $updatedAt;
+    private ?DateTimeImmutable $updatedAt = null;
 
     /**
      * @Serializer\SerializedName("contact")
@@ -111,7 +111,7 @@ class User
      *
      * @Serializer\Groups({"create_data","update_data"})
      */
-    private ?Contact $contact;
+    private ?Contact $contact = null;
 
     public function __construct(
         string $tenantId

@@ -14,7 +14,7 @@ class OfferingCollection
      *
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', 'Y-m-d\TH:i:s'>")
      */
-    private ?DateTimeImmutable $timestamp;
+    private ?DateTimeImmutable $timestamp = null;
 
     /**
      * @var Offering[]
@@ -23,7 +23,7 @@ class OfferingCollection
      *
      * @Serializer\SerializedName("items")
      */
-    private array $offeringItems;
+    private array $offeringItems = [];
 
     /**
      * @var Offering[]
@@ -34,7 +34,7 @@ class OfferingCollection
      *
      * @Serializer\Groups({"update_data"})
      */
-    private array $updatedOfferingItems;
+    private array $updatedOfferingItems = [];
 
     public function __construct()
     {

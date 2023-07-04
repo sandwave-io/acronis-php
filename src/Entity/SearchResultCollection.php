@@ -15,7 +15,7 @@ class SearchResultCollection
      *
      * @Serializer\SerializedName("items")
      */
-    private array $items;
+    private array $items = [];
 
     /**
      * @return SearchResult[]

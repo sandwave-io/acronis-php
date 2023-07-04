@@ -15,7 +15,7 @@ class OfferingQuota
      *
      * @Serializer\Groups({"update_data"})
      */
-    private ?int $version;
+    private ?int $version = null;
 
     /**
      * @Serializer\SerializedName("overage")
@@ -24,7 +24,7 @@ class OfferingQuota
      *
      * @Serializer\Groups({"update_data"})
      */
-    private ?int $overage;
+    private ?int $overage = null;
 
     /**
      * @Serializer\SerializedName("value")
@@ -33,7 +33,7 @@ class OfferingQuota
      *
      * @Serializer\Groups({"update_data"})
      */
-    private ?int $value;
+    private ?int $value = null;
 
     public function __construct(?int $value, ?int $overage = null, ?int $version = null)
     {

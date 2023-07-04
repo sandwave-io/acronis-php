@@ -15,7 +15,7 @@ class UserUuidCollection
      *
      * @Serializer\SerializedName("items")
      */
-    private array $items;
+    private array $items = [];
 
     /**
      * @return string[]

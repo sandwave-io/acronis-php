@@ -23,7 +23,7 @@ class UserCollection
      *
      * @Serializer\SerializedName("items")
      */
-    private array $items;
+    private array $items = [];
 
     public function getTimestamp(): DateTimeImmutable
     {
