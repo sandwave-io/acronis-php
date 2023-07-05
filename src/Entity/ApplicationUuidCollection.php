@@ -13,6 +13,7 @@ class ApplicationUuidCollection
      *
      * @Serializer\Type("array<string>")
      * @Serializer\SerializedName("items")
+     * @Serializer\SkipWhenEmpty()
      */
     private array $items = [];
 

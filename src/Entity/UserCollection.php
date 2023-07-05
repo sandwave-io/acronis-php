@@ -20,6 +20,7 @@ class UserCollection
      *
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\User>")
      * @Serializer\SerializedName("items")
+     * @Serializer\SkipWhenEmpty()
      */
     private array $items = [];
 

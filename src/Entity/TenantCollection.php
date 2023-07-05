@@ -20,6 +20,7 @@ class TenantCollection
      *
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\Tenant>")
      * @Serializer\SerializedName("items")
+     * @Serializer\SkipWhenEmpty()
      */
     private array $items = [];
 

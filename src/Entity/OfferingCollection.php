@@ -20,6 +20,7 @@ class OfferingCollection
      *
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\Offering>")
      * @Serializer\SerializedName("items")
+     * @Serializer\SkipWhenEmpty()
      */
     private array $offeringItems = [];
 
@@ -29,6 +30,7 @@ class OfferingCollection
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\Offering>")
      * @Serializer\SerializedName("offering_items")
      * @Serializer\Groups({"update_data"})
+     * @Serializer\SkipWhenEmpty()
      */
     private array $updatedOfferingItems = [];
 

@@ -29,6 +29,7 @@ class Contact
      * @Serializer\SerializedName("types")
      * @Serializer\Type("array<string>")
      * @Serializer\Groups({"create_data","update_data"})
+     * @Serializer\SkipWhenEmpty()
      */
     private array $types = [];
 
