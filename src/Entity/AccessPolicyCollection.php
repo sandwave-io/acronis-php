@@ -16,6 +16,7 @@ class AccessPolicyCollection
      * @Serializer\SerializedName("items")
      *
      * @Serializer\Groups({"update_data"})
+     * @Serializer\SkipWhenEmpty()
      */
     private array $items = [];
 

@@ -42,6 +42,7 @@ class SearchResult
      * @Serializer\SerializedName("path")
      *
      * @Serializer\Type("array<string>")
+     * @Serializer\SkipWhenEmpty()
      */
     private array $path = [];
 

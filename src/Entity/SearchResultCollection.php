@@ -14,6 +14,7 @@ class SearchResultCollection
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\SearchResult>")
      *
      * @Serializer\SerializedName("items")
+     * @Serializer\SkipWhenEmpty()
      */
     private array $items = [];
 
