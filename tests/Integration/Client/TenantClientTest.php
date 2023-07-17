@@ -43,44 +43,44 @@ class TenantClientTest extends TestCase
         $acronisClient = new AcronisClient($restClient);
         $tenant = $acronisClient->getTenantClient()->get('f313ecf6-9256-4afd-9d47-72e032ee81d0');
 
-        $this->assertInstanceOf(Tenant::class, $tenant);
-        $this->assertInstanceOf(DateTimeImmutable::class, $tenant->getCreatedAt());
-        $this->assertInstanceOf(DateTimeImmutable::class, $tenant->getUpdatedAt());
-        $this->assertSame('f313ecf6-9256-4afd-9d47-72e032ee81d0', $tenant->getId());
-        $this->assertSame('fa6859a9-f5e1-4faf-a56c-5a0ae866dc4f', $tenant->getParentId());
-        $this->assertSame('03fa8bf4-28f2-11e7-ba28-cbe99c3c450a', $tenant->getBrandUuid());
-        $this->assertSame(1, $tenant->getBrandId());
-        $this->assertSame('123asd', $tenant->getCustomerId());
-        $this->assertSame(2, $tenant->getVersion());
-        $this->assertSame('The Qwerty Tenant', $tenant->getName());
-        $this->assertSame('enterprise', $tenant->getCustomerType());
-        $this->assertSame('enabled', $tenant->getMfaStatus());
-        $this->assertSame('partner', $tenant->getKind());
-        $this->assertSame('production', $tenant->getPricingMode());
-        $this->assertSame('en', $tenant->getLanguage());
-        $this->assertTrue($tenant->isEnabled());
-        $this->assertTrue($tenant->hasChildren());
-        $this->assertTrue($tenant->isAncestralAccess());
-        $this->assertSame('2016-06-22 18:25:16', $tenant->getCreatedAt()->format('Y-m-d H:i:s'));
-        $this->assertSame('2016-06-22 18:25:17', $tenant->getUpdatedAt()->format('Y-m-d H:i:s'));
-        $this->assertNull($tenant->getDeletedAt());
+        self::assertInstanceOf(Tenant::class, $tenant);
+        self::assertInstanceOf(DateTimeImmutable::class, $tenant->getCreatedAt());
+        self::assertInstanceOf(DateTimeImmutable::class, $tenant->getUpdatedAt());
+        self::assertSame('f313ecf6-9256-4afd-9d47-72e032ee81d0', $tenant->getId());
+        self::assertSame('fa6859a9-f5e1-4faf-a56c-5a0ae866dc4f', $tenant->getParentId());
+        self::assertSame('03fa8bf4-28f2-11e7-ba28-cbe99c3c450a', $tenant->getBrandUuid());
+        self::assertSame(1, $tenant->getBrandId());
+        self::assertSame('123asd', $tenant->getCustomerId());
+        self::assertSame(2, $tenant->getVersion());
+        self::assertSame('The Qwerty Tenant', $tenant->getName());
+        self::assertSame('enterprise', $tenant->getCustomerType());
+        self::assertSame('enabled', $tenant->getMfaStatus());
+        self::assertSame('partner', $tenant->getKind());
+        self::assertSame('production', $tenant->getPricingMode());
+        self::assertSame('en', $tenant->getLanguage());
+        self::assertTrue($tenant->isEnabled());
+        self::assertTrue($tenant->hasChildren());
+        self::assertTrue($tenant->isAncestralAccess());
+        self::assertSame('2016-06-22 18:25:16', $tenant->getCreatedAt()->format('Y-m-d H:i:s'));
+        self::assertSame('2016-06-22 18:25:17', $tenant->getUpdatedAt()->format('Y-m-d H:i:s'));
+        self::assertNull($tenant->getDeletedAt());
 
-        $this->assertInstanceOf(Contact::class, $tenant->getContact());
-        $this->assertInstanceOf(DateTimeImmutable::class, $tenant->getContact()->getCreatedAt());
-        $this->assertInstanceOf(DateTimeImmutable::class, $tenant->getContact()->getUpdatedAt());
-        $this->assertSame('27f6f164-63dd-47df-b5b6-83a0fd117beb', $tenant->getContact()->getId());
-        $this->assertSame('John', $tenant->getContact()->getFirstname());
-        $this->assertSame('Doe', $tenant->getContact()->getLastname());
-        $this->assertSame('me@mysite.com', $tenant->getContact()->getEmail());
-        $this->assertSame('1440 River Drive #100', $tenant->getContact()->getAddress1());
-        $this->assertSame('', $tenant->getContact()->getAddress2());
-        $this->assertSame('USA', $tenant->getContact()->getCountry());
-        $this->assertSame('CA', $tenant->getContact()->getState());
-        $this->assertSame('12345', $tenant->getContact()->getZipcode());
-        $this->assertSame('Rivertown', $tenant->getContact()->getCity());
-        $this->assertSame('123456789', $tenant->getContact()->getPhone());
-        $this->assertSame('2020-05-19 11:50:00', $tenant->getContact()->getCreatedAt()->format('Y-m-d H:i:s'));
-        $this->assertSame('2020-05-19 11:50:01', $tenant->getContact()->getUpdatedAt()->format('Y-m-d H:i:s'));
+        self::assertInstanceOf(Contact::class, $tenant->getContact());
+        self::assertInstanceOf(DateTimeImmutable::class, $tenant->getContact()->getCreatedAt());
+        self::assertInstanceOf(DateTimeImmutable::class, $tenant->getContact()->getUpdatedAt());
+        self::assertSame('27f6f164-63dd-47df-b5b6-83a0fd117beb', $tenant->getContact()->getId());
+        self::assertSame('John', $tenant->getContact()->getFirstname());
+        self::assertSame('Doe', $tenant->getContact()->getLastname());
+        self::assertSame('me@mysite.com', $tenant->getContact()->getEmail());
+        self::assertSame('1440 River Drive #100', $tenant->getContact()->getAddress1());
+        self::assertSame('', $tenant->getContact()->getAddress2());
+        self::assertSame('USA', $tenant->getContact()->getCountry());
+        self::assertSame('CA', $tenant->getContact()->getState());
+        self::assertSame('12345', $tenant->getContact()->getZipcode());
+        self::assertSame('Rivertown', $tenant->getContact()->getCity());
+        self::assertSame('123456789', $tenant->getContact()->getPhone());
+        self::assertSame('2020-05-19 11:50:00', $tenant->getContact()->getCreatedAt()->format('Y-m-d H:i:s'));
+        self::assertSame('2020-05-19 11:50:01', $tenant->getContact()->getUpdatedAt()->format('Y-m-d H:i:s'));
     }
 
     public function testGetChildren(): void
@@ -101,9 +101,9 @@ class TenantClientTest extends TestCase
         $tenantCollection = $acronisClient->getTenantClient()->getChildren('fa6859a9-f5e1-4faf-a56c-5a0ae866dc4f');
         $firstTenant = $tenantCollection->getItems()[0];
 
-        $this->assertInstanceOf(TenantCollection::class, $tenantCollection);
-        $this->assertInstanceOf(DateTimeImmutable::class, $tenantCollection->getTimestamp());
-        $this->assertInstanceOf(Tenant::class, $firstTenant);
+        self::assertInstanceOf(TenantCollection::class, $tenantCollection);
+        self::assertInstanceOf(DateTimeImmutable::class, $tenantCollection->getTimestamp());
+        self::assertInstanceOf(Tenant::class, $firstTenant);
     }
 
     public function testCreate(): void
@@ -150,47 +150,47 @@ class TenantClientTest extends TestCase
         $stack->push(function (callable $handler) use ($tenant) {
             return function (RequestInterface $request, $options) use ($handler, $tenant) {
                 $body = $request->getBody()->getContents();
-                $this->assertJson($body);
+                self::assertJson($body);
 
                 $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
-                $this->assertArrayNotHasKey('id', $decoded);
-                $this->assertArrayNotHasKey('customer_type', $decoded);
-                $this->assertArrayNotHasKey('ancestral_access', $decoded);
-                $this->assertArrayNotHasKey('created_at', $decoded);
-                $this->assertArrayNotHasKey('updated_at', $decoded);
-                $this->assertArrayNotHasKey('deleted_at', $decoded);
-                $this->assertSame($tenant->getParentId(), $decoded['parent_id']);
-                $this->assertSame($tenant->getOwnerId(), $decoded['owner_id']);
-                $this->assertSame($tenant->getBrandUuid(), $decoded['brand_uuid']);
-                $this->assertSame($tenant->getBrandId(), $decoded['brand_id']);
-                $this->assertSame($tenant->getCustomerId(), $decoded['customer_id']);
-                $this->assertSame($tenant->getVersion(), $decoded['version']);
-                $this->assertSame($tenant->getName(), $decoded['name']);
-                $this->assertSame($tenant->getInternalTag(), $decoded['internal_tag']);
-                $this->assertSame($tenant->getMfaStatus(), $decoded['mfa_status']);
-                $this->assertSame($tenant->getKind(), $decoded['kind']);
-                $this->assertSame($tenant->getPricingMode(), $decoded['pricing_mode']);
-                $this->assertSame($tenant->getLanguage(), $decoded['language']);
-                $this->assertTrue($decoded['enabled']);
-                $this->assertTrue($decoded['has_children']);
+                self::assertArrayNotHasKey('id', $decoded);
+                self::assertArrayNotHasKey('customer_type', $decoded);
+                self::assertArrayNotHasKey('ancestral_access', $decoded);
+                self::assertArrayNotHasKey('created_at', $decoded);
+                self::assertArrayNotHasKey('updated_at', $decoded);
+                self::assertArrayNotHasKey('deleted_at', $decoded);
+                self::assertSame($tenant->getParentId(), $decoded['parent_id']);
+                self::assertSame($tenant->getOwnerId(), $decoded['owner_id']);
+                self::assertSame($tenant->getBrandUuid(), $decoded['brand_uuid']);
+                self::assertSame($tenant->getBrandId(), $decoded['brand_id']);
+                self::assertSame($tenant->getCustomerId(), $decoded['customer_id']);
+                self::assertSame($tenant->getVersion(), $decoded['version']);
+                self::assertSame($tenant->getName(), $decoded['name']);
+                self::assertSame($tenant->getInternalTag(), $decoded['internal_tag']);
+                self::assertSame($tenant->getMfaStatus(), $decoded['mfa_status']);
+                self::assertSame($tenant->getKind(), $decoded['kind']);
+                self::assertSame($tenant->getPricingMode(), $decoded['pricing_mode']);
+                self::assertSame($tenant->getLanguage(), $decoded['language']);
+                self::assertTrue($decoded['enabled']);
+                self::assertTrue($decoded['has_children']);
 
                 /** @var Contact $contact */
                 $contact = $tenant->getContact();
-                $this->assertArrayNotHasKey('id', $decoded['contact']);
-                $this->assertArrayNotHasKey('created_at', $decoded['contact']);
-                $this->assertArrayNotHasKey('updated_at', $decoded['contact']);
-                $this->assertSame($contact->getAcronisAccountNumber(), $decoded['contact']['aan']);
-                $this->assertSame($contact->getTypes(), $decoded['contact']['types']);
-                $this->assertSame($contact->getFirstname(), $decoded['contact']['firstname']);
-                $this->assertSame($contact->getLastname(), $decoded['contact']['lastname']);
-                $this->assertSame($contact->getEmail(), $decoded['contact']['email']);
-                $this->assertSame($contact->getAddress1(), $decoded['contact']['address1']);
-                $this->assertSame($contact->getAddress2(), $decoded['contact']['address2']);
-                $this->assertSame($contact->getCountry(), $decoded['contact']['country']);
-                $this->assertSame($contact->getState(), $decoded['contact']['state']);
-                $this->assertSame($contact->getZipcode(), $decoded['contact']['zipcode']);
-                $this->assertSame($contact->getCity(), $decoded['contact']['city']);
-                $this->assertSame($contact->getPhone(), $decoded['contact']['phone']);
+                self::assertArrayNotHasKey('id', $decoded['contact']);
+                self::assertArrayNotHasKey('created_at', $decoded['contact']);
+                self::assertArrayNotHasKey('updated_at', $decoded['contact']);
+                self::assertSame($contact->getAcronisAccountNumber(), $decoded['contact']['aan']);
+                self::assertSame($contact->getTypes(), $decoded['contact']['types']);
+                self::assertSame($contact->getFirstname(), $decoded['contact']['firstname']);
+                self::assertSame($contact->getLastname(), $decoded['contact']['lastname']);
+                self::assertSame($contact->getEmail(), $decoded['contact']['email']);
+                self::assertSame($contact->getAddress1(), $decoded['contact']['address1']);
+                self::assertSame($contact->getAddress2(), $decoded['contact']['address2']);
+                self::assertSame($contact->getCountry(), $decoded['contact']['country']);
+                self::assertSame($contact->getState(), $decoded['contact']['state']);
+                self::assertSame($contact->getZipcode(), $decoded['contact']['zipcode']);
+                self::assertSame($contact->getCity(), $decoded['contact']['city']);
+                self::assertSame($contact->getPhone(), $decoded['contact']['phone']);
 
                 return $handler($request, $options);
             };
@@ -231,23 +231,23 @@ class TenantClientTest extends TestCase
         $stack->push(function (callable $handler) use ($tenant) {
             return function (RequestInterface $request, $options) use ($handler, $tenant) {
                 $body = $request->getBody()->getContents();
-                $this->assertJson($body);
+                self::assertJson($body);
 
                 $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
-                $this->assertArrayHasKey('id', $decoded);
-                $this->assertArrayNotHasKey('customer_type', $decoded);
-                $this->assertArrayNotHasKey('ancestral_access', $decoded);
-                $this->assertArrayNotHasKey('created_at', $decoded);
-                $this->assertArrayNotHasKey('updated_at', $decoded);
-                $this->assertArrayNotHasKey('deleted_at', $decoded);
-                $this->assertSame($tenant->getId(), $decoded['id']);
+                self::assertArrayHasKey('id', $decoded);
+                self::assertArrayNotHasKey('customer_type', $decoded);
+                self::assertArrayNotHasKey('ancestral_access', $decoded);
+                self::assertArrayNotHasKey('created_at', $decoded);
+                self::assertArrayNotHasKey('updated_at', $decoded);
+                self::assertArrayNotHasKey('deleted_at', $decoded);
+                self::assertSame($tenant->getId(), $decoded['id']);
 
                 /** @var Contact $contact */
                 $contact = $tenant->getContact();
-                $this->assertArrayHasKey('id', $decoded['contact']);
-                $this->assertArrayNotHasKey('created_at', $decoded['contact']);
-                $this->assertArrayNotHasKey('updated_at', $decoded['contact']);
-                $this->assertSame($contact->getId(), $decoded['contact']['id']);
+                self::assertArrayHasKey('id', $decoded['contact']);
+                self::assertArrayNotHasKey('created_at', $decoded['contact']);
+                self::assertArrayNotHasKey('updated_at', $decoded['contact']);
+                self::assertSame($contact->getId(), $decoded['contact']['id']);
 
                 return $handler($request, $options);
             };
@@ -281,8 +281,8 @@ class TenantClientTest extends TestCase
         $userUuidCollection = $acronisClient->getTenantClient()->getUsersByTenantUuid('fa6859a9-f5e1-4faf-a56c-5a0ae866dc4f');
         $firstUserUuid = $userUuidCollection->getItems()[0];
 
-        $this->assertInstanceOf(UserUuidCollection::class, $userUuidCollection);
-        $this->assertSame('aa4f8923-8950-4804-8827-c6d78388e5b6', $firstUserUuid);
+        self::assertInstanceOf(UserUuidCollection::class, $userUuidCollection);
+        self::assertSame('aa4f8923-8950-4804-8827-c6d78388e5b6', $firstUserUuid);
     }
 
     public function testDelete(): void
@@ -302,7 +302,7 @@ class TenantClientTest extends TestCase
         $stack = HandlerStack::create($mockHandler);
         $stack->push(function (callable $handler) {
             return function (RequestInterface $request, $options) use ($handler) {
-                $this->assertSame('DELETE', $request->getMethod());
+                self::assertSame('DELETE', $request->getMethod());
 
                 return $handler($request, $options);
             };
@@ -335,8 +335,8 @@ class TenantClientTest extends TestCase
         $applicationUuidCollection = $acronisClient->getTenantClient()->getAvailableApplications('fa6859a9-f5e1-4faf-a56c-5a0ae866dc4f');
         $firstUserUuid = $applicationUuidCollection->getItems()[0];
 
-        $this->assertInstanceOf(ApplicationUuidCollection::class, $applicationUuidCollection);
-        $this->assertSame('aa4f8923-8950-4804-8827-c6d78388e5b6', $firstUserUuid);
+        self::assertInstanceOf(ApplicationUuidCollection::class, $applicationUuidCollection);
+        self::assertSame('aa4f8923-8950-4804-8827-c6d78388e5b6', $firstUserUuid);
     }
 
     public function testGetInfra(): void
@@ -357,8 +357,8 @@ class TenantClientTest extends TestCase
         $infraUuidCollection = $acronisClient->getTenantClient()->getInfra('fa6859a9-f5e1-4faf-a56c-5a0ae866dc4f');
         $firstUserUuid = $infraUuidCollection->getItems()[0];
 
-        $this->assertInstanceOf(InfraUuidCollection::class, $infraUuidCollection);
-        $this->assertSame('d9fd4cc3-4309-40a2-bd79-88da24a1c99d', $firstUserUuid);
+        self::assertInstanceOf(InfraUuidCollection::class, $infraUuidCollection);
+        self::assertSame('d9fd4cc3-4309-40a2-bd79-88da24a1c99d', $firstUserUuid);
     }
 
     public function testGetUsage(): void
@@ -379,17 +379,17 @@ class TenantClientTest extends TestCase
         $usageCollection = $acronisClient->getTenantClient()->getUsage('fa6859a9-f5e1-4faf-a56c-5a0ae866dc4f');
         $firstUsage = $usageCollection->getItems()[0];
 
-        $this->assertInstanceOf(UsageCollection::class, $usageCollection);
-        $this->assertInstanceOf(Usage::class, $firstUsage);
-        $this->assertInstanceOf(DateTimeImmutable::class, $firstUsage->getRangeStart());
-        $this->assertSame('count', $firstUsage->getType());
-        $this->assertSame('adv_vms', $firstUsage->getName());
-        $this->assertSame('advanced', $firstUsage->getEdition());
-        $this->assertSame('vms', $firstUsage->getUsageName());
-        $this->assertSame('2017-06-01 00:00:00', $firstUsage->getRangeStart()->format('Y-m-d H:i:s'));
-        $this->assertSame(800, $firstUsage->getAbsoluteValue());
-        $this->assertSame(800, $firstUsage->getValue());
-        $this->assertSame('quantity', $firstUsage->getMeasurementUnit());
+        self::assertInstanceOf(UsageCollection::class, $usageCollection);
+        self::assertInstanceOf(Usage::class, $firstUsage);
+        self::assertInstanceOf(DateTimeImmutable::class, $firstUsage->getRangeStart());
+        self::assertSame('count', $firstUsage->getType());
+        self::assertSame('adv_vms', $firstUsage->getName());
+        self::assertSame('advanced', $firstUsage->getEdition());
+        self::assertSame('vms', $firstUsage->getUsageName());
+        self::assertSame('2017-06-01 00:00:00', $firstUsage->getRangeStart()->format('Y-m-d H:i:s'));
+        self::assertSame(800, $firstUsage->getAbsoluteValue());
+        self::assertSame(800, $firstUsage->getValue());
+        self::assertSame('quantity', $firstUsage->getMeasurementUnit());
     }
 
     public function testSwitchEdition(): void
@@ -407,11 +407,11 @@ class TenantClientTest extends TestCase
         $stack->push(function (callable $handler) use ($tenantEdition) {
             return function (RequestInterface $request, $options) use ($handler, $tenantEdition) {
                 $body = $request->getBody()->getContents();
-                $this->assertJson($body);
+                self::assertJson($body);
 
                 $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
-                $this->assertSame($tenantEdition->getEdition(), $decoded['target_edition']);
-                $this->assertSame($tenantEdition->getApplicationId(), $decoded['application_id']);
+                self::assertSame($tenantEdition->getEdition(), $decoded['target_edition']);
+                self::assertSame($tenantEdition->getApplicationId(), $decoded['application_id']);
 
                 return $handler($request, $options);
             };
@@ -424,6 +424,6 @@ class TenantClientTest extends TestCase
 
         $acronisClient = new AcronisClient($restClient);
         $offeringCollection = $acronisClient->getTenantClient()->switchEdition('f313ecf6-9256-4afd-9d47-72e032ee81d0', $tenantEdition);
-        $this->assertInstanceOf(OfferingCollection::class, $offeringCollection);
+        self::assertInstanceOf(OfferingCollection::class, $offeringCollection);
     }
 }

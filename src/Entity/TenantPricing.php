@@ -11,27 +11,34 @@ class TenantPricing
 {
     /**
      * @Serializer\SerializedName("mode")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private ?string $mode = null;
 
     /**
      * @Serializer\SerializedName("version")
+     *
      * @Serializer\Type("integer")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private ?int $version = null;
 
     /**
      * @Serializer\SerializedName("mode")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private ?string $currency = null;
 
     /**
      * @Serializer\SerializedName("production_start_date")
+     *
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:s\Z', 'Y-m-d\TH:i:s']>")
      */
     private ?DateTimeImmutable $productionStartDate = null;

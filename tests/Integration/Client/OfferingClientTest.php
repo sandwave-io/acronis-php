@@ -38,25 +38,25 @@ class OfferingClientTest extends TestCase
         $offeringCollection = $acronisClient->getOfferingClient()->get('fa6859a9-f5e1-4faf-a56c-5a0ae866dc4f');
         $firstOffering = $offeringCollection->getItems()[0];
 
-        $this->assertInstanceOf(OfferingCollection::class, $offeringCollection);
-        $this->assertInstanceOf(Offering::class, $firstOffering);
-        $this->assertInstanceOf(OfferingQuota::class, $firstOffering->getQuota());
-        $this->assertInstanceOf(DateTimeImmutable::class, $offeringCollection->getTimestamp());
-        $this->assertSame('2016-06-22 18:25:16', $offeringCollection->getTimestamp()->format('Y-m-d H:i:s'));
-        $this->assertSame('f313ecf6-9256-4afd-9d47-72e032ee81d0', $firstOffering->getTenantId());
-        $this->assertNull($firstOffering->getInfraId());
-        $this->assertSame('a9fd8016-0e00-4ade-949e-6efe8672dac0', $firstOffering->getApplicationId());
-        $this->assertSame('quantity', $firstOffering->getMeasurementUnit());
-        $this->assertSame(1, $firstOffering->getStatus());
-        $this->assertSame('count', $firstOffering->getType());
-        $this->assertSame('standard', $firstOffering->getEdition());
-        $this->assertSame('vms', $firstOffering->getName());
-        $this->assertSame('vms', $firstOffering->getUsageName());
-        $this->assertTrue($firstOffering->isLocked());
+        self::assertInstanceOf(OfferingCollection::class, $offeringCollection);
+        self::assertInstanceOf(Offering::class, $firstOffering);
+        self::assertInstanceOf(OfferingQuota::class, $firstOffering->getQuota());
+        self::assertInstanceOf(DateTimeImmutable::class, $offeringCollection->getTimestamp());
+        self::assertSame('2016-06-22 18:25:16', $offeringCollection->getTimestamp()->format('Y-m-d H:i:s'));
+        self::assertSame('f313ecf6-9256-4afd-9d47-72e032ee81d0', $firstOffering->getTenantId());
+        self::assertNull($firstOffering->getInfraId());
+        self::assertSame('a9fd8016-0e00-4ade-949e-6efe8672dac0', $firstOffering->getApplicationId());
+        self::assertSame('quantity', $firstOffering->getMeasurementUnit());
+        self::assertSame(1, $firstOffering->getStatus());
+        self::assertSame('count', $firstOffering->getType());
+        self::assertSame('standard', $firstOffering->getEdition());
+        self::assertSame('vms', $firstOffering->getName());
+        self::assertSame('vms', $firstOffering->getUsageName());
+        self::assertTrue($firstOffering->isLocked());
 
-        $this->assertSame(10, $firstOffering->getQuota()->getValue());
-        $this->assertSame(10, $firstOffering->getQuota()->getOverage());
-        $this->assertSame(1486479690324, $firstOffering->getQuota()->getVersion());
+        self::assertSame(10, $firstOffering->getQuota()->getValue());
+        self::assertSame(10, $firstOffering->getQuota()->getOverage());
+        self::assertSame(1486479690324, $firstOffering->getQuota()->getVersion());
     }
 
     public function testUpdate(): void
@@ -87,27 +87,27 @@ class OfferingClientTest extends TestCase
         $stack->push(function (callable $handler) use ($offeringCollection) {
             return function (RequestInterface $request, $options) use ($handler, $offeringCollection) {
                 $body = $request->getBody()->getContents();
-                $this->assertJson($body);
+                self::assertJson($body);
 
                 $decoded = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
-                $this->assertArrayNotHasKey('timestamp', $decoded);
-                $this->assertArrayNotHasKey('items', $decoded);
-                $this->assertArrayHasKey('offering_items', $decoded);
+                self::assertArrayNotHasKey('timestamp', $decoded);
+                self::assertArrayNotHasKey('items', $decoded);
+                self::assertArrayHasKey('offering_items', $decoded);
 
                 $firstDecodedOffering = $decoded['offering_items'][0];
                 $firstOffering = $offeringCollection->getItems()[0];
-                $this->assertArrayNotHasKey('updated_at', $firstDecodedOffering);
-                $this->assertArrayNotHasKey('deleted_at', $firstDecodedOffering);
-                $this->assertArrayNotHasKey('infra_id', $firstDecodedOffering);
-                $this->assertSame($firstOffering->getTenantId(), $firstDecodedOffering['tenant_id']);
-                $this->assertSame($firstOffering->getApplicationId(), $firstDecodedOffering['application_id']);
-                $this->assertSame($firstOffering->getMeasurementUnit(), $firstDecodedOffering['measurement_unit']);
-                $this->assertSame($firstOffering->getStatus(), $firstDecodedOffering['status']);
-                $this->assertSame($firstOffering->getType(), $firstDecodedOffering['type']);
-                $this->assertSame($firstOffering->getEdition(), $firstDecodedOffering['edition']);
-                $this->assertSame($firstOffering->getName(), $firstDecodedOffering['name']);
-                $this->assertSame($firstOffering->getUsageName(), $firstDecodedOffering['usage_name']);
-                $this->assertTrue($firstDecodedOffering['locked']);
+                self::assertArrayNotHasKey('updated_at', $firstDecodedOffering);
+                self::assertArrayNotHasKey('deleted_at', $firstDecodedOffering);
+                self::assertArrayNotHasKey('infra_id', $firstDecodedOffering);
+                self::assertSame($firstOffering->getTenantId(), $firstDecodedOffering['tenant_id']);
+                self::assertSame($firstOffering->getApplicationId(), $firstDecodedOffering['application_id']);
+                self::assertSame($firstOffering->getMeasurementUnit(), $firstDecodedOffering['measurement_unit']);
+                self::assertSame($firstOffering->getStatus(), $firstDecodedOffering['status']);
+                self::assertSame($firstOffering->getType(), $firstDecodedOffering['type']);
+                self::assertSame($firstOffering->getEdition(), $firstDecodedOffering['edition']);
+                self::assertSame($firstOffering->getName(), $firstDecodedOffering['name']);
+                self::assertSame($firstOffering->getUsageName(), $firstDecodedOffering['usage_name']);
+                self::assertTrue($firstDecodedOffering['locked']);
 
                 return $handler($request, $options);
             };

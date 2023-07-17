@@ -10,14 +10,18 @@ class TenantEdition
 {
     /**
      * @Serializer\SerializedName("target_edition")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private string $edition;
 
     /**
      * @Serializer\SerializedName("application_id")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private string $applicationId;

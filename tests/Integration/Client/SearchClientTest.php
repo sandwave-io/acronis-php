@@ -35,15 +35,15 @@ class SearchClientTest extends TestCase
         $searchResultCollection = $acronisClient->getSearchClient()->search('fa6859a9-f5e1-4faf-a56c-5a0ae866dc4f', 'example');
         $firstSearchResult = $searchResultCollection->getItems()[0];
 
-        $this->assertInstanceOf(SearchResultCollection::class, $searchResultCollection);
-        $this->assertInstanceOf(SearchResult::class, $firstSearchResult);
-        $this->assertSame('bfe40b45-7d3f-4183-a655-afa62b59b383', $firstSearchResult->getId());
-        $this->assertSame('tenant', $firstSearchResult->getType());
-        $this->assertSame('customer', $firstSearchResult->getKind());
-        $this->assertSame('bfe40b45-7d3f-4183-a655-afa62b59b383', $firstSearchResult->getParentId());
-        $this->assertSame(['my tenant', 'some child'], $firstSearchResult->getPath());
-        $this->assertSame('Example group', $firstSearchResult->getName());
-        $this->assertNull($firstSearchResult->getFirstname());
-        $this->assertNull($firstSearchResult->getLastname());
+        self::assertInstanceOf(SearchResultCollection::class, $searchResultCollection);
+        self::assertInstanceOf(SearchResult::class, $firstSearchResult);
+        self::assertSame('bfe40b45-7d3f-4183-a655-afa62b59b383', $firstSearchResult->getId());
+        self::assertSame('tenant', $firstSearchResult->getType());
+        self::assertSame('customer', $firstSearchResult->getKind());
+        self::assertSame('bfe40b45-7d3f-4183-a655-afa62b59b383', $firstSearchResult->getParentId());
+        self::assertSame(['my tenant', 'some child'], $firstSearchResult->getPath());
+        self::assertSame('Example group', $firstSearchResult->getName());
+        self::assertNull($firstSearchResult->getFirstname());
+        self::assertNull($firstSearchResult->getLastname());
     }
 }

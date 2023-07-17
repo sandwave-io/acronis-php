@@ -11,6 +11,7 @@ class TenantCollection
 {
     /**
      * @Serializer\SerializedName("timestamp")
+     *
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', 'Y-m-d\TH:i:s'>")
      */
     private DateTimeImmutable $timestamp;
@@ -19,7 +20,9 @@ class TenantCollection
      * @var Tenant[]
      *
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\Tenant>")
+     *
      * @Serializer\SerializedName("items")
+     *
      * @Serializer\SkipWhenEmpty()
      */
     private array $items = [];

@@ -10,49 +10,63 @@ class AccessPolicy
 {
     /**
      * @Serializer\SerializedName("id")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private ?string $id = null;
 
     /**
      * @Serializer\SerializedName("issuer_id")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private string $issuerId;
 
     /**
      * @Serializer\SerializedName("role_id")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private string $roleId;
 
     /**
      * @Serializer\SerializedName("tenant_id")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private string $tenantId;
 
     /**
      * @Serializer\SerializedName("trustee_id")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private string $trusteeId;
 
     /**
      * @Serializer\SerializedName("trustee_type")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private string $trusteeType;
 
     /**
      * @Serializer\SerializedName("version")
+     *
      * @Serializer\Type("integer")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private int $version;

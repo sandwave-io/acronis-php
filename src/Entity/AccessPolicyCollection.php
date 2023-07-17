@@ -12,8 +12,11 @@ class AccessPolicyCollection
      * @var AccessPolicy[]
      *
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\AccessPolicy>")
+     *
      * @Serializer\SerializedName("items")
+     *
      * @Serializer\Groups({"update_data"})
+     *
      * @Serializer\SkipWhenEmpty()
      */
     private array $items = [];

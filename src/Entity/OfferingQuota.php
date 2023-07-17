@@ -10,21 +10,27 @@ class OfferingQuota
 {
     /**
      * @Serializer\SerializedName("version")
+     *
      * @Serializer\Type("integer")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private ?int $version = null;
 
     /**
      * @Serializer\SerializedName("overage")
+     *
      * @Serializer\Type("integer")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private ?int $overage = null;
 
     /**
      * @Serializer\SerializedName("value")
+     *
      * @Serializer\Type("integer")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private ?int $value = null;

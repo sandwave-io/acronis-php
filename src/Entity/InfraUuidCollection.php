@@ -12,7 +12,9 @@ class InfraUuidCollection
      * @var string[]
      *
      * @Serializer\Type("array<string>")
+     *
      * @Serializer\SerializedName("infras")
+     *
      * @Serializer\SkipWhenEmpty()
      */
     private array $items = [];

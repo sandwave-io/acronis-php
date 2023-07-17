@@ -10,77 +10,99 @@ class Offering
 {
     /**
      * @Serializer\SerializedName("tenant_id")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private string $tenantId;
 
     /**
      * @Serializer\SerializedName("infra_id")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private ?string $infraId = null;
 
     /**
      * @Serializer\SerializedName("application_id")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private string $applicationId;
 
     /**
      * @Serializer\SerializedName("measurement_unit")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private string $measurementUnit;
 
     /**
      * @Serializer\SerializedName("status")
+     *
      * @Serializer\Type("integer")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private int $status;
 
     /**
      * @Serializer\SerializedName("type")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private string $type;
 
     /**
      * @Serializer\SerializedName("edition")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private ?string $edition = null;
 
     /**
      * @Serializer\SerializedName("name")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private string $name;
 
     /**
      * @Serializer\SerializedName("usage_name")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private string $usageName;
 
     /**
      * @Serializer\SerializedName("locked")
+     *
      * @Serializer\Type("boolean")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private bool $locked;
 
     /**
      * @Serializer\SerializedName("quota")
+     *
      * @Serializer\Type("SandwaveIo\Acronis\Entity\OfferingQuota")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private ?OfferingQuota $quota = null;

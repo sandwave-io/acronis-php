@@ -11,6 +11,7 @@ class UserCollection
 {
     /**
      * @Serializer\SerializedName("timestamp")
+     *
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', 'Y-m-d\TH:i:s'>")
      */
     private DateTimeImmutable $timestamp;
@@ -19,7 +20,9 @@ class UserCollection
      * @var User[]
      *
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\User>")
+     *
      * @Serializer\SerializedName("items")
+     *
      * @Serializer\SkipWhenEmpty()
      */
     private array $items = [];

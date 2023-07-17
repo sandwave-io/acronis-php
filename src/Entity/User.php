@@ -11,82 +11,104 @@ class User
 {
     /**
      * @Serializer\SerializedName("id")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private ?string $id = null;
 
     /**
      * @Serializer\SerializedName("tenant_id")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private string $tenantId;
 
     /**
      * @Serializer\SerializedName("personal_tenant_id")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private ?string $personalTenantId = null;
 
     /**
      * @Serializer\SerializedName("version")
+     *
      * @Serializer\Type("integer")
+     *
      * @Serializer\Groups({"update_data"})
      */
     private ?int $version = null;
 
     /**
      * @Serializer\SerializedName("login")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private ?string $login = null;
 
     /**
      * @Serializer\SerializedName("enabled")
+     *
      * @Serializer\Type("boolean")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private ?bool $enabled = null;
 
     /**
      * @Serializer\SerializedName("activated")
+     *
      * @Serializer\Type("boolean")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private ?bool $activated = null;
 
     /**
      * @Serializer\SerializedName("language")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private ?string $language = null;
 
     /**
      * @Serializer\SerializedName("mfa_status")
+     *
      * @Serializer\Type("string")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private ?string $mfaStatus = null;
 
     /**
      * @Serializer\SerializedName("created_at")
+     *
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:s\Z', 'Y-m-d\TH:i:s']>")
      */
     private ?DateTimeImmutable $createdAt = null;
 
     /**
      * @Serializer\SerializedName("updated_at")
+     *
      * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', ['Y-m-d\TH:i:s\Z', 'Y-m-d\TH:i:s']>")
      */
     private ?DateTimeImmutable $updatedAt = null;
 
     /**
      * @Serializer\SerializedName("contact")
+     *
      * @Serializer\Type("SandwaveIo\Acronis\Entity\Contact")
+     *
      * @Serializer\Groups({"create_data","update_data"})
      */
     private ?Contact $contact = null;
