@@ -28,15 +28,17 @@ class Contact
     private ?string $acronisAccountNumber = null;
 
     /**
-     * @var string[]
+     * @var string[]|null
      *
      * @Serializer\SerializedName("types")
      *
      * @Serializer\Type("array<string>")
      *
      * @Serializer\Groups({"create_data","update_data"})
+     *
+     * @Serializer\SkipWhenEmpty()
      */
-    private array $types;
+    private ?array $types = [];
 
     /**
      * @Serializer\SerializedName("firstname")
@@ -182,9 +184,9 @@ class Contact
     }
 
     /**
-     * @return string[]
+     * @return string[]|null
      */
-    public function getTypes(): array
+    public function getTypes(): ?array
     {
         return $this->types;
     }

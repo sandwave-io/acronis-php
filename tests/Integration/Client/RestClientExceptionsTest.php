@@ -50,7 +50,7 @@ class RestClientExceptionsTest extends TestCase
         $serializer = $serializerBuilder->build();
         $restClient = new RestClient($guzzle, $serializer);
 
-        $this->expectException(UnauthorizedException::class);
+        self::expectException(UnauthorizedException::class);
         $restClient->getRawData($uri);
     }
 
@@ -77,7 +77,7 @@ class RestClientExceptionsTest extends TestCase
         $serializer = $serializerBuilder->build();
         $restClient = new RestClient($guzzle, $serializer);
 
-        $this->expectException(ResourceNotFoundException::class);
+        self::expectException(ResourceNotFoundException::class);
         $restClient->getRawData($uri);
     }
 
@@ -104,7 +104,7 @@ class RestClientExceptionsTest extends TestCase
         $serializer = $serializerBuilder->build();
         $restClient = new RestClient($guzzle, $serializer);
 
-        $this->expectException(BadRequestException::class);
+        self::expectException(BadRequestException::class);
         $restClient->getRawData($uri);
     }
 
@@ -129,7 +129,7 @@ class RestClientExceptionsTest extends TestCase
         $serializer = $serializerBuilder->build();
         $restClient = new RestClient($guzzle, $serializer);
 
-        $this->expectException(NetworkException::class);
+        self::expectException(NetworkException::class);
         $restClient->getRawData($uri);
     }
 
@@ -156,7 +156,7 @@ class RestClientExceptionsTest extends TestCase
         $serializer = $serializerBuilder->build();
         $restClient = new RestClient($guzzle, $serializer);
 
-        $this->expectException(AcronisServerException::class);
+        self::expectException(AcronisServerException::class);
         $restClient->getRawData($uri);
     }
 
@@ -183,7 +183,7 @@ class RestClientExceptionsTest extends TestCase
         $serializer = $serializerBuilder->build();
         $restClient = new RestClient($guzzle, $serializer);
 
-        $this->expectException(AcronisException::class);
+        self::expectException(AcronisException::class);
         $restClient->getRawData($uri);
     }
 
@@ -200,7 +200,7 @@ class RestClientExceptionsTest extends TestCase
 
         $restClient = new RestClient($restClientFactory->create(), $serializer);
 
-        $this->expectException(DeserializationException::class);
+        self::expectException(DeserializationException::class);
         $restClient->getEntity($uri, $class);
     }
 }

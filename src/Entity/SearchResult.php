@@ -42,8 +42,10 @@ class SearchResult
      * @Serializer\SerializedName("path")
      *
      * @Serializer\Type("array<string>")
+     *
+     * @Serializer\SkipWhenEmpty()
      */
-    private array $path;
+    private array $path = [];
 
     /**
      * @Serializer\SerializedName("name")
@@ -57,14 +59,14 @@ class SearchResult
      *
      * @Serializer\Type("string")
      */
-    private ?string $firstname;
+    private ?string $firstname = null;
 
     /**
      * @Serializer\SerializedName("last_name")
      *
      * @Serializer\Type("string")
      */
-    private ?string $lastname;
+    private ?string $lastname = null;
 
     public function getId(): string
     {
