@@ -9,7 +9,7 @@ use SandwaveIo\Acronis\Exception\AcronisException;
 
 final class OfferingClient
 {
-    private const OFFERING_ITEMS = 'tenants/%s/offering_items';
+    private const OFFERING_ITEMS = 'tenants/%s/offering_items?edition=*';
 
     private RestClientInterface $client;
 
