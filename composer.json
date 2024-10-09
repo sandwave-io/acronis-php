@@ -1,5 +1,5 @@
 {
-  "name": "sandwave-io/acronis-php",
+  "name": "creacoon/acronis-php",
   "description": "A PHP SDK for the Acronis REST API.",
   "type": "library",
   "license": "MIT",
@@ -18,7 +18,7 @@
     }
   ],
   "require": {
-    "php": "^7.4|^8.0|^8.1|^8.2",
+    "php": "^8.3",
     "ext-json": "*",
     "guzzlehttp/guzzle": "^6.5.0|^7.5.0",
     "jms/serializer": "^3.17",

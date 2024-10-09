@@ -38,6 +38,14 @@ final class TenantClient
     /**
      * @throws AcronisException
      */
+    public function list(): TenantCollection
+    {
+        return $this->client->getEntity(self::TENANT_DETAILS, TenantCollection::class);
+    }
+
+    /**
+     * @throws AcronisException
+     */
     public function get(string $uuid): Tenant
     {
         return $this->client->getEntity(sprintf(self::TENANT_DETAILS, $uuid), Tenant::class);
