@@ -10,13 +10,6 @@ use JMS\Serializer\Annotation as Serializer;
 class OfferingCollection
 {
     /**
-     * @Serializer\SerializedName("timestamp")
-     *
-     * @Serializer\Type("DateTimeImmutable<'Y-m-d H:i:s', '', 'Y-m-d\TH:i:s'>")
-     */
-    private ?DateTimeImmutable $timestamp = null;
-
-    /**
      * @var Offering[]
      *
      * @Serializer\Type("array<SandwaveIo\Acronis\Entity\Offering>")
@@ -44,14 +37,6 @@ class OfferingCollection
     {
         $this->offeringItems = [];
         $this->updatedOfferingItems = [];
-    }
-
-    /**
-     * @return DateTimeImmutable|null
-     */
-    public function getTimestamp(): ?DateTimeImmutable
-    {
-        return $this->timestamp;
     }
 
     /**
